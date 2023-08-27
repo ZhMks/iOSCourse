@@ -19,8 +19,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
-        window.backgroundColor = .systemMint
-        
         
         let tabController = UITabBarController()
         
@@ -29,15 +27,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
-      
-      
-        let controllers = [feedViewController, profileViewController]
         
-        tabController.viewControllers = controllers.map({
-            UINavigationController(rootViewController: $0)
-        })
-        tabController.selectedIndex = 1
-        
+        let controllers = [feedNavigationController, profileNavigationController]
+    
+        tabController.viewControllers = controllers
         window.rootViewController = tabController
         window.makeKeyAndVisible()
         self.window = window
