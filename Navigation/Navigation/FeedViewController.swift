@@ -9,7 +9,14 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    let button = UIButton(type: .system)
+    private lazy var button: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("TO Post", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        
+        return button
+    }()
+    
     let imageView = UIImageView(image: .init(named: "hamster"))
     
     struct Post {
@@ -18,17 +25,23 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.orange
         title = "Feed"
-        view.backgroundColor = .systemBackground
+        self.navigationItem.title = "Новости"
+        
         view.addSubview(button)
         view.addSubview(imageView)
-        self.navigationItem.title = "Новости"
+        
         buttonChange()
+        
         imageViewChange()
+        
         button.addTarget(self, action: #selector(onPressed(_:)), for: .touchUpInside)
     }
         
         func buttonChange() {
+            let safeAreaLayoutGuide = view.safeAreaLayoutGuide
             button.translatesAutoresizingMaskIntoConstraints = false
             button.setTitle("To Post", for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 55)
@@ -37,19 +50,21 @@ class FeedViewController: UIViewController {
             button.layer.borderWidth = 2.2
             
             NSLayoutConstraint.activate([
-                button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-                button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-                button.topAnchor.constraint(equalTo: view.topAnchor, constant: 400),
-                button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -400),
+                button.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 40),
+                button.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -40),
+                button.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 300),
+                button.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -200),
             ])
         }
     
     func imageViewChange() {
+        let safeAreaLayoutGuide = view.safeAreaLayoutGuide
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
-        imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-        imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+        imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80),
+        imageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 40),
+        imageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -40),
         imageView.heightAnchor.constraint(equalToConstant: 200),
         imageView.widthAnchor.constraint(equalToConstant: 100)
         ])
@@ -58,8 +73,8 @@ class FeedViewController: UIViewController {
     @objc func onPressed(_ sender: UIButton) {
         if sender.isTouchInside {
             let postViewController = PostViewController()
-            self.present(postViewController, animated: true, completion: nil)
-            let post1 = Post(title: "Post Title")
+            postViewController.modalPresentationStyle = .fullScreen
+            present(postViewController, animated: true, completion: nil)
         }
     }
     
