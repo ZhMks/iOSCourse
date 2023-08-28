@@ -15,8 +15,6 @@ class FeedViewController: UIViewController {
     
     private lazy var button: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("TO Post", for: .normal)
-        button.setTitleColor(.black, for: .normal)
         return button
     }()
     
@@ -28,7 +26,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.systemBackground
-        title = "Feed"
+        title = "Новости"
         self.navigationItem.title = "Новости"
         view.addSubview(button)
         view.addSubview(imageView)
