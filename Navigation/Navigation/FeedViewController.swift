@@ -13,13 +13,13 @@ class FeedViewController: UIViewController {
         var title: String?
    }
     
-    lazy var sunSymbol: UIImage = {
+    lazy var bookSymbol: UIImage = {
         let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
-        let image = UIImage(systemName: "sun.max.fill", withConfiguration: configuration)
+        let image = UIImage(systemName: "chart.bar.doc.horizontal", withConfiguration: configuration)
         if let image {
-            self.sunSymbol = image
+            self.bookSymbol = image
         }
-        return sunSymbol
+        return bookSymbol
     }()
     
     private lazy var button: UIButton = {
@@ -39,7 +39,7 @@ class FeedViewController: UIViewController {
         self.view.backgroundColor = UIColor.systemBackground
         title = "Feed"
         self.navigationItem.title = "Новости"
-        
+        self.tabBarItem = UITabBarItem(title: "Feed", image: bookSymbol, tag: 1)
         view.addSubview(button)
         view.addSubview(imageView)
         
@@ -86,7 +86,7 @@ class FeedViewController: UIViewController {
             postViewController.modalPresentationStyle = .fullScreen
             let title = Post(title: "POSTTITLE")
             postViewController.title = title.title
-             
+            present(postViewController, animated: true, completion: nil)
         }
     }
     

@@ -28,8 +28,9 @@ class PostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemTeal
         view.addSubview(backButton)
+        self.tabBarItem = UITabBarItem(title: "Info", image: nil, tag: 2)
 
         backButtonChange()
         backButton.addTarget(self, action: #selector(backButtonPressed(_:)), for: .touchUpInside)
@@ -54,6 +55,7 @@ class PostViewController: UIViewController {
     @objc func backButtonPressed(_ sender: UIButton) {
         dismiss(animated: true)
     }
+
 
 }
 

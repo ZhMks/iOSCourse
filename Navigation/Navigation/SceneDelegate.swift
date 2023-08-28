@@ -10,25 +10,6 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    
-    lazy var sunSymbol: UIImage = {
-        let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
-        let image = UIImage(systemName: "sun.max.fill", withConfiguration: configuration)
-        if let image {
-            self.sunSymbol = image
-        }
-        return sunSymbol
-    }()
-    
-    lazy var bookSymbol: UIImage = {
-        let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
-        let image = UIImage(systemName: "chart.bar.doc.horizontal", withConfiguration: configuration)
-        if let image {
-            self.bookSymbol = image
-        }
-        return bookSymbol
-    }()
-
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -44,9 +25,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
         
-        profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: sunSymbol, tag: 0)
-        feedNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: bookSymbol, tag: 1)
-       
         let controllers = [feedNavigationController, profileNavigationController]
     
         tabController.viewControllers = controllers
