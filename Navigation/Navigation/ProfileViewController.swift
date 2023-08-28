@@ -9,20 +9,10 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    lazy var sunSymbol: UIImage = {
-        let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
-        let image = UIImage(systemName: "sun.max.fill", withConfiguration: configuration)
-        if let image {
-            self.sunSymbol = image
-        }
-        return sunSymbol
-    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Профиль"
         self.view.backgroundColor = .systemBackground
-        self.tabBarItem = UITabBarItem(title: "Profile", image: sunSymbol, tag: 0)
 
     }
     

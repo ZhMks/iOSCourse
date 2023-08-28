@@ -17,6 +17,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
         
+        lazy var bookSymbol: UIImage = {
+            let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
+            let image = UIImage(systemName: "chart.bar.doc.horizontal", withConfiguration: configuration)
+            if let image {
+                bookSymbol = image
+            }
+            return bookSymbol
+        }()
+        
+        lazy var sunSymbol: UIImage = {
+            let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
+            let image = UIImage(systemName: "sun.max.fill", withConfiguration: configuration)
+            if let image {
+                sunSymbol = image
+            }
+            return sunSymbol
+        }()
+        
         let tabController = UITabBarController()
         
         let feedViewController = FeedViewController()
@@ -24,6 +42,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        
+        feedNavigationController.tabBarItem = UITabBarItem(title: "Новости", image: bookSymbol, tag: 0)
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Профиль", image: sunSymbol, tag: 1)
         
         let controllers = [feedNavigationController, profileNavigationController]
     

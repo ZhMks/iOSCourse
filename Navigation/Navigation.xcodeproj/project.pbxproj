@@ -15,6 +15,7 @@
 		B274C2E12A9A27C300D872F4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E02A9A27C300D872F4 /* ProfileViewController.swift */; };
 		B274C2E32A9B553B00D872F4 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E22A9B553B00D872F4 /* PostViewController.swift */; };
 		B274C2E52A9C862200D872F4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E42A9C862200D872F4 /* InfoViewController.swift */; };
+		B274C2E72A9CBADC00D872F4 /* UiAllertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E62A9CBADC00D872F4 /* UiAllertViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		B274C2E02A9A27C300D872F4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B274C2E22A9B553B00D872F4 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		B274C2E42A9C862200D872F4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		B274C2E62A9CBADC00D872F4 /* UiAllertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiAllertViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,8 +66,9 @@
 				B274C2DE2A9A27BB00D872F4 /* FeedViewController.swift */,
 				B274C2E22A9B553B00D872F4 /* PostViewController.swift */,
 				B274C2E42A9C862200D872F4 /* InfoViewController.swift */,
-				B274C2CA2A99FD9200D872F4 /* AppDelegate.swift */,
+				B274C2E62A9CBADC00D872F4 /* UiAllertViewController.swift */,
 				B274C2CC2A99FD9200D872F4 /* SceneDelegate.swift */,
+				B274C2CA2A99FD9200D872F4 /* AppDelegate.swift */,
 				B274C2D32A99FD9400D872F4 /* Assets.xcassets */,
 				B274C2D52A99FD9400D872F4 /* LaunchScreen.storyboard */,
 				B274C2D82A99FD9400D872F4 /* Info.plist */,
@@ -145,6 +148,7 @@
 			files = (
 				B274C2CB2A99FD9200D872F4 /* AppDelegate.swift in Sources */,
 				B274C2E12A9A27C300D872F4 /* ProfileViewController.swift in Sources */,
+				B274C2E72A9CBADC00D872F4 /* UiAllertViewController.swift in Sources */,
 				B274C2DF2A9A27BB00D872F4 /* FeedViewController.swift in Sources */,
 				B274C2CD2A99FD9200D872F4 /* SceneDelegate.swift in Sources */,
 				B274C2E52A9C862200D872F4 /* InfoViewController.swift in Sources */,

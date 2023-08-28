@@ -13,15 +13,6 @@ class FeedViewController: UIViewController {
         var title: String?
    }
     
-    lazy var bookSymbol: UIImage = {
-        let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
-        let image = UIImage(systemName: "chart.bar.doc.horizontal", withConfiguration: configuration)
-        if let image {
-            self.bookSymbol = image
-        }
-        return bookSymbol
-    }()
-    
     private lazy var button: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("TO Post", for: .normal)
@@ -39,7 +30,6 @@ class FeedViewController: UIViewController {
         self.view.backgroundColor = UIColor.systemBackground
         title = "Feed"
         self.navigationItem.title = "Новости"
-        self.tabBarItem = UITabBarItem(title: "Feed", image: bookSymbol, tag: 1)
         view.addSubview(button)
         view.addSubview(imageView)
         
@@ -53,7 +43,7 @@ class FeedViewController: UIViewController {
         func buttonChange() {
             let safeAreaLayoutGuide = view.safeAreaLayoutGuide
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.setTitle("To Post", for: .normal)
+            button.setTitle("К посту", for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 55)
             button.setTitleColor(.black, for: .normal)
             button.layer.borderColor = UIColor.black.cgColor
@@ -83,22 +73,9 @@ class FeedViewController: UIViewController {
     @objc func onPressed(_ sender: UIButton) {
         if sender.isTouchInside {
             let postViewController = PostViewController()
-            postViewController.modalPresentationStyle = .fullScreen
-            let title = Post(title: "POSTTITLE")
-            postViewController.title = title.title
-            present(postViewController, animated: true, completion: nil)
+            let post1 = Post(title: "Заголовок поста")
+            postViewController.title = post1.title
+            self.navigationController?.pushViewController(postViewController, animated: true)
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

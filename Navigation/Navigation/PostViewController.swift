@@ -9,14 +9,7 @@ import UIKit
 
 
 class PostViewController: UIViewController {
-    
-    private lazy var backButton: UIButton = {
-        let backButton = UIButton(type: .system)
-        backButton.setTitle("Back to Feed", for: .normal)
-        backButton.setTitleColor(.black, for: .normal)
-        return backButton
-    }()
-    
+  
     lazy var infoSymbol: UIImage = {
         let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
         let image = UIImage(systemName: "circle.square.fill", withConfiguration: configuration)
@@ -25,37 +18,18 @@ class PostViewController: UIViewController {
         }
         return infoSymbol
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemTeal
-        view.addSubview(backButton)
-        self.tabBarItem = UITabBarItem(title: "Info", image: nil, tag: 2)
+        let backgroundColor = UIColor(red: 255/255, green: 123/255, blue: 255/255, alpha: 1)
+        view.backgroundColor = backgroundColor
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Информация", style: .plain, target: self, action: #selector(barButtonPressed(_:)))
+    }
 
-        backButtonChange()
-        backButton.addTarget(self, action: #selector(backButtonPressed(_:)), for: .touchUpInside)
-
-        // Do any additional setup after loading the view.
+    @objc func barButtonPressed(_ sender: UIBarButtonItem) {
+        let infoViewController = InfoViewController()
+        present(infoViewController, animated: true)
     }
     
-    func backButtonChange() {
-        let safeAreaLayout = view.safeAreaLayoutGuide
-        backButton.layer.borderColor = UIColor.black.cgColor
-        backButton.layer.borderWidth = 2.0
-        
-        backButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor, constant: 500),
-            backButton.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor, constant: 50),
-            backButton.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -50)
-        ])
-    }
-    
-    @objc func backButtonPressed(_ sender: UIButton) {
-        dismiss(animated: true)
-    }
-
-
 }
 
