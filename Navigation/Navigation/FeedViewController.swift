@@ -9,24 +9,34 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
+    struct Post {
+        var title: String?
+   }
+    
+    lazy var sunSymbol: UIImage = {
+        let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
+        let image = UIImage(systemName: "sun.max.fill", withConfiguration: configuration)
+        if let image {
+            self.sunSymbol = image
+        }
+        return sunSymbol
+    }()
+    
     private lazy var button: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("TO Post", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        
         return button
     }()
     
     let imageView = UIImageView(image: .init(named: "hamster"))
     
-    struct Post {
-       var title: String?
-   }
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.orange
+        self.view.backgroundColor = UIColor.systemBackground
         title = "Feed"
         self.navigationItem.title = "Новости"
         
@@ -74,7 +84,9 @@ class FeedViewController: UIViewController {
         if sender.isTouchInside {
             let postViewController = PostViewController()
             postViewController.modalPresentationStyle = .fullScreen
-            present(postViewController, animated: true, completion: nil)
+            let title = Post(title: "POSTTITLE")
+            postViewController.title = title.title
+             
         }
     }
     

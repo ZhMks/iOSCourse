@@ -1,21 +1,17 @@
 //
-//  ProfileViewController.swift
+//  InfoViewController.swift
 //  Navigation
 //
-//  Created by Максим Жуин on 26.08.2023.
+//  Created by Максим Жуин on 28.08.2023.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-    
-   
+class InfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Профиль"
-        self.view.backgroundColor = .systemBackground
-
+        
     }
     
 
