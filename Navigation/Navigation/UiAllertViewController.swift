@@ -8,7 +8,6 @@
 import UIKit
 
 class UIAllertViewController: UIViewController {
-    
     lazy var redButton = UIButton(type: .system)
     lazy var blackButton = UIButton(type: .system)
     lazy var titleMessage = UILabel()
@@ -29,7 +28,6 @@ class UIAllertViewController: UIViewController {
     }
     
     func blackButtonChange() {
-        
         blackButton.translatesAutoresizingMaskIntoConstraints = false
         blackButton.setTitle("Black Button", for: .normal)
         blackButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
@@ -82,13 +80,11 @@ class UIAllertViewController: UIViewController {
         ])
     }
     
-    @objc func redButtonTouched(_ : UIButton) {
+    @objc func redButtonTouched(_: UIButton) {
         print("Red BUTTON TOUCHED")
     }
     
-    @objc func blackButtonTouched(_ : UIButton) {
+    @objc func blackButtonTouched(_: UIButton) {
         print("Black BUTTON TOUCHED")
     }
-
-    
 }

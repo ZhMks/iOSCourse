@@ -8,7 +8,6 @@
 import UIKit
 
 class InfoViewController: UIViewController {
-    
     lazy var alertButton = UIButton(type: .system)
     
     override func viewDidLoad() {
@@ -21,7 +20,6 @@ class InfoViewController: UIViewController {
     }
     
     func buttonChange() {
-        
         alertButton.translatesAutoresizingMaskIntoConstraints = false
         alertButton.setTitle("ALERT!", for: .normal)
         alertButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
@@ -40,7 +38,7 @@ class InfoViewController: UIViewController {
         ])
     }
     
-    @objc func tranferToAlertView(_ : UIButton) {
+    @objc func tranferToAlertView(_: UIButton) {
         let uiAllertViewController = UIAllertViewController()
         present(uiAllertViewController, animated: true)
     }

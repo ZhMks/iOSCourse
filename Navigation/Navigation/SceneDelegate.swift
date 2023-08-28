@@ -8,15 +8,13 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         guard let scene = (scene as? UIWindowScene) else { return }
-        
+
         let window = UIWindow(windowScene: scene)
-        
+
         lazy var bookSymbol: UIImage = {
             let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
             let image = UIImage(systemName: "chart.bar.doc.horizontal", withConfiguration: configuration)
@@ -25,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
             return bookSymbol
         }()
-        
+
         lazy var sunSymbol: UIImage = {
             let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
             let image = UIImage(systemName: "sun.max.fill", withConfiguration: configuration)
@@ -34,27 +32,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
             return sunSymbol
         }()
-        
+
         let tabController = UITabBarController()
-        
+
         let feedViewController = FeedViewController()
         let profileViewController = ProfileViewController()
-        
+
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
-        
+
         feedNavigationController.tabBarItem = UITabBarItem(title: "Новости", image: bookSymbol, tag: 0)
         profileNavigationController.tabBarItem = UITabBarItem(title: "Профиль", image: sunSymbol, tag: 1)
-        
+
         let controllers = [feedNavigationController, profileNavigationController]
-    
+
         tabController.viewControllers = controllers
         window.rootViewController = tabController
         window.makeKeyAndVisible()
         self.window = window
-        
     }
-    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -83,7 +79,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
-
