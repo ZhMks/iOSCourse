@@ -13,11 +13,22 @@ class FeedViewController: UIViewController {
     }
     
     private lazy var button: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
+        button.layer.cornerRadius = 10.0
+        button.layer.backgroundColor = UIColor(red: 255/255, green: 152/255, blue: 153/255, alpha: 1).cgColor
+        button.setTitle("К посту", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 36)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 2.2
         return button
     }()
     
-    let imageView = UIImageView(image: .init(named: "hamster"))
+    let hamsterImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "hamster")
+        return imageView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,24 +37,19 @@ class FeedViewController: UIViewController {
         title = "Новости"
         navigationItem.title = "Новости"
         view.addSubview(button)
-        view.addSubview(imageView)
+        view.addSubview(hamsterImage)
         
-        buttonChange()
+        buttonPositionChange()
         
-        imageViewChange()
+        imageViewPositionChange()
         
         button.addTarget(self, action: #selector(onPressed(_:)), for: .touchUpInside)
     }
         
-    func buttonChange() {
+    func buttonPositionChange() {
         let safeAreaLayoutGuide = view.safeAreaLayoutGuide
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("К посту", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 55)
-        button.setTitleColor(.black, for: .normal)
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 2.2
-            
+        
         NSLayoutConstraint.activate([
             button.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 40),
             button.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -40),
@@ -52,16 +58,16 @@ class FeedViewController: UIViewController {
         ])
     }
     
-    func imageViewChange() {
+    func imageViewPositionChange() {
         let safeAreaLayoutGuide = view.safeAreaLayoutGuide
         
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        hamsterImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80),
-            imageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 40),
-            imageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -40),
-            imageView.heightAnchor.constraint(equalToConstant: 200),
-            imageView.widthAnchor.constraint(equalToConstant: 100),
+            hamsterImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80),
+            hamsterImage.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 40),
+            hamsterImage.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -40),
+            hamsterImage.heightAnchor.constraint(equalToConstant: 200),
+            hamsterImage.widthAnchor.constraint(equalToConstant: 100),
         ])
     }
     

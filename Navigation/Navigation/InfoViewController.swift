@@ -8,7 +8,18 @@
 import UIKit
 
 class InfoViewController: UIViewController {
-    lazy var alertButton = UIButton(type: .system)
+    lazy var alertButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("ALERT!", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 15.0
+        button.backgroundColor = .black
+        button.layer.borderWidth = 0.5
+        return button
+        
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,30 +27,36 @@ class InfoViewController: UIViewController {
         view.backgroundColor = backgroundColor
         view.addSubview(alertButton)
         buttonChange()
+        alertButton.addTarget(self, action: #selector(animationForButton(_:)), for: .touchUpInside)
         alertButton.addTarget(self, action: #selector(tranferToAlertView(_:)), for: .touchUpInside)
     }
     
     func buttonChange() {
-        alertButton.translatesAutoresizingMaskIntoConstraints = false
-        alertButton.setTitle("ALERT!", for: .normal)
-        alertButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
-        alertButton.setTitleColor(.white, for: .normal)
-        alertButton.layer.borderColor = UIColor(named: "black")?.cgColor
-        alertButton.backgroundColor = .black
-        alertButton.layer.borderWidth = 0.5
-        
         let safeArealayoutGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
             alertButton.topAnchor.constraint(equalTo: safeArealayoutGuide.topAnchor, constant: 400),
-            alertButton.bottomAnchor.constraint(equalTo: safeArealayoutGuide.bottomAnchor, constant: -200),
+            alertButton.bottomAnchor.constraint(equalTo: safeArealayoutGuide.bottomAnchor, constant: -300),
             alertButton.leadingAnchor.constraint(equalTo: safeArealayoutGuide.leadingAnchor, constant: 50),
             alertButton.trailingAnchor.constraint(equalTo: safeArealayoutGuide.trailingAnchor, constant: -50)
         ])
     }
     
+    @objc func animationForButton(_: UIButton) {
+        UIView.animate(withDuration: 0.6) {
+            self.alertButton.backgroundColor = .red
+            self.alertButton.layer.shadowOffset = CGSize(width: 4, height: 10)
+            self.alertButton.layer.shadowColor = .init(gray: 15.0, alpha: 1)
+            self.alertButton.layer.shadowOpacity = 1
+            self.alertButton.layer.shadowRadius = 5.0
+            self.alertButton.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
+            self.alertButton.backgroundColor = .black
+            self.alertButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+    }
+    
     @objc func tranferToAlertView(_: UIButton) {
         let uiAllertViewController = UIAllertViewController()
-        present(uiAllertViewController, animated: true)
+        present(uiAllertViewController.uiAllert, animated: true)
     }
 }
