@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
 
         lazy var bookSymbol: UIImage = {
-            let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)I
+            let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
             let image = UIImage(systemName: "chart.bar.doc.horizontal", withConfiguration: configuration)
             if let image {
                 bookSymbol = image
