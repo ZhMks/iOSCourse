@@ -69,6 +69,7 @@ class ProfileHeaderView: UIView {
         textField.layer.borderColor = UIColor(named: "black")?.cgColor
         textField.keyboardType = .default
         textField.returnKeyType = .done
+        textField.placeholder = " Input your status"
         
         return textField
     }()
@@ -88,6 +89,25 @@ class ProfileHeaderView: UIView {
         return statusChangeButton
     }()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(profileImage)
+        addSubview(nameLabel)
+        addSubview(statusButton)
+        addSubview(statusLabelText)
+        addSubview(statusTextField)
+        addSubview(statusChangeButton)
+        setUpConstraints()
+        statusButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
+        statusTextField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
+        statusChangeButton.addTarget(self, action: #selector(statusButtonPressed(_:)), for: .touchUpInside)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     @objc func statusTextChanged(_ textField: UITextField) {
         statusText = textField.text
     }
@@ -98,7 +118,11 @@ class ProfileHeaderView: UIView {
             self.statusButton.backgroundColor = UIColor(red: 70/255, green: 130/255, blue: 180/255, alpha: 1)
             self.statusButton.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.statusButton.backgroundColor = .blue
-            print(self.statusLabelText.text!)
+            if let text = self.statusText {
+                print(text)
+            } else {
+                print("There is no text in status")
+            }
         }
     }
     
@@ -112,21 +136,33 @@ class ProfileHeaderView: UIView {
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubview(profileImage)
-        addSubview(nameLabel)
-        addSubview(statusButton)
-        addSubview(statusLabelText)
-        addSubview(statusTextField)
-        addSubview(statusChangeButton)
-        statusButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        statusTextField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
-        statusChangeButton.addTarget(self, action: #selector(statusButtonPressed(_:)), for: .touchUpInside)
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func setUpConstraints() {
+        let safeAreaLayout = self.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            profileImage.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor, constant: 16),
+            profileImage.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor, constant: 16),
+            profileImage.heightAnchor.constraint(equalToConstant: 150),
+            profileImage.widthAnchor.constraint(equalToConstant: 150),
+            
+            nameLabel.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor, constant: 27),
+            nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
+            
+            statusLabelText.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
+            statusLabelText.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 40),
+            
+            statusButton.topAnchor.constraint(equalTo: statusChangeButton.bottomAnchor, constant: 16),
+            statusButton.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor, constant: 16),
+            statusButton.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -16),
+            
+            statusTextField.topAnchor.constraint(equalTo: statusLabelText.bottomAnchor, constant: 26),
+            statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -16),
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+            statusTextField.widthAnchor.constraint(equalToConstant: 200),
+            
+            statusChangeButton.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor, constant: 16),
+            statusChangeButton.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -16),
+            statusChangeButton.topAnchor.constraint(equalTo: statusLabelText.bottomAnchor, constant: 86),
+            
+        ])
     }
 }
