@@ -48,8 +48,8 @@
 		B234B6552AA3590D00F3904F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				B274C2E02A9A27C300D872F4 /* ProfileViewController.swift */,
 				B234B6572AA35A2F00F3904F /* ProfileHeaderView.swift */,
+				B274C2E02A9A27C300D872F4 /* ProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -84,15 +84,23 @@
 		B274C2C92A99FD9200D872F4 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				B2909C2F2AA5E08300985A6B /* Main Scene */,
 				B234B6562AA3592700F3904F /* Feed */,
 				B234B6552AA3590D00F3904F /* Profile */,
-				B274C2CC2A99FD9200D872F4 /* SceneDelegate.swift */,
-				B274C2CA2A99FD9200D872F4 /* AppDelegate.swift */,
 				B274C2D32A99FD9400D872F4 /* Assets.xcassets */,
-				B274C2D52A99FD9400D872F4 /* LaunchScreen.storyboard */,
 				B274C2D82A99FD9400D872F4 /* Info.plist */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		B2909C2F2AA5E08300985A6B /* Main Scene */ = {
+			isa = PBXGroup;
+			children = (
+				B274C2CC2A99FD9200D872F4 /* SceneDelegate.swift */,
+				B274C2CA2A99FD9200D872F4 /* AppDelegate.swift */,
+				B274C2D52A99FD9400D872F4 /* LaunchScreen.storyboard */,
+			);
+			path = "Main Scene";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
