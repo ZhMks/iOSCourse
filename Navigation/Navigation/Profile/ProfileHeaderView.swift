@@ -43,21 +43,6 @@ class ProfileHeaderView: UIView {
         return statusLabelText
     }()
     
-    lazy var statusButton: UIButton = {
-        let statusButton = UIButton()
-        statusButton.translatesAutoresizingMaskIntoConstraints = false
-        statusButton.backgroundColor = UIColor.blue
-        statusButton.setTitle("Show status", for: .normal)
-        statusButton.titleLabel?.textColor = .white
-        statusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
-        statusButton.layer.shadowRadius = 4
-        statusButton.layer.shadowColor = UIColor(named: "black")?.cgColor
-        statusButton.layer.shadowOpacity = 0.7
-        statusButton.layer.cornerRadius = 4
-        
-        return statusButton
-    }()
-    
     lazy var statusTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -93,12 +78,10 @@ class ProfileHeaderView: UIView {
         super.init(frame: frame)
         addSubview(profileImage)
         addSubview(nameLabel)
-        addSubview(statusButton)
         addSubview(statusLabelText)
         addSubview(statusTextField)
         addSubview(statusChangeButton)
         setUpConstraints()
-        statusButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         statusTextField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
         statusChangeButton.addTarget(self, action: #selector(statusButtonPressed(_:)), for: .touchUpInside)
     }
@@ -112,27 +95,17 @@ class ProfileHeaderView: UIView {
         statusText = textField.text
     }
     
-    @objc func buttonPressed(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.4) {
-            self.statusButton.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
-            self.statusButton.backgroundColor = UIColor(red: 70/255, green: 130/255, blue: 180/255, alpha: 1)
-            self.statusButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-            self.statusButton.backgroundColor = .blue
-            if let text = self.statusText {
-                print(text)
-            } else {
-                print("There is no text in status")
-            }
-        }
-    }
-    
     @objc func statusButtonPressed(_ sender: UIButton) {
         UIView.animate(withDuration: 0.4) { [self] in
             self.statusChangeButton.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
             self.statusChangeButton.backgroundColor = UIColor(red: 70/255, green: 130/255, blue: 180/255, alpha: 1)
             self.statusChangeButton.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.statusChangeButton.backgroundColor = .blue
-            statusLabelText.text = self.statusText
+            if let text = statusText {
+                statusLabelText.text = text
+            } else {
+                print("There is no text")
+            }
         }
     }
     
@@ -150,10 +123,6 @@ class ProfileHeaderView: UIView {
             statusLabelText.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
             statusLabelText.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 40),
             
-            statusButton.topAnchor.constraint(equalTo: statusChangeButton.bottomAnchor, constant: 16),
-            statusButton.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor, constant: 16),
-            statusButton.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -16),
-            
             statusTextField.topAnchor.constraint(equalTo: statusLabelText.bottomAnchor, constant: 26),
             statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -16),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
@@ -161,8 +130,7 @@ class ProfileHeaderView: UIView {
             
             statusChangeButton.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor, constant: 16),
             statusChangeButton.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -16),
-            statusChangeButton.topAnchor.constraint(equalTo: statusLabelText.bottomAnchor, constant: 86),
-            
+            statusChangeButton.topAnchor.constraint(equalTo: statusLabelText.bottomAnchor, constant: 86)
         ])
     }
 }
