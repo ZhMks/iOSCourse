@@ -21,6 +21,8 @@ class InfoViewController: UIViewController {
         
     }()
     
+    // MARK: -lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let backgroundColor = UIColor(red: 255/255, green: 204/255, blue: 102/255, alpha: 1)
@@ -30,6 +32,8 @@ class InfoViewController: UIViewController {
         alertButton.addTarget(self, action: #selector(animationForButton(_:)), for: .touchUpInside)
         alertButton.addTarget(self, action: #selector(tranferToAlertView(_:)), for: .touchUpInside)
     }
+    
+    // MARK: -func
     
     func buttonChange() {
         let safeArealayoutGuide = view.safeAreaLayoutGuide

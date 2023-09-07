@@ -19,9 +19,9 @@ class PostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backgroundColor = UIColor(red: 255/255, green: 123/255, blue: 255/255, alpha: 1)
+        let backgroundColor = UIColor(red: 255/255, green: 204/255, blue: 255/255, alpha: 1)
         view.backgroundColor = backgroundColor
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Информация", style: .plain, target: self, action: #selector(barButtonPressed(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(barButtonPressed(_:)))
     }
 
     @objc func barButtonPressed(_ sender: UIBarButtonItem) {

@@ -17,6 +17,7 @@
 		B274C2E32A9B553B00D872F4 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E22A9B553B00D872F4 /* PostViewController.swift */; };
 		B274C2E52A9C862200D872F4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E42A9C862200D872F4 /* InfoViewController.swift */; };
 		B274C2E72A9CBADC00D872F4 /* UiAllertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E62A9CBADC00D872F4 /* UiAllertViewController.swift */; };
+		B2909C312AA86CB000985A6B /* UIPostButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C302AA86CB000985A6B /* UIPostButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		B274C2E22A9B553B00D872F4 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		B274C2E42A9C862200D872F4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		B274C2E62A9CBADC00D872F4 /* UiAllertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiAllertViewController.swift; sourceTree = "<group>"; };
+		B2909C302AA86CB000985A6B /* UIPostButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				B274C2E22A9B553B00D872F4 /* PostViewController.swift */,
 				B274C2E42A9C862200D872F4 /* InfoViewController.swift */,
 				B274C2E62A9CBADC00D872F4 /* UiAllertViewController.swift */,
+				B2909C302AA86CB000985A6B /* UIPostButton.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				B274C2E52A9C862200D872F4 /* InfoViewController.swift in Sources */,
 				B274C2E32A9B553B00D872F4 /* PostViewController.swift in Sources */,
 				B234B6582AA35A2F00F3904F /* ProfileHeaderView.swift in Sources */,
+				B2909C312AA86CB000985A6B /* UIPostButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,12 +8,11 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-    
     // MARK: - Properties
     
     private var statusText: String?
     
-   private lazy var nameLabel: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
         name.text = "Hipster copybara"
@@ -91,6 +90,7 @@ class ProfileHeaderView: UIView {
         
         return setTitleButton
     }()
+
     // MARK: - Lyfecicle
     
     override init(frame: CGRect) {
@@ -112,7 +112,6 @@ class ProfileHeaderView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     // MARK: - Functions
     
@@ -145,7 +144,7 @@ class ProfileHeaderView: UIView {
     }
     
     func setUpConstraints() {
-        let safeAreaLayout = self.safeAreaLayoutGuide
+        let safeAreaLayout = safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
             profileImage.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor, constant: 16),
