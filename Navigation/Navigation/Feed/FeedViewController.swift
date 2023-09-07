@@ -34,8 +34,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.systemBackground
-        title = "Новости"
-        navigationItem.title = "Новости"
+        navigationItem.title = "Feed"
         view.addSubview(button)
         view.addSubview(hamsterImage)
         

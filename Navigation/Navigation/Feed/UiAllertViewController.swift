@@ -9,8 +9,8 @@ import UIKit
 
 class UIAllertViewController: UIViewController {
     lazy var uiAllert: UIAlertController = {
-        let allert = UIAlertController(title: "Last View", message: "Message", preferredStyle: .alert)
-        let firstAction = UIAlertAction(title: "Black Button", style: .default, handler: {_ in
+        let allert = UIAlertController(title: "Last view", message: "Message allert", preferredStyle: .alert)
+        let firstAction = UIAlertAction(title: "Black Button", style: .default, handler: { _ in
             print("Black button tapped")
         })
         let secondAction = UIAlertAction(title: "Red Button", style: .default, handler: { _ in
