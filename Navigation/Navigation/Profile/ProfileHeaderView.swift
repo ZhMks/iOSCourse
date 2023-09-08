@@ -91,6 +91,8 @@ class ProfileHeaderView: UIView {
         return setTitleButton
     }()
 
+    
+    
     // MARK: - Lyfecicle
     
     override init(frame: CGRect) {
