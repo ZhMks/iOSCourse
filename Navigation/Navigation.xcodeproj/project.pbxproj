@@ -20,6 +20,7 @@
 		B2909C312AA86CB000985A6B /* UIPostButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C302AA86CB000985A6B /* UIPostButton.swift */; };
 		B2909C332AAB393B00985A6B /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C322AAB393B00985A6B /* LogInViewController.swift */; };
 		B2909C352AAB3B7200985A6B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C342AAB3B7200985A6B /* LoginView.swift */; };
+		B2909C382AAB5BCA00985A6B /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C372AAB5BCA00985A6B /* TextFieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		B2909C302AA86CB000985A6B /* UIPostButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostButton.swift; sourceTree = "<group>"; };
 		B2909C322AAB393B00985A6B /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B2909C342AAB3B7200985A6B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B2909C372AAB5BCA00985A6B /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +58,6 @@
 			children = (
 				B234B6572AA35A2F00F3904F /* ProfileHeaderView.swift */,
 				B274C2E02A9A27C300D872F4 /* ProfileViewController.swift */,
-				B2909C322AAB393B00985A6B /* LogInViewController.swift */,
-				B2909C342AAB3B7200985A6B /* LoginView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -65,11 +65,11 @@
 		B234B6562AA3592700F3904F /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				B2909C302AA86CB000985A6B /* UIPostButton.swift */,
 				B274C2DE2A9A27BB00D872F4 /* FeedViewController.swift */,
 				B274C2E22A9B553B00D872F4 /* PostViewController.swift */,
 				B274C2E42A9C862200D872F4 /* InfoViewController.swift */,
 				B274C2E62A9CBADC00D872F4 /* UiAllertViewController.swift */,
-				B2909C302AA86CB000985A6B /* UIPostButton.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -95,6 +95,7 @@
 			children = (
 				B2909C2F2AA5E08300985A6B /* Main Scene */,
 				B234B6562AA3592700F3904F /* Feed */,
+				B2909C362AAB52BF00985A6B /* LogIn */,
 				B234B6552AA3590D00F3904F /* Profile */,
 				B274C2D32A99FD9400D872F4 /* Assets.xcassets */,
 				B274C2D82A99FD9400D872F4 /* Info.plist */,
@@ -110,6 +111,16 @@
 				B274C2D52A99FD9400D872F4 /* LaunchScreen.storyboard */,
 			);
 			path = "Main Scene";
+			sourceTree = "<group>";
+		};
+		B2909C362AAB52BF00985A6B /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				B2909C342AAB3B7200985A6B /* LoginView.swift */,
+				B2909C372AAB5BCA00985A6B /* TextFieldView.swift */,
+				B2909C322AAB393B00985A6B /* LogInViewController.swift */,
+			);
+			path = LogIn;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +195,7 @@
 			files = (
 				B274C2CB2A99FD9200D872F4 /* AppDelegate.swift in Sources */,
 				B274C2E12A9A27C300D872F4 /* ProfileViewController.swift in Sources */,
+				B2909C382AAB5BCA00985A6B /* TextFieldView.swift in Sources */,
 				B274C2E72A9CBADC00D872F4 /* UiAllertViewController.swift in Sources */,
 				B274C2DF2A9A27BB00D872F4 /* FeedViewController.swift in Sources */,
 				B274C2CD2A99FD9200D872F4 /* SceneDelegate.swift in Sources */,

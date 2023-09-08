@@ -11,9 +11,12 @@ class ProfileViewController: UIViewController {
     private lazy var profileHeaderView: ProfileHeaderView = {
         let profileHeaderView = ProfileHeaderView()
         profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeGesture.direction = .right
+        profileHeaderView.addGestureRecognizer(swipeGesture)
         return profileHeaderView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Profile"
@@ -30,5 +33,11 @@ class ProfileViewController: UIViewController {
             profileHeaderView.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor),
             profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
         ])
+    }
+    
+    @objc func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .right {
+            navigationController?.popViewController(animated: true)
+        }
     }
 }

@@ -8,22 +8,22 @@
 import UIKit
 
 class LogInViewController: UIViewController {
-    
     private lazy var loginView = LogInView()
+    private lazy var textFieldView = TextFieldView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
         view.addSubview(loginView)
         loginView.frame = view.frame
         loginView.logInButton.addTarget(self, action: #selector(logInButtonPressed(_:)), for: .touchUpInside)
     }
-    
-    @objc func logInButtonPressed(_ sender: UIButton ){
+
+    @objc func logInButtonPressed(_ sender: UIButton) {
         let profileView = ProfileViewController()
         profileView.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(profileView, animated: true)
