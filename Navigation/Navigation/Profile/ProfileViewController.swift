@@ -16,12 +16,19 @@ class ProfileViewController: UIViewController {
         profileHeaderView.addGestureRecognizer(swipeGesture)
         return profileHeaderView
     }()
-    
+
+    private lazy var tableView: TableView = {
+        let tableView = TableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Profile"
         view.backgroundColor = .systemBackground
         view.addSubview(profileHeaderView)
+        view.addSubview(tableView)
         setupConstraintsForProfileHeader()
     }
 
@@ -31,7 +38,12 @@ class ProfileViewController: UIViewController {
             profileHeaderView.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor),
             profileHeaderView.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor),
             profileHeaderView.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
+
+            tableView.topAnchor.constraint(equalTo: profileHeaderView.bottomAnchor, constant: 20),
+            tableView.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeAreaLayout.bottomAnchor)
         ])
     }
     

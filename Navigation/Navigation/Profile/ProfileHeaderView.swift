@@ -9,19 +9,19 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     // MARK: - Properties
-    
+
     private var statusText: String?
-    
+
     private lazy var nameLabel: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
         name.text = "Hipster copybara"
         name.font = UIFont.boldSystemFont(ofSize: 16)
         name.textColor = .black
-        
+
         return name
     }()
-    
+
     private lazy var profileImage: UIImageView = {
         let profileImage = UIImage(named: "copybara")
         let profileView = UIImageView()
@@ -31,20 +31,20 @@ class ProfileHeaderView: UIView {
         profileView.layer.borderWidth = 3
         profileView.layer.cornerRadius = 75
         profileView.layer.masksToBounds = true
-        
+
         return profileView
     }()
-    
+
     private lazy var statusLabelText: UILabel = {
         let statusLabelText = UILabel()
         statusLabelText.translatesAutoresizingMaskIntoConstraints = false
         statusLabelText.text = "Waiting for something..."
         statusLabelText.textColor = .gray
         statusLabelText.font = UIFont.systemFont(ofSize: 14)
-        
+
         return statusLabelText
     }()
-    
+
     private lazy var statusTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -57,10 +57,10 @@ class ProfileHeaderView: UIView {
         textField.keyboardType = .default
         textField.returnKeyType = .done
         textField.placeholder = " Input your status"
-        
+
         return textField
     }()
-    
+
     private lazy var setStatusButton: UIButton = {
         let setStatusButton = UIButton()
         setStatusButton.translatesAutoresizingMaskIntoConstraints = false
@@ -71,77 +71,84 @@ class ProfileHeaderView: UIView {
         setStatusButton.layer.shadowRadius = 4
         setStatusButton.layer.shadowColor = UIColor(named: "black")?.cgColor
         setStatusButton.layer.shadowOpacity = 0.7
-        setStatusButton.layer.cornerRadius = 4
-        
+        setStatusButton.layer.cornerRadius = 10
+
         return setStatusButton
     }()
 
-    
-    
     // MARK: - Lyfecicle
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .lightGray
-        addSubview(profileImage)
-        addSubview(nameLabel)
-        addSubview(statusLabelText)
-        addSubview(statusTextField)
-        addSubview(setStatusButton)
+        addSubViews()
         setUpConstraints()
         statusTextField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
         setStatusButton.addTarget(self, action: #selector(statusButtonPressed(_:)), for: .touchUpInside)
     }
-    
+
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
     // MARK: - Functions
-    
-    @objc func statusTextChanged(_ textField: UITextField) {
-        statusText = textField.text
-    }
-    
-    @objc func statusButtonPressed(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.4) { [self] in
-            self.setStatusButton.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
-            self.setStatusButton.backgroundColor = UIColor(red: 70/255, green: 130/255, blue: 180/255, alpha: 1)
-            self.setStatusButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-            setStatusButton.backgroundColor = UIColor(red: 0/255, green: 132/255, blue: 247/255, alpha: 1)
-            
-            if let text = statusText {
-                statusLabelText.text = text
-            } else {
-                print("There is no text")
+
+    extension ProfileHeaderView {
+        @objc func statusTextChanged(_ textField: UITextField) {
+            statusText = textField.text
+        }
+
+        @objc func statusButtonPressed(_ sender: UIButton) {
+            UIView.animate(withDuration: 0.4) { [self] in
+                self.setStatusButton.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
+                self.setStatusButton.backgroundColor = UIColor(red: 70/255, green: 130/255, blue: 180/255, alpha: 1)
+                self.setStatusButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+                setStatusButton.backgroundColor = UIColor(red: 0/255, green: 132/255, blue: 247/255, alpha: 1)
+
+                if let text = statusText {
+                    statusLabelText.text = text
+                } else {
+                    print("There is no text")
+                }
             }
         }
+
+        func setUpConstraints() {
+            let safeAreaLayout = safeAreaLayoutGuide
+
+            NSLayoutConstraint.activate([
+                profileImage.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor, constant: 16),
+                profileImage.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor, constant: 16),
+                profileImage.heightAnchor.constraint(equalToConstant: 150),
+                profileImage.widthAnchor.constraint(equalToConstant: 150),
+
+                nameLabel.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor, constant: 27),
+                nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
+
+                statusLabelText.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
+                statusLabelText.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 40),
+
+                statusTextField.topAnchor.constraint(equalTo: statusLabelText.bottomAnchor, constant: 26),
+                statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -16),
+                statusTextField.heightAnchor.constraint(equalToConstant: 40),
+                statusTextField.widthAnchor.constraint(equalToConstant: 200),
+
+                setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayout.bottomAnchor, constant: -10),
+                setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor, constant: 16),
+                setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -16),
+                setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayout.bottomAnchor, constant: -10),
+            ])
+        }
+
+        func addSubViews(){
+            addSubview(profileImage)
+            addSubview(nameLabel)
+            addSubview(statusLabelText)
+            addSubview(statusTextField)
+            addSubview(setStatusButton)
+        }
+
     }
-    
-    func setUpConstraints() {
-        let safeAreaLayout = safeAreaLayoutGuide
-        
-        NSLayoutConstraint.activate([
-            profileImage.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor, constant: 16),
-            profileImage.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor, constant: 16),
-            profileImage.heightAnchor.constraint(equalToConstant: 150),
-            profileImage.widthAnchor.constraint(equalToConstant: 150),
-            
-            nameLabel.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor, constant: 27),
-            nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
-            
-            statusLabelText.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
-            statusLabelText.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 40),
-            
-            statusTextField.topAnchor.constraint(equalTo: statusLabelText.bottomAnchor, constant: 26),
-            statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -16),
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            statusTextField.widthAnchor.constraint(equalToConstant: 200),
-            
-            setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayout.bottomAnchor, constant: -5),
-            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -16)
-        ])
-    }
-}
+

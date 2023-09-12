@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TextFieldView: UIView {
+class TextFieldView: UIView, UITextFieldDelegate {
     // MARK: - Properties
     
     private lazy var underlineView: UIView = {
@@ -28,6 +28,12 @@ class TextFieldView: UIView {
         emailTextField.layer.borderColor = UIColor(named: "lightGray")?.cgColor
         emailTextField.autocapitalizationType = .none
         emailTextField.placeholder = "E-mail or Phone"
+        emailTextField.keyboardType = .default
+        emailTextField.returnKeyType = .done
+        emailTextField.autocorrectionType = .no
+        emailTextField.clearButtonMode = UITextField.ViewMode.whileEditing
+
+        emailTextField.delegate = self
       
         return emailTextField
     }()
@@ -91,3 +97,4 @@ class TextFieldView: UIView {
     }
     
 }
+
