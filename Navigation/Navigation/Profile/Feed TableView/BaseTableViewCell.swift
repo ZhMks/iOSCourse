@@ -55,10 +55,10 @@ class BaseTableViewCell: UITableViewCell {
         // MARK: - Functions
 
         private func setupUI(){
-            contentView.addSubview(feedImageView)
-            contentView.addSubview(feedImageViewLabel)
-            contentView.addSubview(bottomLikesLabel)
-            contentView.addSubview(bottomViewsLabel)
+            addSubview(feedImageView)
+            addSubview(feedImageViewLabel)
+            addSubview(bottomLikesLabel)
+            addSubview(bottomViewsLabel)
 
             let safeAreaLayout = safeAreaLayoutGuide
             NSLayoutConstraint.activate([

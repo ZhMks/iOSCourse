@@ -62,10 +62,8 @@
 		B234B6552AA3590D00F3904F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				B2909C472AB0500A00985A6B /* Feed TableView */,
 				B234B6572AA35A2F00F3904F /* ProfileHeaderView.swift */,
-				B2909C452AB048EA00985A6B /* TableView.swift */,
-				B2909C3D2AAF446100985A6B /* BaseTableViewCell.swift */,
-				B2909C412AB0399C00985A6B /* DataForCell.swift */,
 				B274C2E02A9A27C300D872F4 /* ProfileViewController.swift */,
 			);
 			path = Profile;
@@ -130,6 +128,16 @@
 				B2909C322AAB393B00985A6B /* LogInViewController.swift */,
 			);
 			path = LogIn;
+			sourceTree = "<group>";
+		};
+		B2909C472AB0500A00985A6B /* Feed TableView */ = {
+			isa = PBXGroup;
+			children = (
+				B2909C452AB048EA00985A6B /* TableView.swift */,
+				B2909C3D2AAF446100985A6B /* BaseTableViewCell.swift */,
+				B2909C412AB0399C00985A6B /* DataForCell.swift */,
+			);
+			path = "Feed TableView";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
