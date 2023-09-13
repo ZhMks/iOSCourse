@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileTableHeaderView: UIView {
     // MARK: - Properties
 
     private var statusText: String?
@@ -80,7 +80,6 @@ class ProfileHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .lightGray
         addSubViews()
         setUpConstraints()
         statusTextField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
@@ -95,7 +94,7 @@ class ProfileHeaderView: UIView {
 
     // MARK: - Functions
 
-    extension ProfileHeaderView {
+    extension ProfileTableHeaderView {
         @objc func statusTextChanged(_ textField: UITextField) {
             statusText = textField.text
         }
@@ -116,38 +115,35 @@ class ProfileHeaderView: UIView {
         }
 
         func setUpConstraints() {
-            let safeAreaLayout = safeAreaLayoutGuide
-
             NSLayoutConstraint.activate([
-                profileImage.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor, constant: 16),
-                profileImage.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor, constant: 16),
+                profileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+                profileImage.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
                 profileImage.heightAnchor.constraint(equalToConstant: 150),
                 profileImage.widthAnchor.constraint(equalToConstant: 150),
 
-                nameLabel.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor, constant: 27),
-                nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
+                nameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+                nameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 16),
 
                 statusLabelText.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
                 statusLabelText.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 40),
 
                 statusTextField.topAnchor.constraint(equalTo: statusLabelText.bottomAnchor, constant: 26),
-                statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -16),
+                statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
                 statusTextField.heightAnchor.constraint(equalToConstant: 40),
                 statusTextField.widthAnchor.constraint(equalToConstant: 200),
 
-                setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayout.bottomAnchor, constant: -10),
-                setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor, constant: 16),
-                setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor, constant: -16),
-                setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayout.bottomAnchor, constant: -10),
+                setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -500),
+                setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
             ])
         }
 
-        func addSubViews(){
-            addSubview(profileImage)
-            addSubview(nameLabel)
-            addSubview(statusLabelText)
-            addSubview(statusTextField)
-            addSubview(setStatusButton)
+        func addSubViews() {
+        addSubview(profileImage)
+        addSubview(nameLabel)
+        addSubview(statusLabelText)
+        addSubview(statusTextField)
+        addSubview(setStatusButton)
         }
 
     }

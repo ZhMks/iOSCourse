@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TextFieldView: UIView, UITextFieldDelegate {
+class TextFieldView: UIView {
     // MARK: - Properties
     
     private lazy var underlineView: UIView = {
@@ -32,8 +32,8 @@ class TextFieldView: UIView, UITextFieldDelegate {
         emailTextField.returnKeyType = .done
         emailTextField.autocorrectionType = .no
         emailTextField.clearButtonMode = UITextField.ViewMode.whileEditing
+        emailTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
 
-        emailTextField.delegate = self
       
         return emailTextField
     }()
@@ -47,6 +47,12 @@ class TextFieldView: UIView, UITextFieldDelegate {
         passwordTextField.autocapitalizationType = .none
         passwordTextField.placeholder = "Password"
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.keyboardType = .default
+        passwordTextField.returnKeyType = .done
+        passwordTextField.autocorrectionType = .no
+        passwordTextField.clearButtonMode = UITextField.ViewMode.whileEditing
+        passwordTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+
         
         return passwordTextField
     }()
