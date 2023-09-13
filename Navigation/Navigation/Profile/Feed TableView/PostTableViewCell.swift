@@ -102,7 +102,7 @@ class PostTableViewCell: UITableViewCell {
                 bottomLikesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
 
                 bottomViewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                bottomViewsLabel.topAnchor.constraint(equalTo: feedImageView.bottomAnchor, constant: 16),
+                bottomViewsLabel.topAnchor.constraint(equalTo: feedImageViewLabel.bottomAnchor, constant: 16),
                 bottomViewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
             ])
         }
@@ -111,7 +111,7 @@ class PostTableViewCell: UITableViewCell {
             authorName.text = author
             feedImageViewLabel.text = title
             feedImageView.image = UIImage(named: imageName)
-            bottomLikesLabel.text = String(likes)
-            bottomViewsLabel.text = String(views)
+            bottomLikesLabel.text = "Likes: \(likes)"
+            bottomViewsLabel.text = "Views: \(views)"
         }
 }

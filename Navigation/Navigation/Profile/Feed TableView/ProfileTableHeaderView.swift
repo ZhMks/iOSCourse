@@ -12,6 +12,10 @@ class ProfileTableHeaderView: UIView {
 
     private var statusText: String?
 
+    override var intrinsicContentSize: CGSize {
+        CGSize(width: UIView.noIntrinsicMetric, height: 220)
+    }
+
     private lazy var nameLabel: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -80,6 +84,7 @@ class ProfileTableHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .secondarySystemBackground
         addSubViews()
         setUpConstraints()
         statusTextField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
@@ -122,19 +127,19 @@ class ProfileTableHeaderView: UIView {
                 profileImage.widthAnchor.constraint(equalToConstant: 150),
 
                 nameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
-                nameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 16),
+                nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
 
                 statusLabelText.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
-                statusLabelText.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 40),
+                statusLabelText.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 20),
 
                 statusTextField.topAnchor.constraint(equalTo: statusLabelText.bottomAnchor, constant: 26),
                 statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
                 statusTextField.heightAnchor.constraint(equalToConstant: 40),
                 statusTextField.widthAnchor.constraint(equalToConstant: 200),
 
-                setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -500),
                 setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
                 setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+                setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -12)
             ])
         }
 

@@ -33,27 +33,18 @@ class ProfileViewController: UIViewController {
     ]
 
     private lazy var postTableView : UITableView = {
-        let postTableView = UITableView()
+        let postTableView = UITableView.init(frame: .zero, style: .plain)
         postTableView.translatesAutoresizingMaskIntoConstraints = false
+
         return postTableView
     }()
-    private lazy var profileHeaderView: ProfileTableHeaderView = {
-        let profileHeaderView = ProfileTableHeaderView()
-        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        profileHeaderView.backgroundColor = .gray
-        return profileHeaderView
-    }()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         view.addSubview(postTableView)
-        postTableView.addSubview(profileHeaderView)
         setupConstraints()
-        postTableView.setAndLayout(header: profileHeaderView)
-        postTableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
-        postTableView.addSubview(profileHeaderView)
+        tuneTableView() 
         navigationItem.title = "Profile"
     }
 
@@ -61,6 +52,18 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tuneTableView() {
+        postTableView.rowHeight = UITableView.automaticDimension
+        postTableView.estimatedRowHeight = 44
+        let header = ProfileTableHeaderView()
+        postTableView.setAndLayout(header: header)
+        postTableView.tableFooterView = UIView()
+        postTableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
+        postTableView.dataSource = self
+        postTableView.delegate = self
+
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dataSource.count
@@ -79,26 +82,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            let headerView = profileHeaderView
-            return headerView
-        }
-        return nil
-    }
-
     func setupConstraints() {
         let safeAreaLayout = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             postTableView.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor),
             postTableView.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor),
             postTableView.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor),
-            postTableView.bottomAnchor.constraint(equalTo: safeAreaLayout.bottomAnchor),
-
-            profileHeaderView.topAnchor.constraint(equalTo: postTableView.topAnchor),
-            profileHeaderView.leadingAnchor.constraint(equalTo: postTableView.leadingAnchor),
-            profileHeaderView.trailingAnchor.constraint(equalTo: postTableView.trailingAnchor),
-            profileHeaderView.bottomAnchor.constraint(equalTo: postTableView.bottomAnchor)
+            postTableView.bottomAnchor.constraint(equalTo: safeAreaLayout.bottomAnchor)
         ])
     }
 }

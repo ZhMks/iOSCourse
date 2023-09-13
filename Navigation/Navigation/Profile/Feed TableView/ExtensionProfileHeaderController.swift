@@ -14,7 +14,7 @@ extension UITableView {
         header.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            header.widthAnchor.constraint(equalTo: widthAnchor)
+            header.widthAnchor.constraint(equalTo: widthAnchor) 
         ])
         header.setNeedsLayout()
         header.layoutIfNeeded()
