@@ -12,20 +12,23 @@ class LogInViewController: UIViewController {
     private lazy var loginView : LogInView = {
         let loginView = LogInView()
         loginView.translatesAutoresizingMaskIntoConstraints = false
+        loginView.frame = CGRect(origin: .zero, size: scrollView.contentSize)
         return loginView
     }()
 
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .systemBackground
-        scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .systemBackground
+        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height)
+        scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginView.logInButton.addTarget(self, action: #selector(logInButtonPressed(_:)), for: .touchUpInside)
     }
 
     override func viewWillLayoutSubviews() {
@@ -34,7 +37,6 @@ class LogInViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(loginView)
         setupConstraints()
-        loginView.logInButton.addTarget(self, action: #selector(logInButtonPressed(_:)), for: .touchUpInside)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -70,10 +72,6 @@ class LogInViewController: UIViewController {
 
 extension LogInViewController: UITextFieldDelegate {
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-    }
-
    private func setupKeyboardObservers() {
        let notificationCenter = NotificationCenter.default
        notificationCenter.addObserver(self, selector: #selector(willShowKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -98,4 +96,5 @@ extension LogInViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+
 }

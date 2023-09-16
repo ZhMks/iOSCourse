@@ -34,6 +34,7 @@ class TextFieldView: UIView {
         emailTextField.clearButtonMode = UITextField.ViewMode.whileEditing
         emailTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
 
+
       
         return emailTextField
     }()
