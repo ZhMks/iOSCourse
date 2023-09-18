@@ -51,8 +51,6 @@ class ProfileViewController: UIViewController {
         tuneTableView() 
         navigationItem.title = "Profile"
     }
-
-
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
