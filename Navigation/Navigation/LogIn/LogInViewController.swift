@@ -126,7 +126,6 @@ class LogInViewController: UIViewController {
 
     @objc func logInButtonPressed(_ sender: UIButton) {
         let profileView = ProfileViewController()
-        profileView.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(profileView, animated: true)
     }
 }

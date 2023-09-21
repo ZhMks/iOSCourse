@@ -17,4 +17,27 @@ struct Post {
     var views: Int
 }
 
+struct Photos {
+
+    var photoView: UIImage
+
+   static func makeArray() -> [Photos] {
+        [
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Film1")!),
+            Photos(photoView: .init(named: "Film2")!),
+            Photos(photoView: .init(named: "Film3")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!)
+        ]
+    }
+}
+
 

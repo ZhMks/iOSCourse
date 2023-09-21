@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    // MARK: - Properties
+
     private var dataSource: [Post] = [
         Post(author: "Wedmak.Official",
              imgae: "Film1",
@@ -32,56 +34,74 @@ class ProfileViewController: UIViewController {
              imgae: "Film3",
              description: "SIMPLETEXT SIMPLETEXT SIMPLETEXT SIMPLETEXT SIMPLETEXT",
              likes: 2222,
-             views: 2234
-            )
+             views: 2234)
     ]
 
-    private lazy var postTableView : UITableView = {
-        let postTableView = UITableView.init(frame: .zero, style: .plain)
+    private lazy var postTableView: UITableView = {
+        let postTableView = UITableView(frame: .zero, style: .grouped)
         postTableView.translatesAutoresizingMaskIntoConstraints = false
 
         return postTableView
     }()
+
+    // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         view.addSubview(postTableView)
         setupConstraints()
-        tuneTableView() 
+        tuneTableView()
         navigationItem.title = "Profile"
     }
 }
 
-extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+// MARK: - Functions
 
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tuneTableView() {
         postTableView.rowHeight = UITableView.automaticDimension
-        postTableView.estimatedRowHeight = 44
+        postTableView.estimatedRowHeight = 12
         let header = ProfileTableHeaderView()
         postTableView.setAndLayout(header: header)
         postTableView.tableFooterView = UIView()
         postTableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
+        postTableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
         postTableView.dataSource = self
         postTableView.delegate = self
-
+        postTableView.sectionFooterHeight = 2
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataSource.count
+           if section == 0 {
+               return 1
+           } else {
+               return dataSource.count
+           }
+       }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
-        let setting = dataSource[indexPath.row]
-        cell.configure(
-            author: setting.author,
-            title: setting.description,
-            imageName: setting.imgae,
-            likes: setting.likes,
-            views: setting.views
-        )
-        return cell
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.id, for: indexPath) as? PhotosTableViewCell else { return UITableViewCell() }
+            let photoArray = Photos.makeArray()
+            cell.configureCell(photo: photoArray)
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
+            let setting = dataSource[indexPath.row]
+            cell.configure(
+                author: setting.author,
+                title: setting.description,
+                imageName: setting.imgae,
+                likes: setting.likes,
+                views: setting.views
+            )
+            return cell
+        }
     }
 
     func setupConstraints() {
@@ -92,5 +112,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             postTableView.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor),
             postTableView.bottomAnchor.constraint(equalTo: safeAreaLayout.bottomAnchor)
         ])
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            let photosViewController = PhotosViewController()
+            navigationController?.pushViewController(photosViewController, animated: true)
+        }
     }
 }
