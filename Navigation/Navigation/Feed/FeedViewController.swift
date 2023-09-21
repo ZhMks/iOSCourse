@@ -44,7 +44,6 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.systemBackground
-        navigationItem.title = "Feed"
         view.addSubview(hamsterImage)
         view.addSubview(uiStackView)
         setupConstraintsForStack()

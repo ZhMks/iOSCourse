@@ -52,7 +52,6 @@ class ProfileViewController: UIViewController {
         view.addSubview(postTableView)
         setupConstraints()
         tuneTableView()
-        navigationItem.title = "Profile"
     }
 }
 

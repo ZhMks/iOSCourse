@@ -23,10 +23,26 @@ struct Photos {
 
    static func makeArray() -> [Photos] {
         [
-            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "gldot")!),
             Photos(photoView: .init(named: "Film1")!),
             Photos(photoView: .init(named: "Film2")!),
             Photos(photoView: .init(named: "Film3")!),
+            Photos(photoView: .init(named: "forsazh")!),
+            Photos(photoView: .init(named: "Ww")!),
+            Photos(photoView: .init(named: "ww1984")!),
+            Photos(photoView: .init(named: "testImg")!),
+            Photos(photoView: .init(named: "flash")!),
+            Photos(photoView: .init(named: "batman")!),
+            Photos(photoView: .init(named: "foundation")!),
+            Photos(photoView: .init(named: "nile")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
+            Photos(photoView: .init(named: "Netology1")!),
             Photos(photoView: .init(named: "Netology1")!),
             Photos(photoView: .init(named: "Netology1")!),
             Photos(photoView: .init(named: "Netology1")!),
@@ -36,6 +52,7 @@ struct Photos {
             Photos(photoView: .init(named: "Netology1")!),
             Photos(photoView: .init(named: "Netology1")!),
             Photos(photoView: .init(named: "Netology1")!)
+
         ]
     }
 }
