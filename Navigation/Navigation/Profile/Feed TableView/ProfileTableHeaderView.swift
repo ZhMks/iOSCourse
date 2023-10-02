@@ -26,7 +26,7 @@ class ProfileTableHeaderView: UIView {
         return name
     }()
 
-    private lazy var profileImage: UIImageView = {
+    lazy var profileImage: UIImageView = {
         let profileImage = UIImage(named: "copybara")
         let profileView = UIImageView()
         profileView.image = profileImage
@@ -35,6 +35,7 @@ class ProfileTableHeaderView: UIView {
         profileView.layer.borderWidth = 3
         profileView.layer.cornerRadius = 75
         profileView.layer.masksToBounds = true
+        profileView.isUserInteractionEnabled = true
 
         return profileView
     }()
@@ -139,7 +140,7 @@ class ProfileTableHeaderView: UIView {
 
                 setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
                 setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-                setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -12)
+                setStatusButton.bottomAnchor.constraint(equalTo:  safeAreaLayoutGuide.bottomAnchor, constant: -12)
             ])
         }
 

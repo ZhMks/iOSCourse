@@ -44,6 +44,20 @@ class ProfileViewController: UIViewController {
         return postTableView
     }()
 
+    private lazy var profileImage : UIView = {
+        let profileImage = ProfileTableHeaderView().profileImage
+        return profileImage
+    }()
+
+    private lazy var animatedButton : UIButton = {
+        let animatedButton = UIButton()
+        animatedButton.setBackgroundImage(.init(systemName:"clear"), for: .normal)
+        animatedButton.tintColor = .white
+        animatedButton.frame = CGRect(x: view.frame.midX, y: 0, width: 44, height: 44)
+        return animatedButton
+    }()
+
+
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
@@ -69,6 +83,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         postTableView.dataSource = self
         postTableView.delegate = self
         postTableView.sectionFooterHeight = 2
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+        header.profileImage.addGestureRecognizer(tapGesture)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -118,5 +134,27 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let photosViewController = PhotosViewController()
             navigationController?.pushViewController(photosViewController, animated: true)
         }
+    }
+
+    @objc func imageTapped(_: UITapGestureRecognizer) {
+            if self.view.subviews.contains(where: { $0 === self.profileImage }) {
+                return
+            } else {
+                let animatedView = UIView()
+                animatedView.frame = self.view.frame
+                let width = animatedView.center.x
+                let height = animatedView.center.y
+                UIView.animateKeyframes(withDuration: 1, delay: 0, animations: {
+                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: {
+                        self.view.addSubview(animatedView)
+                        animatedView.addSubview(self.profileImage)
+                        animatedView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+                    })
+                    UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.3, animations: {
+                        animatedView.addSubview(self.animatedButton)
+                    })
+                })
+                print("image tapped")
+            }
     }
 }
