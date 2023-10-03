@@ -8,6 +8,7 @@
 import UIKit
 
 class ProfileTableHeaderView: UIView {
+    
     // MARK: - Properties
 
     private var statusText: String?
@@ -15,6 +16,12 @@ class ProfileTableHeaderView: UIView {
     override var intrinsicContentSize: CGSize {
         CGSize(width: UIView.noIntrinsicMetric, height: 220)
     }
+
+    lazy var animatedView: UIView = {
+        let animatedView = UIView()
+        animatedView.isHidden = true
+        return animatedView
+    }()
 
     private lazy var nameLabel: UILabel = {
         let name = UILabel()
@@ -36,7 +43,7 @@ class ProfileTableHeaderView: UIView {
         profileView.layer.cornerRadius = 75
         profileView.layer.masksToBounds = true
         profileView.isUserInteractionEnabled = true
-
+        
         return profileView
     }()
 
@@ -124,8 +131,9 @@ class ProfileTableHeaderView: UIView {
             NSLayoutConstraint.activate([
                 profileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
                 profileImage.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                profileImage.heightAnchor.constraint(equalToConstant: 150),
+                profileImage.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),
                 profileImage.widthAnchor.constraint(equalToConstant: 150),
+                profileImage.heightAnchor.constraint(equalToConstant: 150),
 
                 nameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
                 nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),

@@ -11,31 +11,7 @@ class ProfileViewController: UIViewController {
 
     // MARK: - Properties
 
-    private var dataSource: [Post] = [
-        Post(author: "Wedmak.Official",
-             imgae: "Film1",
-             description: "Новые кадры со съемок второго сезона сериала \"Ведьмак\" ",
-             likes: 121,
-             views: 121),
-        Post(author: "Netology",
-             imgae: "Netology1",
-             description: """
-             От 'Hello, World' до первого сложного iOS-приложения - всего один курс. Если чувствуете в себе силу для покорения топов AppStore - пора начинать действовать! Профессия «iOS-разработчик» - тот самый путь, по которому стоит пройти до самого
-             конца. Вы научитесь создавать приложения на языке Swift с нуля: от начинки до интерфейса. Чтобы закрепить знания на практике, каждый студент подготовит дипломную работу - VK-like приложение с возможностью публиковать фотографии, использовать фильтры, ставить лайки и подписываться на других
-             пользователей.
-             """,
-             likes: 120, views: 120),
-        Post(author: "SimpleTextAuthor",
-             imgae: "Film2",
-             description: "TEKSTTEKSTTEKSTTEKSTTEKSTTEKSTTEKST",
-             likes: 222,
-             views: 223),
-        Post(author: "AUTHOR$",
-             imgae: "Film3",
-             description: "SIMPLETEXT SIMPLETEXT SIMPLETEXT SIMPLETEXT SIMPLETEXT",
-             likes: 2222,
-             views: 2234)
-    ]
+    private var dataSource = Post.makeArray()
 
     private lazy var postTableView: UITableView = {
         let postTableView = UITableView(frame: .zero, style: .grouped)
@@ -44,16 +20,15 @@ class ProfileViewController: UIViewController {
         return postTableView
     }()
 
-    private lazy var profileImage : UIView = {
-        let profileImage = ProfileTableHeaderView().profileImage
-        return profileImage
-    }()
+    let header = ProfileTableHeaderView()
 
     private lazy var animatedButton : UIButton = {
         let animatedButton = UIButton()
         animatedButton.setBackgroundImage(.init(systemName:"clear"), for: .normal)
-        animatedButton.tintColor = .white
-        animatedButton.frame = CGRect(x: view.frame.midX, y: 0, width: 44, height: 44)
+        animatedButton.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
+        animatedButton.frame = CGRect(x: 300, y: 50, width: 44, height: 44)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(animatedButtonTapped(_:)))
+        animatedButton.addGestureRecognizer(tapGesture)
         return animatedButton
     }()
 
@@ -72,10 +47,10 @@ class ProfileViewController: UIViewController {
 // MARK: - Functions
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+
     func tuneTableView() {
         postTableView.rowHeight = UITableView.automaticDimension
-        postTableView.estimatedRowHeight = 12
-        let header = ProfileTableHeaderView()
+        postTableView.estimatedRowHeight = 44
         postTableView.setAndLayout(header: header)
         postTableView.tableFooterView = UIView()
         postTableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
@@ -136,25 +111,30 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
-    @objc func imageTapped(_: UITapGestureRecognizer) {
-            if self.view.subviews.contains(where: { $0 === self.profileImage }) {
-                return
-            } else {
-                let animatedView = UIView()
-                animatedView.frame = self.view.frame
-                let width = animatedView.center.x
-                let height = animatedView.center.y
-                UIView.animateKeyframes(withDuration: 1, delay: 0, animations: {
-                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: {
-                        self.view.addSubview(animatedView)
-                        animatedView.addSubview(self.profileImage)
-                        animatedView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-                    })
-                    UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.3, animations: {
-                        animatedView.addSubview(self.animatedButton)
-                    })
-                })
-                print("image tapped")
-            }
+    @objc func animatedButtonTapped(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.header.profileImage.transform = CGAffineTransform.identity
+            self.header.profileImage.layer.position = CGPoint(x: 90, y: 90)
+            self.header.animatedView.isHidden = true
+        })
     }
+
+    @objc func imageTapped(_: UITapGestureRecognizer) {
+        self.view.addSubview(self.header.animatedView)
+        self.header.animatedView.addSubview(self.animatedButton)
+        self.header.animatedView.isHidden = false
+
+        UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options: .calculationModeCubicPaced, animations: {
+            self.header.animatedView.frame = self.view.frame
+            self.header.animatedView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+            self.view.bringSubviewToFront(self.header.profileImage)
+            self.header.profileImage.center = self.view.center
+            self.header.profileImage.transform = CGAffineTransform(scaleX: 2, y: 2)
+
+        })
+        UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.3, animations: {
+            self.animatedButton.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
+        })
+    }
+
 }

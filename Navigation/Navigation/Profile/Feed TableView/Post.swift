@@ -15,6 +15,34 @@ struct Post {
     var description: String
     var likes: Int
     var views: Int
+
+    static func makeArray() -> [Post] {
+        [
+        Post(author: "Wedmak.Official",
+             imgae: "Film1",
+             description: "Новые кадры со съемок второго сезона сериала \"Ведьмак\" ",
+             likes: 121,
+             views: 121),
+        Post(author: "Netology",
+             imgae: "Netology1",
+             description: """
+             От 'Hello, World' до первого сложного iOS-приложения - всего один курс. Если чувствуете в себе силу для покорения топов AppStore - пора начинать действовать! Профессия «iOS-разработчик» - тот самый путь, по которому стоит пройти до самого
+             конца. Вы научитесь создавать приложения на языке Swift с нуля: от начинки до интерфейса. Чтобы закрепить знания на практике, каждый студент подготовит дипломную работу - VK-like приложение с возможностью публиковать фотографии, использовать фильтры, ставить лайки и подписываться на других
+             пользователей.
+             """,
+             likes: 120, views: 120),
+        Post(author: "SimpleTextAuthor",
+             imgae: "Film2",
+             description: "TEKSTTEKSTTEKSTTEKSTTEKSTTEKSTTEKST",
+             likes: 222,
+             views: 223),
+        Post(author: "AUTHOR$",
+             imgae: "Film3",
+             description: "SIMPLETEXT SIMPLETEXT SIMPLETEXT SIMPLETEXT SIMPLETEXT",
+             likes: 2222,
+             views: 2234)
+        ]
+    }
 }
 
 struct Photos {

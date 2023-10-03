@@ -86,14 +86,17 @@ class PostTableViewCell: UITableViewCell {
                 authorName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
                 authorName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
                 authorName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+                authorName.heightAnchor.constraint(equalToConstant: 50),
 
                 feedImageView.topAnchor.constraint(equalTo: authorName.bottomAnchor, constant: 12),
                 feedImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 feedImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                feedImageView.heightAnchor.constraint(equalToConstant: 200),
 
                 feedImageViewLabel.topAnchor.constraint(equalTo: feedImageView.bottomAnchor, constant: 16),
                 feedImageViewLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
                 feedImageViewLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+                feedImageViewLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
 
                 bottomLikesLabel.topAnchor.constraint(equalTo: feedImageViewLabel.bottomAnchor, constant: 16),
                 bottomLikesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
