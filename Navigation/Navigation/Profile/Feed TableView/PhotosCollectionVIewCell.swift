@@ -14,6 +14,8 @@ class PhotosCollectionViewCell : UICollectionViewCell {
     private lazy var photoImageView : UIImageView = {
         let photoImageView = UIImageView()
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
+        photoImageView.layer.cornerRadius = 6
+        photoImageView.layer.masksToBounds = true
         return photoImageView
     }()
 

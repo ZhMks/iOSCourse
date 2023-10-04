@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Properties
 
     private var dataSource = Post.makeArray()
+    private var photosArray = Photos.makeArray()
 
     private lazy var postTableView: UITableView = {
         let postTableView = UITableView(frame: .zero, style: .grouped)
@@ -41,6 +42,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(postTableView)
         setupConstraints()
         tuneTableView()
+        postTableView.reloadData()
     }
 }
 
@@ -77,8 +79,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.id, for: indexPath) as? PhotosTableViewCell else { return UITableViewCell() }
-            let photoArray = Photos.makeArray()
-            cell.configureCell(photo: photoArray)
+            cell.configure(with: photosArray)
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
@@ -123,17 +124,19 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         self.view.addSubview(self.header.animatedView)
         self.header.animatedView.addSubview(self.animatedButton)
         self.header.animatedView.isHidden = false
+        let scale = self.view.bounds.width / header.profileImage.bounds.width
 
         UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options: .calculationModeCubicPaced, animations: {
             self.header.animatedView.frame = self.view.frame
             self.header.animatedView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
             self.view.bringSubviewToFront(self.header.profileImage)
             self.header.profileImage.center = self.view.center
-            self.header.profileImage.transform = CGAffineTransform(scaleX: 2, y: 2)
+            self.header.profileImage.transform = CGAffineTransform(scaleX: scale, y: scale)
 
-        })
-        UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.3, animations: {
-            self.animatedButton.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.3, animations: {
+                self.animatedButton.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
+            })
+
         })
     }
 
