@@ -5,7 +5,7 @@
 //  Created by Максим Жуин on 11.09.2023.
 //
 
-import Foundation
+import iOSIntPackage
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
