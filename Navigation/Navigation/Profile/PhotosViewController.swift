@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import StorageService
 
 class PhotosViewController: UIViewController {
-    private lazy var photoArray: [Photos] = Photos.makeArray()
+
+    private lazy var photoArray: [Photos] = Photos(photoView: .init()).makeArray()
 
     // MARK: - Properties
 

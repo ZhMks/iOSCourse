@@ -5,7 +5,7 @@
 //  Created by Максим Жуин on 21.09.2023.
 //
 
-import Foundation
+import StorageService
 import UIKit
 
 class PhotosCollectionViewCell : UICollectionViewCell {

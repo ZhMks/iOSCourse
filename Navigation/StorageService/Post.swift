@@ -9,14 +9,23 @@ import Foundation
 import UIKit
 
 
-struct Post {
-    var author: String
-    var imgae: String
-    var description: String
-    var likes: Int
-    var views: Int
+public struct Post {
+    
+   public var author: String
+   public var imgae: String
+   public var description: String
+   public var likes: Int
+   public var views: Int
 
-    static func makeArray() -> [Post] {
+    public init(author: String, imgae: String, description: String, likes: Int, views: Int) {
+        self.author = author
+        self.imgae = imgae
+        self.description = description
+        self.likes = likes
+        self.views = views
+    }
+
+    public func makeArray() -> [Post] {
         [
         Post(author: "Wedmak.Official",
              imgae: "Film1",
@@ -45,11 +54,15 @@ struct Post {
     }
 }
 
-struct Photos {
+public struct Photos {
 
-    var photoView: UIImage
+   public var photoView: UIImage
 
-   static func makeArray() -> [Photos] {
+    public init(photoView: UIImage) {
+        self.photoView = photoView
+    }
+
+   public func makeArray() -> [Photos] {
         [
             Photos(photoView: .init(named: "gldot")!),
             Photos(photoView: .init(named: "Film1")!),

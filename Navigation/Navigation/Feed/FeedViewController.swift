@@ -60,7 +60,6 @@ class FeedViewController: UIViewController {
             hamsterImage.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 80),
             hamsterImage.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -80),
             hamsterImage.heightAnchor.constraint(equalToConstant: 200),
-            hamsterImage.widthAnchor.constraint(equalToConstant: 100),
         ])
     }
     

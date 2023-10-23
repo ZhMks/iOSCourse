@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
 
     // MARK: - Properties
 
-    private var dataSource = Post.makeArray()
-    private var photosArray = Photos.makeArray()
+    private var dataSource = Post(author: "", imgae: "", description: "", likes: 0, views: 0).makeArray()
+    private var photosArray = Photos(photoView: .init()).makeArray()
 
     private lazy var postTableView: UITableView = {
         let postTableView = UITableView(frame: .zero, style: .grouped)
@@ -129,7 +130,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options: .calculationModeCubicPaced, animations: {
             self.header.animatedView.frame = self.view.frame
             self.header.animatedView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-            self.view.bringSubviewToFront(self.header.profileImage)
             self.header.profileImage.center = self.view.center
             self.header.profileImage.transform = CGAffineTransform(scaleX: scale, y: scale)
 
