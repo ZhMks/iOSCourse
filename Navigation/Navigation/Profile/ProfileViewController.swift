@@ -39,11 +39,17 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         view.addSubview(postTableView)
         setupConstraints()
         tuneTableView()
         postTableView.reloadData()
+
+        #if DEBUG
+        view.backgroundColor = .systemBackground
+        #else
+        view.backgroundColor = .yellow
+        #endif
+
     }
 }
 
