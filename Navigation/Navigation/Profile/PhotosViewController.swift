@@ -61,13 +61,9 @@ extension PhotosViewController: UICollectionViewDataSource {
         uiCollectionView.delegate = self
         uiCollectionView.dataSource = self
         view.addSubview(uiCollectionView)
-        let safeArea = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            uiCollectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            uiCollectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
-            uiCollectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            uiCollectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
-        ])
+        uiCollectionView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 }
 

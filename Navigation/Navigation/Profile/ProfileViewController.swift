@@ -103,13 +103,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func setupConstraints() {
-        let safeAreaLayout = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            postTableView.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor),
-            postTableView.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor),
-            postTableView.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor),
-            postTableView.bottomAnchor.constraint(equalTo: safeAreaLayout.bottomAnchor)
-        ])
+        postTableView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

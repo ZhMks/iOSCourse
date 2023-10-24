@@ -158,51 +158,60 @@ extension LogInViewController: UITextFieldDelegate {
     }
 
    private func setupConstraints() {
-        let safeArea = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            vkLogo.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
-            vkLogo.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            vkLogo.widthAnchor.constraint(equalToConstant: 100),
-            vkLogo.heightAnchor.constraint(equalToConstant: 100),
 
-            scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
-            scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
-            scrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+       vkLogo.snp.makeConstraints { make in
+           make.top.equalTo(contentView.snp.top).offset(120)
+           make.centerX.equalTo(contentView.snp.centerX)
+           make.height.width.equalTo(100)
+       }
 
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+       scrollView.snp.makeConstraints { make in
+           make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+           make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(16)
+           make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-16)
+           make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+       }
 
-            textFieldView.topAnchor.constraint(equalTo: vkLogo.bottomAnchor, constant: 120),
-            textFieldView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            textFieldView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            textFieldView.heightAnchor.constraint(equalToConstant: 100),
+       contentView.snp.makeConstraints { make in
+           make.top.bottom.leading.trailing.width.equalTo(scrollView)
+       }
 
-            emailTextField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor),
-            emailTextField.topAnchor.constraint(equalTo: textFieldView.topAnchor),
-            emailTextField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor),
-            emailTextField.heightAnchor.constraint(equalToConstant: 50),
+       textFieldView.snp.makeConstraints { make in
+           make.top.equalTo(vkLogo.snp.bottom).offset(120)
+           make.trailing.equalTo(contentView.snp.trailing)
+           make.leading.equalTo(contentView.snp.leading)
+           make.height.equalTo(100)
+       }
 
-            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor),
-            passwordTextField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor),
-            passwordTextField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+       emailTextField.snp.makeConstraints { make in
+           make.height.equalTo(50)
+           make.leading.equalTo(textFieldView.snp.leading)
+           make.trailing.equalTo(textFieldView.snp.trailing)
+           make.top.equalTo(textFieldView.snp.top)
+       }
 
-            underlineView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 0.5),
-            underlineView.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: -0.5),
-            underlineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            underlineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            underlineView.heightAnchor.constraint(equalToConstant: 0.5),
+       passwordTextField.snp.makeConstraints { make in
+           make.top.equalTo(emailTextField.snp.bottom)
+           make.leading.equalTo(textFieldView.snp.leading)
+           make.trailing.equalTo(textFieldView.snp.trailing)
+           make.height.equalTo(50)
+       }
 
-            loginButton.topAnchor.constraint(equalTo: textFieldView.bottomAnchor, constant: 16),
-            loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
+       underlineView.snp.makeConstraints { make in
+           make.height.equalTo(0.5)
+           make.leading.equalTo(contentView.snp.leading)
+           make.trailing.equalTo(contentView.snp.trailing)
+           make.top.equalTo(emailTextField.snp.bottom).offset(0.5)
+           make.bottom.equalTo(passwordTextField.snp.top).offset(-0.5)
+       }
+
+       loginButton.snp.makeConstraints { make in
+           make.height.equalTo(50)
+           make.top.equalTo(textFieldView.snp.bottom).offset(16)
+           make.leading.equalTo(contentView.snp.leading)
+           make.trailing.equalTo(contentView.snp.trailing)
+           make.bottom.equalTo(contentView.snp.bottom)
+       }
     }
 
     private func addSubviews() {
@@ -213,7 +222,7 @@ extension LogInViewController: UITextFieldDelegate {
         contentView.addSubview(textFieldView)
         textFieldView.addSubview(emailTextField)
         textFieldView.addSubview(passwordTextField)
-        textFieldView.addSubview(underlineView)
+        contentView.addSubview(underlineView)
     }
 
 }

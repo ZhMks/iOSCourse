@@ -7,6 +7,7 @@
 
 import StorageService
 import UIKit
+import SnapKit
 
 class PhotosTableViewCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
 
@@ -65,19 +66,21 @@ static let id = "PhotosTableViewCell"
         uiCollectionView.delegate = self
         uiCollectionView.dataSource = self
 
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 12),
-            label.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 12),
-            label.bottomAnchor.constraint(equalTo: uiCollectionView.topAnchor, constant: -12),
-
-            uiCollectionView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 12),
-            uiCollectionView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -12),
-            uiCollectionView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor),
-            uiCollectionView.heightAnchor.constraint(equalToConstant: 90),
-
-            imageButton.centerYAnchor.constraint(equalTo: label.centerYAnchor),
-            imageButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12)
-        ])
+        label.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(12)
+            make.leading.equalTo(contentView.snp.leading).offset(12)
+            make.bottom.equalTo(uiCollectionView.snp.top).offset(-12)
+        }
+        uiCollectionView.snp.makeConstraints { make in
+            make.leading.equalTo(contentView.snp.leading).offset(12)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-12)
+            make.width.equalTo(contentView.snp.width)
+            make.height.equalTo(90)
+        }
+        imageButton.snp.makeConstraints { make in
+            make.centerY.equalTo(label.snp.centerY)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-12)
+        }
     }
 }
 

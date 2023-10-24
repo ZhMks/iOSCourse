@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileTableHeaderView: UIView {
 
@@ -128,28 +129,30 @@ extension ProfileTableHeaderView {
     }
 
     func setUpConstraints() {
-        NSLayoutConstraint.activate([
-            profileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            profileImage.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            profileImage.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),
-            profileImage.widthAnchor.constraint(equalToConstant: 150),
-            profileImage.heightAnchor.constraint(equalToConstant: 150),
-
-            nameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
-            nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
-
-            statusLabelText.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
-            statusLabelText.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 20),
-
-            statusTextField.topAnchor.constraint(equalTo: statusLabelText.bottomAnchor, constant: 26),
-            statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            statusTextField.widthAnchor.constraint(equalToConstant: 200),
-
-            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            setStatusButton.bottomAnchor.constraint(equalTo:  safeAreaLayoutGuide.bottomAnchor, constant: -12)
-        ])
+        profileImage.snp.makeConstraints { make in
+            make.top.leading.equalTo(safeAreaLayoutGuide).offset(16)
+            make.bottom.equalTo(setStatusButton.snp.top).offset(-16)
+            make.height.width.equalTo(150)
+        }
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(27)
+            make.leading.equalTo(profileImage.snp.trailing).offset(16)
+        }
+        statusLabelText.snp.makeConstraints { make in
+            make.leading.equalTo(profileImage.snp.trailing).offset(16)
+            make.top.equalTo(nameLabel.snp.bottom).offset(20)
+        }
+        statusTextField.snp.makeConstraints { make in
+            make.height.equalTo(40)
+            make.width.equalTo(200)
+            make.top.equalTo(statusLabelText.snp.bottom).offset(26)
+            make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-16)
+        }
+        setStatusButton.snp.makeConstraints { make in
+            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(16)
+            make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-16)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-12)
+        }
     }
 
     func addSubViews() {

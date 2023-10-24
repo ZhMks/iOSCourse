@@ -7,6 +7,7 @@
 
 import iOSIntPackage
 import UIKit
+import SnapKit
 
 class PostTableViewCell: UITableViewCell {
 
@@ -81,31 +82,34 @@ class PostTableViewCell: UITableViewCell {
             contentView.addSubview(bottomLikesLabel)
             contentView.addSubview(bottomViewsLabel)
             contentView.addSubview(authorName)
-            
-            NSLayoutConstraint.activate([
-                authorName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-                authorName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                authorName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-                authorName.heightAnchor.constraint(equalToConstant: 50),
 
-                feedImageView.topAnchor.constraint(equalTo: authorName.bottomAnchor, constant: 12),
-                feedImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                feedImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                feedImageView.heightAnchor.constraint(equalToConstant: 200),
-
-                feedImageViewLabel.topAnchor.constraint(equalTo: feedImageView.bottomAnchor, constant: 16),
-                feedImageViewLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-                feedImageViewLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                feedImageViewLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
-
-                bottomLikesLabel.topAnchor.constraint(equalTo: feedImageViewLabel.bottomAnchor, constant: 16),
-                bottomLikesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-                bottomLikesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-
-                bottomViewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                bottomViewsLabel.topAnchor.constraint(equalTo: feedImageViewLabel.bottomAnchor, constant: 16),
-                bottomViewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
-            ])
+            authorName.snp.makeConstraints { make in
+                make.top.equalTo(contentView.snp.top).offset(16)
+                make.trailing.equalTo(contentView.snp.trailing)
+                make.leading.equalTo(contentView.snp.leading).offset(12)
+                make.height.equalTo(50)
+            }
+            feedImageView.snp.makeConstraints { make in
+                make.leading.trailing.equalTo(contentView)
+                make.height.equalTo(200)
+                make.top.equalTo(authorName.snp.bottom).offset(12)
+            }
+            feedImageViewLabel.snp.makeConstraints { make in
+                make.top.equalTo(feedImageView.snp.bottom).offset(16)
+                make.leading.equalTo(contentView.snp.leading).offset(16)
+                make.trailing.equalTo(contentView.snp.trailing).offset(-16)
+                make.bottom.equalTo(contentView.snp.bottom).offset(-50)
+            }
+            bottomLikesLabel.snp.makeConstraints { make in
+                make.leading.equalTo(contentView.snp.leading).offset(16)
+                make.top.equalTo(feedImageViewLabel.snp.bottom).offset(16)
+                make.bottom.equalTo(contentView.snp.bottom).offset(-16)
+            }
+            bottomViewsLabel.snp.makeConstraints { make in
+                make.trailing.trailing.equalTo(contentView.snp.trailing).offset(-16)
+                make.top.equalTo(feedImageViewLabel.snp.bottom).offset(16)
+                make.bottom.equalTo(contentView.snp.bottom).offset(-16)
+            }
         }
 
         func configure(author: String, title: String, imageName: String, likes: Int, views: Int) {

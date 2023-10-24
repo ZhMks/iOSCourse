@@ -35,11 +35,8 @@ class PhotosCollectionViewCell : UICollectionViewCell {
     }
 
     func setupUI(){
-        NSLayoutConstraint.activate([
-            photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            photoImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            photoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
+        photoImageView.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalTo(contentView)
+        }
     }
 }

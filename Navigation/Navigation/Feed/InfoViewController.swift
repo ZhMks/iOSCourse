@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class InfoViewController: UIViewController {
     lazy var alertButton: UIButton = {
@@ -36,14 +37,12 @@ class InfoViewController: UIViewController {
     // MARK: -func
     
     func buttonChange() {
-        let safeArealayoutGuide = view.safeAreaLayoutGuide
-        
-        NSLayoutConstraint.activate([
-            alertButton.topAnchor.constraint(equalTo: safeArealayoutGuide.topAnchor, constant: 400),
-            alertButton.bottomAnchor.constraint(equalTo: safeArealayoutGuide.bottomAnchor, constant: -300),
-            alertButton.leadingAnchor.constraint(equalTo: safeArealayoutGuide.leadingAnchor, constant: 50),
-            alertButton.trailingAnchor.constraint(equalTo: safeArealayoutGuide.trailingAnchor, constant: -50)
-        ])
+        alertButton.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(400)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-300)
+            make.leading.equalTo(50)
+            make.trailing.equalTo(-50)
+        }
     }
     
     @objc func animationForButton(_: UIButton) {
