@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class FeedViewController: UIViewController {
     
@@ -54,13 +55,12 @@ class FeedViewController: UIViewController {
     // MARK: - Func
     
     func imageViewPositionChange() {
-        let safeAreaLayoutGuide = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            hamsterImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80),
-            hamsterImage.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 80),
-            hamsterImage.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -80),
-            hamsterImage.heightAnchor.constraint(equalToConstant: 200),
-        ])
+        hamsterImage.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(80)
+            make.leading.equalTo(80)
+            make.trailing.equalTo(-80)
+            make.height.equalTo(200)
+        }
     }
     
     func setupConstraintsForStack() {

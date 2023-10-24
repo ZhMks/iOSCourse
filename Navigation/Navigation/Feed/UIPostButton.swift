@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class GoToPostButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
