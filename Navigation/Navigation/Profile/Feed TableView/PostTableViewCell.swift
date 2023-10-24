@@ -14,6 +14,7 @@ class PostTableViewCell: UITableViewCell {
     // MARK: - Properties
 
     static let id = "BaseTableViewCell"
+    let imgProcessor = ImageProcessor()
 
     private lazy var authorName: UILabel = {
         let authorName = UILabel()
@@ -118,5 +119,9 @@ class PostTableViewCell: UITableViewCell {
             feedImageView.image = UIImage(named: imageName)
             bottomLikesLabel.text = "Likes: \(likes)"
             bottomViewsLabel.text = "Views: \(views)"
+            imgProcessor.processImage(sourceImage: feedImageView.image!, filter: .noir) { image in
+                var processedImage = image
+                feedImageView.image = processedImage
+            }
         }
 }
