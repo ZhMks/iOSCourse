@@ -11,7 +11,6 @@ import StorageService
 class ProfileViewController: UIViewController {
 
     // MARK: - Properties
-
     private var dataSource = Post(author: "", imgae: "", description: "", likes: 0, views: 0).makeArray()
     private var photosArray = Photos(photoView: .init()).makeArray()
 
@@ -49,7 +48,10 @@ class ProfileViewController: UIViewController {
         #else
         view.backgroundColor = .yellow
         #endif
+    }
 
+    func returnHeaderView() -> ProfileTableHeaderView {
+        return header
     }
 }
 

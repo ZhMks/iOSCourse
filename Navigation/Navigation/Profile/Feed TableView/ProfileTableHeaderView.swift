@@ -12,6 +12,7 @@ class ProfileTableHeaderView: UIView {
     // MARK: - Properties
 
     private var statusText: String?
+    private var currentUser: User?
 
     override var intrinsicContentSize: CGSize {
         CGSize(width: UIView.noIntrinsicMetric, height: 220)
@@ -26,7 +27,7 @@ class ProfileTableHeaderView: UIView {
     private lazy var nameLabel: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
-        name.text = "Hipster copybara"
+        name.text = "Full name"
         name.font = UIFont.boldSystemFont(ofSize: 16)
         name.textColor = .black
 
@@ -34,7 +35,7 @@ class ProfileTableHeaderView: UIView {
     }()
 
     lazy var profileImage: UIImageView = {
-        let profileImage = UIImage(named: "copybara")
+        let profileImage = UIImage(systemName: "checkmark")
         let profileView = UIImageView()
         profileView.image = profileImage
         profileView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +51,7 @@ class ProfileTableHeaderView: UIView {
     private lazy var statusLabelText: UILabel = {
         let statusLabelText = UILabel()
         statusLabelText.translatesAutoresizingMaskIntoConstraints = false
-        statusLabelText.text = "Waiting for something..."
+        statusLabelText.text = "Empty Status"
         statusLabelText.textColor = .gray
         statusLabelText.font = UIFont.systemFont(ofSize: 14)
 
@@ -90,7 +91,7 @@ class ProfileTableHeaderView: UIView {
 
     // MARK: - Lyfecicle
 
-    override init(frame: CGRect) {
+  override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .secondarySystemBackground
         addSubViews()
@@ -103,11 +104,19 @@ class ProfileTableHeaderView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func getUser(user: User) {
+        currentUser = user
+        profileImage.image = currentUser?.avatarImg
+        statusLabelText.text = currentUser?.status
+        nameLabel.text = currentUser?.fullName
+    }
 }
 
 // MARK: - Functions
 
 extension ProfileTableHeaderView {
+
     @objc func statusTextChanged(_ textField: UITextField) {
         statusText = textField.text
     }
@@ -159,6 +168,5 @@ extension ProfileTableHeaderView {
         addSubview(setStatusButton)
         addSubview(profileImage)
     }
-
 }
 

@@ -31,6 +31,9 @@
 		B2A10F202AE6839F004BBF96 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2A10F0A2AE6839E004BBF96 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B2A10F282AE68918004BBF96 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C412AB0399C00985A6B /* Post.swift */; };
 		B2A4505B2ABC1C3B00B5ACCA /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4505A2ABC1C3B00B5ACCA /* PhotosTableViewCell.swift */; };
+		B2DB0FC02AEA44DE002176A8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DB0FBE2AEA4382002176A8 /* User.swift */; };
+		B2DB0FC22AEA44EE002176A8 /* CurrenUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DB0FC12AEA44EE002176A8 /* CurrenUserService.swift */; };
+		B2DB0FC42AEA7536002176A8 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DB0FC32AEA7536002176A8 /* TestUserService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +100,9 @@
 		B2A10F132AE6839F004BBF96 /* StorageServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorageServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2A10F1A2AE6839F004BBF96 /* StorageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
 		B2A4505A2ABC1C3B00B5ACCA /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		B2DB0FBE2AEA4382002176A8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B2DB0FC12AEA44EE002176A8 /* CurrenUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenUserService.swift; sourceTree = "<group>"; };
+		B2DB0FC32AEA7536002176A8 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +201,9 @@
 			isa = PBXGroup;
 			children = (
 				B2909C322AAB393B00985A6B /* LogInViewController.swift */,
+				B2DB0FBE2AEA4382002176A8 /* User.swift */,
+				B2DB0FC12AEA44EE002176A8 /* CurrenUserService.swift */,
+				B2DB0FC32AEA7536002176A8 /* TestUserService.swift */,
 			);
 			path = LogIn;
 			sourceTree = "<group>";
@@ -376,12 +385,15 @@
 				B274C2E12A9A27C300D872F4 /* ProfileViewController.swift in Sources */,
 				B2909C3E2AAF446100985A6B /* PostTableViewCell.swift in Sources */,
 				B274C2E72A9CBADC00D872F4 /* UiAllertViewController.swift in Sources */,
+				B2DB0FC02AEA44DE002176A8 /* User.swift in Sources */,
 				B2909C492AB188A500985A6B /* ExtensionProfileHeaderController.swift in Sources */,
 				B274C2DF2A9A27BB00D872F4 /* FeedViewController.swift in Sources */,
 				B274C2CD2A99FD9200D872F4 /* SceneDelegate.swift in Sources */,
+				B2DB0FC42AEA7536002176A8 /* TestUserService.swift in Sources */,
 				B2A4505B2ABC1C3B00B5ACCA /* PhotosTableViewCell.swift in Sources */,
 				B26630072ABC66E60018A785 /* PhotosViewController.swift in Sources */,
 				B274C2E52A9C862200D872F4 /* InfoViewController.swift in Sources */,
+				B2DB0FC22AEA44EE002176A8 /* CurrenUserService.swift in Sources */,
 				B274C2E32A9B553B00D872F4 /* PostViewController.swift in Sources */,
 				B234B6582AA35A2F00F3904F /* ProfileTableHeaderView.swift in Sources */,
 				B25B87792ABC75E500282787 /* PhotosCollectionVIewCell.swift in Sources */,

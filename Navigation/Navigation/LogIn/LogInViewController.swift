@@ -11,6 +11,11 @@ class LogInViewController: UIViewController {
 
     // MARK: - Properties
 
+    private var currentUser = CurrenUserService(user: User(login: "12345",
+                                                           fullName: "Maks ZHS",
+                                                           avatarImg: UIImage(named: "copybara") ?? UIImage(systemName: "checkmark")!,
+                                                           status: "Finished Work"))
+
     private lazy var vkLogo: UIImageView = {
         let vkLogo = UIImageView()
         vkLogo.translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +65,7 @@ class LogInViewController: UIViewController {
         passwordTextField.leftViewMode = .always
         passwordTextField.keyboardType = UIKeyboardType.default
         passwordTextField.clearButtonMode = UITextField.ViewMode.whileEditing
-
+        passwordTextField.addTarget(self, action: #selector(textChangedIn(_:)), for: .allEditingEvents)
 
         return passwordTextField
     }()
@@ -126,8 +131,86 @@ class LogInViewController: UIViewController {
 
     @objc func logInButtonPressed(_ sender: UIButton) {
         let profileView = ProfileViewController()
+        let headerView = profileView.returnHeaderView()
+#if DEBUG
+        let testUser = TestUserService(user: User(login: "551551", fullName: "Test User", avatarImg: UIImage(systemName: "checkmark")!, status: "TestStatus"))
+        headerView.getUser(user: testUser.user)
         navigationController?.pushViewController(profileView, animated: true)
+#else
+        let login = passwordTextField.text
+        do {
+            let currentUser = try currentUser.checkAuthorisationFor(login: login!)
+            if currentUser != nil {
+                headerView.getUser(user: currentUser!)
+                navigationController?.pushViewController(profileView, animated: true)
+            }
+        } catch PossibleErrors.wrongLogin {
+            print(PossibleErrors.wrongLogin.description)
+        } catch {
+            print("Error")
+        }
+#endif
+
     }
+
+    private func setupConstraints() {
+         let safeArea = view.safeAreaLayoutGuide
+         NSLayoutConstraint.activate([
+             vkLogo.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
+             vkLogo.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+             vkLogo.widthAnchor.constraint(equalToConstant: 100),
+             vkLogo.heightAnchor.constraint(equalToConstant: 100),
+
+             scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+             scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
+             scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
+             scrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+
+             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+
+             textFieldView.topAnchor.constraint(equalTo: vkLogo.bottomAnchor, constant: 120),
+             textFieldView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+             textFieldView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+             textFieldView.heightAnchor.constraint(equalToConstant: 100),
+
+             emailTextField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor),
+             emailTextField.topAnchor.constraint(equalTo: textFieldView.topAnchor),
+             emailTextField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor),
+             emailTextField.heightAnchor.constraint(equalToConstant: 50),
+
+             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor),
+             passwordTextField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor),
+             passwordTextField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor),
+             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+
+             underlineView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 0.5),
+             underlineView.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: -0.5),
+             underlineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+             underlineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+             underlineView.heightAnchor.constraint(equalToConstant: 0.5),
+
+             loginButton.topAnchor.constraint(equalTo: textFieldView.bottomAnchor, constant: 16),
+             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+             loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+             loginButton.heightAnchor.constraint(equalToConstant: 50)
+         ])
+     }
+
+     private func addSubviews() {
+         view.addSubview(scrollView)
+         scrollView.addSubview(contentView)
+         contentView.addSubview(vkLogo)
+         contentView.addSubview(loginButton)
+         contentView.addSubview(textFieldView)
+         textFieldView.addSubview(emailTextField)
+         textFieldView.addSubview(passwordTextField)
+         textFieldView.addSubview(underlineView)
+     }
 }
 
 extension LogInViewController: UITextFieldDelegate {
@@ -140,7 +223,7 @@ extension LogInViewController: UITextFieldDelegate {
 
     @objc func willShowKeyboard(_ notificator: NSNotification) {
         let keyboardHeight = (notificator.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
-        scrollView.contentInset.bottom += keyboardHeight ?? 0.0
+        scrollView.contentInset.bottom = keyboardHeight ?? 0.0
     }
 
     @objc func willHideKeyboard(_ notificator: NSNotification) {
@@ -157,63 +240,10 @@ extension LogInViewController: UITextFieldDelegate {
         return true
     }
 
-   private func setupConstraints() {
-        let safeArea = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            vkLogo.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
-            vkLogo.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            vkLogo.widthAnchor.constraint(equalToConstant: 100),
-            vkLogo.heightAnchor.constraint(equalToConstant: 100),
-
-            scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
-            scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
-            scrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
-
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-
-            textFieldView.topAnchor.constraint(equalTo: vkLogo.bottomAnchor, constant: 120),
-            textFieldView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            textFieldView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            textFieldView.heightAnchor.constraint(equalToConstant: 100),
-
-            emailTextField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor),
-            emailTextField.topAnchor.constraint(equalTo: textFieldView.topAnchor),
-            emailTextField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor),
-            emailTextField.heightAnchor.constraint(equalToConstant: 50),
-
-            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor),
-            passwordTextField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor),
-            passwordTextField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
-
-            underlineView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 0.5),
-            underlineView.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: -0.5),
-            underlineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            underlineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            underlineView.heightAnchor.constraint(equalToConstant: 0.5),
-
-            loginButton.topAnchor.constraint(equalTo: textFieldView.bottomAnchor, constant: 16),
-            loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-    }
-
-    private func addSubviews() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        contentView.addSubview(vkLogo)
-        contentView.addSubview(loginButton)
-        contentView.addSubview(textFieldView)
-        textFieldView.addSubview(emailTextField)
-        textFieldView.addSubview(passwordTextField)
-        textFieldView.addSubview(underlineView)
-    }
+    @objc func textChangedIn(_ textField: UITextField) {
+            if let text = textField.text {
+                passwordTextField.text = text
+            }
+        }
 
 }
