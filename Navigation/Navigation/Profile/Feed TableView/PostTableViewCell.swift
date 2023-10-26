@@ -120,8 +120,8 @@ class PostTableViewCell: UITableViewCell {
             bottomLikesLabel.text = "Likes: \(likes)"
             bottomViewsLabel.text = "Views: \(views)"
             imgProcessor.processImage(sourceImage: feedImageView.image!, filter: .noir) { image in
-                var processedImage = image
-                feedImageView.image = processedImage
+                feedImageView.image = image
             }
         }
 }
+
