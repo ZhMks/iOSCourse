@@ -26,7 +26,7 @@ class ProfileTableHeaderView: UIView {
 
     private lazy var nameLabel: UILabel = {
         let name = UILabel()
-        name.translatesAutoresizingMaskIntoConstraints = false
+        name.translatesAutoresizingMaskIntoConstraints = false 
         name.text = "Full name"
         name.font = UIFont.boldSystemFont(ofSize: 16)
         name.textColor = .black

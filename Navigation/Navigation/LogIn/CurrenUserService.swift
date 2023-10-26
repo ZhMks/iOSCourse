@@ -19,8 +19,10 @@ final class CurrenUserService {
 extension CurrenUserService: UserService {
 
     func checkAuthorisationFor(login: String) throws -> User? {
-        if login.contains(user.login) {
+        if login == user.login {
             return self.user
+        } else if login .isEmpty {
+            throw PossibleErrors.emptyLogin
         } else {
             throw PossibleErrors.wrongLogin
         }
@@ -29,12 +31,14 @@ extension CurrenUserService: UserService {
 
  enum PossibleErrors: Error, CustomStringConvertible {
     case wrongLogin
-
+case emptyLogin
 
     var description: String {
         switch self {
         case .wrongLogin:
             return "The login is incorrect"
+        case .emptyLogin:
+            return "The login is empty"
         }
     }
 }

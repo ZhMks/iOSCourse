@@ -145,7 +145,15 @@ class LogInViewController: UIViewController {
                 navigationController?.pushViewController(profileView, animated: true)
             }
         } catch PossibleErrors.wrongLogin {
-            print(PossibleErrors.wrongLogin.description)
+            let uiAlertController = UIAlertController(title: "Ошибка", message: "\(PossibleErrors.wrongLogin.description)", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
+            uiAlertController.addAction(alertAction)
+            present(uiAlertController, animated: true)
+        } catch PossibleErrors.emptyLogin {
+            let uiAlertController = UIAlertController(title: "Ошибка", message: "\(PossibleErrors.emptyLogin.description)", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
+            uiAlertController.addAction(alertAction)
+            present(uiAlertController, animated: true)
         } catch {
             print("Error")
         }
