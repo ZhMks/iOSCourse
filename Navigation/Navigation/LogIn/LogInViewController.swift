@@ -11,10 +11,7 @@ class LogInViewController: UIViewController {
 
     // MARK: - Properties
 
-    private var currentUser = CurrenUserService(user: User(login: "12345",
-                                                           fullName: "Maks ZHS",
-                                                           avatarImg: UIImage(named: "copybara") ?? UIImage(systemName: "checkmark")!,
-                                                           status: "Finished Work"))
+    var loginDelegate: LoginViewControllerDelegate?
 
     private lazy var vkLogo: UIImageView = {
         let vkLogo = UIImageView()
@@ -132,32 +129,81 @@ class LogInViewController: UIViewController {
     @objc func logInButtonPressed(_ sender: UIButton) {
         let profileView = ProfileViewController()
         let headerView = profileView.returnHeaderView()
-#if DEBUG
-        let testUser = TestUserService(user: User(login: "551551", fullName: "Test User", avatarImg: UIImage(systemName: "checkmark")!, status: "TestStatus"))
-        headerView.getUser(user: testUser.user)
-        navigationController?.pushViewController(profileView, animated: true)
-#else
-        let login = passwordTextField.text
-        do {
-            let currentUser = try currentUser.checkAuthorisationFor(login: login!)
-            if currentUser != nil {
-                headerView.getUser(user: currentUser!)
+        let password = passwordTextField.text
+        let login = emailTextField.text
+
+        if !passwordTextField.text!.isEmpty && !emailTextField.text!.isEmpty {
+            let loginChecker = loginDelegate?.check(login: login!, pass: password!)
+            if loginChecker == true {
+                let currentUser = CurrenUserService(user: User(login: "123456",
+                                                                   fullName: "MMKS ZH",
+                                                                  avatarImg: UIImage(named: "copybara")!,
+                                                                   status: "Finished Workd"))
+                headerView.getUser(user: currentUser.user!)
                 navigationController?.pushViewController(profileView, animated: true)
+            } else {
+                let uiAlertController = UIAlertController(title: "Ошибка",
+                                                                     message: "Неверный логин или пароль",
+                                                                     preferredStyle: .alert)
+
+                           let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
+                           uiAlertController.addAction(alertAction)
+                           present(uiAlertController, animated: true)
             }
-        } catch PossibleErrors.wrongLogin {
-            let uiAlertController = UIAlertController(title: "Ошибка", message: "\(PossibleErrors.wrongLogin.description)", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
-            uiAlertController.addAction(alertAction)
-            present(uiAlertController, animated: true)
-        } catch PossibleErrors.emptyLogin {
-            let uiAlertController = UIAlertController(title: "Ошибка", message: "\(PossibleErrors.emptyLogin.description)", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
-            uiAlertController.addAction(alertAction)
-            present(uiAlertController, animated: true)
-        } catch {
-            print("Error")
+        } else {
+            let uiAlertController = UIAlertController(title: "Ошибка",
+                                                                 message: "Пожалуйста, заполните формы",
+                                                                 preferredStyle: .alert)
+
+                       let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
+                       uiAlertController.addAction(alertAction)
+                       present(uiAlertController, animated: true)
         }
-#endif
+
+
+
+        // Комментарий к предыдущей работе.
+
+//#if DEBUG
+//        let service = TestUserService(user: User(login: "551551",
+//                                                 fullName: "Test User",
+//                                                 avatarImg: UIImage(systemName: "checkmark")!,
+//                                                 status: "TestStatus"))
+//#else
+//        let service = CurrenUserService(user: User(login: "123456",
+//                                                   fullName: "MMKS ZH",
+//                                                   avatarImg: UIImage(named: "copybara")!,
+//                                                   status: "Finished Workd"))
+//#endif
+//        let password = passwordTextField.text
+//        let login = emailTextField.text
+//        
+//        do {
+//            let currentUser = try service.checkAuthorisationFor(login: password!)
+//            if currentUser != nil {
+//                headerView.getUser(user: service.user!)
+//                navigationController?.pushViewController(profileView, animated: true)
+//            }
+//        } catch PossibleErrors.wrongLogin {
+//            let uiAlertController = UIAlertController(title: "Ошибка",
+//                                                      message: "\(PossibleErrors.wrongLogin.description)",
+//                                                      preferredStyle: .alert)
+//
+//            let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
+//            uiAlertController.addAction(alertAction)
+//            present(uiAlertController, animated: true)
+//        } catch PossibleErrors.emptyLogin {
+//            let uiAlertController = UIAlertController(title: "Ошибка",
+//                                                      message: "\(PossibleErrors.emptyLogin.description)",
+//                                                      preferredStyle: .alert)
+//
+//            let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
+//            uiAlertController.addAction(alertAction)
+//            present(uiAlertController, animated: true)
+//        } catch {
+//            print("Error")
+//        }
+
 
     }
 

@@ -8,18 +8,11 @@
 import UIKit
 
 
-final class TestUserService {
+final class TestUserService: UserService {
+    var user: User?
 
-    var user: User
-
-    init(user: User) {
+    init(user: User? = nil) {
         self.user = user
     }
 }
 
-extension TestUserService: UserService {
-
-    func checkAuthorisationFor(login: String) throws -> User? {
-        return self.user
-    }
-}

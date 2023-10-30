@@ -7,6 +7,22 @@
 
 import UIKit
 
+protocol UserService {
+    var user: User? { get set }
+}
+
+extension UserService {
+    func checkAuthorisationFor(login: String) throws -> User? {
+        if login == user?.login {
+            return user
+        } else if login.isEmpty {
+            throw PossibleErrors.emptyLogin
+        } else {
+            throw PossibleErrors.wrongLogin
+        }
+    }
+}
+
 final class User {
 
     let login: String
@@ -22,7 +38,3 @@ final class User {
     }
 }
 
-protocol UserService {
-
-    func checkAuthorisationFor(login: String) throws -> User?
-}

@@ -38,6 +38,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let feedViewController = FeedViewController()
         let logInViewController = LogInViewController()
 
+        // Создание через Фабрику
+
+        logInViewController.loginDelegate = MyLoginFactory().makeLoginInspector()
+
+        // Создание через делегат.
+        
+       // logInViewController.loginDelegate = LoginInspector()
+
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
         let profileNavigationController = UINavigationController(rootViewController: logInViewController)
 
