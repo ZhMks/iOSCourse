@@ -7,12 +7,16 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class ProfileViewController: UIViewController {
+
+    private lazy var imgArray: [UIImage] = []
 
     // MARK: - Properties
     private var dataSource = Post(author: "", imgae: "", description: "", likes: 0, views: 0).makeArray()
     private var photosArray = Photos(photoView: .init()).makeArray()
+    private var imagePublisher = ImagePublisherFacade()
 
     private lazy var postTableView: UITableView = {
         let postTableView = UITableView(frame: .zero, style: .grouped)
@@ -117,6 +121,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             let photosViewController = PhotosViewController()
+            imagePublisher.subscribe(photosViewController)
+            
+            // Random Images
+            // imagePublisher.addImagesWithTimer(time: 0.5, repeat: 15)
+
+            // My asset images
+            photosArray.forEach({ image in
+                imgArray.append(image.photoView)
+            })
+            imagePublisher.addImagesWithTimer(time: 0.5, repeat: 15, userImages: imgArray)
+
             navigationController?.pushViewController(photosViewController, animated: true)
         }
     }

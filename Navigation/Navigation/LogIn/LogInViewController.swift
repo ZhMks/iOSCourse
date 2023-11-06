@@ -159,52 +159,6 @@ class LogInViewController: UIViewController {
                        uiAlertController.addAction(alertAction)
                        present(uiAlertController, animated: true)
         }
-
-
-
-        // Комментарий к предыдущей работе.
-
-//#if DEBUG
-//        let service = TestUserService(user: User(login: "551551",
-//                                                 fullName: "Test User",
-//                                                 avatarImg: UIImage(systemName: "checkmark")!,
-//                                                 status: "TestStatus"))
-//#else
-//        let service = CurrenUserService(user: User(login: "123456",
-//                                                   fullName: "MMKS ZH",
-//                                                   avatarImg: UIImage(named: "copybara")!,
-//                                                   status: "Finished Workd"))
-//#endif
-//        let password = passwordTextField.text
-//        let login = emailTextField.text
-//        
-//        do {
-//            let currentUser = try service.checkAuthorisationFor(login: password!)
-//            if currentUser != nil {
-//                headerView.getUser(user: service.user!)
-//                navigationController?.pushViewController(profileView, animated: true)
-//            }
-//        } catch PossibleErrors.wrongLogin {
-//            let uiAlertController = UIAlertController(title: "Ошибка",
-//                                                      message: "\(PossibleErrors.wrongLogin.description)",
-//                                                      preferredStyle: .alert)
-//
-//            let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
-//            uiAlertController.addAction(alertAction)
-//            present(uiAlertController, animated: true)
-//        } catch PossibleErrors.emptyLogin {
-//            let uiAlertController = UIAlertController(title: "Ошибка",
-//                                                      message: "\(PossibleErrors.emptyLogin.description)",
-//                                                      preferredStyle: .alert)
-//
-//            let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
-//            uiAlertController.addAction(alertAction)
-//            present(uiAlertController, animated: true)
-//        } catch {
-//            print("Error")
-//        }
-
-
     }
 
     private func setupConstraints() {

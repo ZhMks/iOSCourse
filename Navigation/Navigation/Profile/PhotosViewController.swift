@@ -7,8 +7,13 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
+
+    lazy var imageSubscriber = ImagePublisherFacade()
+
+    private lazy var imgArray: [UIImage] = []
 
     private lazy var photoArray: [Photos] = Photos(photoView: .init()).makeArray()
 
@@ -24,6 +29,11 @@ class PhotosViewController: UIViewController {
 
     // MARK: - LifeCycle
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationItem.title = "Photo Gallery"
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -34,12 +44,12 @@ class PhotosViewController: UIViewController {
         super.viewWillLayoutSubviews()
         setupUI()
         navigationController?.navigationBar.isHidden = false
-        navigationItem.title = "Photo Gallery"
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = true
+        imageSubscriber.removeSubscription(for: self)
     }
 }
 
@@ -47,12 +57,12 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photoArray.count
+        imgArray.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosTableViewCell.id, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
-        let settings = photoArray[indexPath.row]
+        let settings = imgArray[indexPath.row]
         cell.update(photo: settings)
         return cell
     }
@@ -87,4 +97,14 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
        8
     }
+}
+
+extension PhotosViewController: ImageLibrarySubscriber {
+
+    func receive(images: [UIImage]) {
+        self.imgArray = images
+        uiCollectionView.reloadData()
+    }
+    
+
 }

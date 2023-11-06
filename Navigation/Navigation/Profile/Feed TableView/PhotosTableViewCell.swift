@@ -94,7 +94,7 @@ extension PhotosTableViewCell {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.id, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
         let settings = photosArray[indexPath.row]
-        cell.update(photo: settings)
+        cell.updateForTableView(photo: settings)
         return cell
     }
 

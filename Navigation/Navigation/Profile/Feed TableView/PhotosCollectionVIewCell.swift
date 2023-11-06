@@ -30,7 +30,11 @@ class PhotosCollectionViewCell : UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func update(photo: Photos) {
+    func update(photo: UIImage) {
+        photoImageView.image = photo
+    }
+
+    func updateForTableView(photo: Photos) {
         photoImageView.image = photo.photoView
     }
 
