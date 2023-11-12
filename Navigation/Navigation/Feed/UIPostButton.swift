@@ -8,32 +8,29 @@
 import UIKit
 
 class GoToPostButton: UIButton {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = false
-        customizeButton()
-        self.addTarget(self, action: #selector(animation(_:)), for: .touchUpInside)
+
+    var buttonTappedClosure: (() -> Void)?
+
+    init(title: String, backgroundColor: UIColor, frame: CGRect?, buttonTappedClosure: (() -> Void)?) {
+            super.init(frame: frame ?? .zero)
+            self.setTitle(title, for: .normal)
+            self.backgroundColor = backgroundColor
+            self.buttonTappedClosure = buttonTappedClosure
+            customizeButton()
+            addTarget(self, action: #selector(animation(_:)), for: .touchUpInside)
+            addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
     }
 
-    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
 
-extension GoToPostButton {
     func customizeButton() {
-        self.backgroundColor = .blue
-        self.setTitle("Go to Post", for: .normal)
         self.setTitleColor(.white, for: .normal)
         self.layer.cornerRadius = 10.0
-        self.layer.shadowOffset = CGSize(width: 0, height: 4)
-        self.layer.shadowOpacity = 0.5
-        self.layer.shadowRadius = 4
-        self.layer.shadowColor = UIColor.black.cgColor
     }
 
-    @objc func animation(_ sender: UIButton) {
+    @objc private func animation(_ sender: UIButton) {
         UIView.animate(withDuration: 0.5, animations: {
             self.backgroundColor = .cyan
             self.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
@@ -41,4 +38,9 @@ extension GoToPostButton {
             self.transform = CGAffineTransform(scaleX: 1, y: 1)
         })
     }
+
+    @objc private func buttonTapped(_ sender: UIButton) {
+        buttonTappedClosure?()
+    }
 }
+

@@ -8,6 +8,7 @@
 import UIKit
 
 class PostViewController: UIViewController {
+    
     lazy var infoSymbol: UIImage = {
         let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
         let image = UIImage(systemName: "circle.square.fill", withConfiguration: configuration)

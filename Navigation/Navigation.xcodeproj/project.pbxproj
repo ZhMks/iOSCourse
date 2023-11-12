@@ -25,6 +25,7 @@
 		B2909C3E2AAF446100985A6B /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C3D2AAF446100985A6B /* PostTableViewCell.swift */; };
 		B2909C492AB188A500985A6B /* ExtensionProfileHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C482AB188A500985A6B /* ExtensionProfileHeaderController.swift */; };
 		B292C9FB2AF8C45B002D22D8 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = B292C9FA2AF8C45B002D22D8 /* iOSIntPackage */; };
+		B292C9FD2B00CEEC002D22D8 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B292C9FC2B00CEEC002D22D8 /* FeedModel.swift */; };
 		B2A10F0E2AE6839E004BBF96 /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = B2A10F0D2AE6839E004BBF96 /* StorageService.docc */; };
 		B2A10F142AE6839F004BBF96 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A10F0A2AE6839E004BBF96 /* StorageService.framework */; };
 		B2A10F1B2AE6839F004BBF96 /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A10F1A2AE6839F004BBF96 /* StorageServiceTests.swift */; };
@@ -98,6 +99,7 @@
 		B2909C3D2AAF446100985A6B /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		B2909C412AB0399C00985A6B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		B2909C482AB188A500985A6B /* ExtensionProfileHeaderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionProfileHeaderController.swift; sourceTree = "<group>"; };
+		B292C9FC2B00CEEC002D22D8 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		B2A10F0A2AE6839E004BBF96 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2A10F0C2AE6839E004BBF96 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		B2A10F0D2AE6839E004BBF96 /* StorageService.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StorageService.docc; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				B274C2E22A9B553B00D872F4 /* PostViewController.swift */,
 				B274C2E42A9C862200D872F4 /* InfoViewController.swift */,
 				B274C2E62A9CBADC00D872F4 /* UiAllertViewController.swift */,
+				B292C9FC2B00CEEC002D22D8 /* FeedModel.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				B2DB0FC62AEB8CFA002176A8 /* Checker.swift in Sources */,
 				B274C2E12A9A27C300D872F4 /* ProfileViewController.swift in Sources */,
 				B2909C3E2AAF446100985A6B /* PostTableViewCell.swift in Sources */,
+				B292C9FD2B00CEEC002D22D8 /* FeedModel.swift in Sources */,
 				B274C2E72A9CBADC00D872F4 /* UiAllertViewController.swift in Sources */,
 				B2DB0FC02AEA44DE002176A8 /* User.swift in Sources */,
 				B2909C492AB188A500985A6B /* ExtensionProfileHeaderController.swift in Sources */,

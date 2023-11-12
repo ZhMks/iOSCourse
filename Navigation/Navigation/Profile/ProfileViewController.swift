@@ -122,11 +122,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let photosViewController = PhotosViewController()
             imagePublisher.subscribe(photosViewController)
-            
-            // Random Images
-            // imagePublisher.addImagesWithTimer(time: 0.5, repeat: 15)
-
-            // My asset images
             photosArray.forEach({ image in
                 imgArray.append(image.photoView)
             })
