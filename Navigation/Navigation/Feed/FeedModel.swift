@@ -8,10 +8,32 @@
 import Foundation
 
 
-final class FeedModel {
+final class FeedModel: UsersVMOutput  {
+    
+    var currentState: ((State) -> Void)?
+
+    var state: State {
+        willSet {
+            print(newValue)
+        }
+        didSet {
+            currentState?(state)
+        }
+    }
+
     var secretWord = "Password"
 
-    func check(word: String) -> Bool {
-        word == secretWord ? true : false
+    init(state: State) {
+        self.state = state
+    }
+
+    func check(word: String) -> State {
+        if word == secretWord {
+            self.state = .green
+            return state
+        } else {
+            self.state = .red
+            return state
+        }
     }
 }
