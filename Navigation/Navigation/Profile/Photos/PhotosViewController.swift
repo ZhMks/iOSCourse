@@ -11,6 +11,8 @@ import iOSIntPackage
 
 class PhotosViewController: UIViewController {
 
+    let viewModel: PhotosViewModel
+
     lazy var imageSubscriber = ImagePublisherFacade()
 
     private lazy var imgArray: [UIImage] = []
@@ -29,6 +31,15 @@ class PhotosViewController: UIViewController {
 
     // MARK: - LifeCycle
 
+    init(viewModel: PhotosViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationItem.title = "Photo Gallery"
@@ -37,7 +48,6 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        setupUI()
     }
 
     override func viewWillLayoutSubviews() {

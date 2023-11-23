@@ -8,7 +8,8 @@
 import UIKit
 
 class InfoViewController: UIViewController {
-    
+
+    let infoVM: InfoViewModel
 
     private lazy var alertButton: UIButton = {
         let alertButton = UIButton(type: .system)
@@ -20,6 +21,15 @@ class InfoViewController: UIViewController {
     }()
 
     // MARK: -lifecycle
+
+    init(infoVM: InfoViewModel) {
+        self.infoVM = infoVM
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

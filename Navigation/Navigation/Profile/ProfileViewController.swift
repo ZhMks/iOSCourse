@@ -11,6 +11,9 @@ import iOSIntPackage
 
 class ProfileViewController: UIViewController {
 
+    let profileViewModel: ProfileViewModel
+    var header: ProfileTableHeaderView
+
     private lazy var imgArray: [UIImage] = []
 
     // MARK: - Properties
@@ -25,8 +28,6 @@ class ProfileViewController: UIViewController {
         return postTableView
     }()
 
-    let header = ProfileTableHeaderView()
-
     private lazy var animatedButton : UIButton = {
         let animatedButton = UIButton()
         animatedButton.setBackgroundImage(.init(systemName:"clear"), for: .normal)
@@ -40,6 +41,16 @@ class ProfileViewController: UIViewController {
 
     // MARK: - LifeCycle
 
+    init(viewModel: ProfileViewModel, header: ProfileTableHeaderView) {
+        self.profileViewModel = viewModel
+        self.header = header
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(postTableView)
@@ -52,10 +63,6 @@ class ProfileViewController: UIViewController {
         #else
         view.backgroundColor = .yellow
         #endif
-    }
-
-    func returnHeaderView() -> ProfileTableHeaderView {
-        return header
     }
 }
 
@@ -120,14 +127,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            let photosViewController = PhotosViewController()
+            let viewModel = PhotosVMImp()
+            let photosViewController = PhotosViewController(viewModel: viewModel)
             imagePublisher.subscribe(photosViewController)
             photosArray.forEach({ image in
                 imgArray.append(image.photoView)
             })
             imagePublisher.addImagesWithTimer(time: 0.5, repeat: 15, userImages: imgArray)
-
-            navigationController?.pushViewController(photosViewController, animated: true)
+            
+            profileViewModel.onDetail?()
         }
     }
 

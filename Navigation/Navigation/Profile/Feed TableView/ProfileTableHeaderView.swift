@@ -12,11 +12,7 @@ class ProfileTableHeaderView: UIView {
     // MARK: - Properties
 
     private var statusText: String?
-    private var currentUser: User?
-
-    override var intrinsicContentSize: CGSize {
-        CGSize(width: UIView.noIntrinsicMetric, height: 220)
-    }
+    private var viewModel: ProfileTableViewModel
 
     lazy var animatedView: UIView = {
         let animatedView = UIView()
@@ -24,10 +20,9 @@ class ProfileTableHeaderView: UIView {
         return animatedView
     }()
 
-    private lazy var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false 
-        name.text = "Full name"
         name.font = UIFont.boldSystemFont(ofSize: 16)
         name.textColor = .black
 
@@ -35,9 +30,7 @@ class ProfileTableHeaderView: UIView {
     }()
 
     lazy var profileImage: UIImageView = {
-        let profileImage = UIImage(systemName: "checkmark")
         let profileView = UIImageView()
-        profileView.image = profileImage
         profileView.translatesAutoresizingMaskIntoConstraints = false
         profileView.layer.borderColor = UIColor(white: 100, alpha: 1).cgColor
         profileView.layer.borderWidth = 3
@@ -48,10 +41,10 @@ class ProfileTableHeaderView: UIView {
         return profileView
     }()
 
-    private lazy var statusLabelText: UILabel = {
+    lazy var statusLabelText: UILabel = {
         let statusLabelText = UILabel()
         statusLabelText.translatesAutoresizingMaskIntoConstraints = false
-        statusLabelText.text = "Empty Status"
+        statusLabelText.text = ""
         statusLabelText.textColor = .gray
         statusLabelText.font = UIFont.systemFont(ofSize: 14)
 
@@ -91,8 +84,9 @@ class ProfileTableHeaderView: UIView {
 
     // MARK: - Lyfecicle
 
-  override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(viewModel: ProfileTableViewModel) {
+        self.viewModel = viewModel
+        super.init(frame: .zero)
         backgroundColor = .secondarySystemBackground
         addSubViews()
         setUpConstraints()
@@ -104,14 +98,8 @@ class ProfileTableHeaderView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    func getUser(user: User) {
-        currentUser = user
-        profileImage.image = currentUser?.avatarImg
-        statusLabelText.text = currentUser?.status
-        nameLabel.text = currentUser?.fullName
-    }
 }
+
 
 // MARK: - Functions
 
@@ -122,14 +110,14 @@ extension ProfileTableHeaderView {
     }
 
     @objc func statusButtonPressed(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.4) { [self] in
+        UIView.animate(withDuration: 0.4) {
             self.setStatusButton.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
             self.setStatusButton.backgroundColor = UIColor(red: 70/255, green: 130/255, blue: 180/255, alpha: 1)
             self.setStatusButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-            setStatusButton.backgroundColor = UIColor(red: 0/255, green: 132/255, blue: 247/255, alpha: 1)
+            self.setStatusButton.backgroundColor = UIColor(red: 0/255, green: 132/255, blue: 247/255, alpha: 1)
 
-            if let text = statusText {
-                statusLabelText.text = text
+            if let text = self.statusText {
+                self.statusLabelText.text = text
             } else {
                 print("There is no text")
             }
@@ -137,6 +125,7 @@ extension ProfileTableHeaderView {
     }
 
     func setUpConstraints() {
+        viewModel.updateView(self)
         NSLayoutConstraint.activate([
             profileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             profileImage.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),

@@ -10,48 +10,13 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
+    var mainCoordinator = MainCoordinator().start()
+
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
 
         let window = UIWindow(windowScene: scene)
-
-        lazy var bookSymbol: UIImage = {
-            let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
-            let image = UIImage(systemName: "house.fill", withConfiguration: configuration)
-            if let image {
-                bookSymbol = image
-            }
-            return bookSymbol
-        }()
-
-        lazy var sunSymbol: UIImage = {
-            let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 12), scale: .large)
-            let image = UIImage(systemName: "person.fill", withConfiguration: configuration)
-            if let image {
-                sunSymbol = image
-            }
-            return sunSymbol
-        }()
-
-        let tabController = UITabBarController()
-        let feedModel = FeedModel(state: .initial)
-        let feedViewController = FeedViewController(viewModel: feedModel)
-        let logInViewController = LogInViewController()
-
-        // Создание через Фабрику
-
-        logInViewController.loginDelegate = MyLoginFactory().makeLoginInspector()
-
-        let feedNavigationController = UINavigationController(rootViewController: feedViewController)
-        let profileNavigationController = UINavigationController(rootViewController: logInViewController)
-
-        feedNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: bookSymbol, tag: 0)
-        profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: sunSymbol, tag: 1)
-
-        let controllers = [feedNavigationController, profileNavigationController]
-
-        tabController.viewControllers = controllers
-        window.rootViewController = tabController
+        window.rootViewController = mainCoordinator
         window.makeKeyAndVisible()
         self.window = window
     }

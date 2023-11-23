@@ -7,28 +7,12 @@
 
 import UIKit
 
-protocol UserService {
-    var user: User? { get set }
-}
-
-extension UserService {
-    func checkAuthorisationFor(login: String) throws -> User? {
-        if login == user?.login {
-            return user
-        } else if login.isEmpty {
-            throw PossibleErrors.emptyLogin
-        } else {
-            throw PossibleErrors.wrongLogin
-        }
-    }
-}
-
 final class User {
 
-    let login: String
-    let fullName: String
-    let avatarImg: UIImage
-    let status: String
+    var login: String
+    var fullName: String
+    var avatarImg: UIImage
+    var status: String
 
     init(login: String, fullName: String, avatarImg: UIImage, status: String) {
         self.login = login

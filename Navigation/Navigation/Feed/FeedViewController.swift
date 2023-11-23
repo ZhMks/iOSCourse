@@ -9,7 +9,9 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
-    private var feedModel: UsersVMOutput
+    weak var coordinator: FeedBaseCoordinator?
+
+    private var feedModel: FeedViewModel
 
     struct Post {
         var title: String?
@@ -60,7 +62,7 @@ class FeedViewController: UIViewController {
 
     // MARK: - Lifecycle
 
-    init(viewModel: UsersVMOutput) {
+    init(viewModel: FeedViewModel) {
         self.feedModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -118,10 +120,7 @@ class FeedViewController: UIViewController {
     @objc func tapOnTopButton(_ sender: UIButton) {
         switch feedModel.state {
         case .green: 
-            let postViewController = PostViewController()
-            let post1 = Post(title: "Заголовок поста")
-            postViewController.title = post1.title
-            self.navigationController?.pushViewController(postViewController, animated: true)
+            feedModel.onDetail?()
         case .red:
             let uiAlert = UIAlertController(title: "error", message: "enter correct password", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "Back", style: .cancel)
@@ -134,7 +133,7 @@ class FeedViewController: UIViewController {
     @objc func tapOnCheckGuessButton(_ sender: UIButton) {
         self.textField.resignFirstResponder()
         if let text = self.textField.text {
-            self.feedModel.check(word: text)
+            feedModel.check(word: text)
         }
     }
 }

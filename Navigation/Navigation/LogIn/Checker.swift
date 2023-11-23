@@ -11,10 +11,6 @@ protocol LoginViewControllerDelegate {
     func check(login: String, pass: String) -> Bool
 }
 
-protocol LoginFactory {
-    func makeLoginInspector() -> LoginInspector
-}
-
 class Checker {
 
     private let login = "Zhmks"

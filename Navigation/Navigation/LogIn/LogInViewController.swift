@@ -11,6 +11,8 @@ class LogInViewController: UIViewController {
 
     // MARK: - Properties
 
+    let viewModel: LoginViewModel
+
     var loginDelegate: LoginViewControllerDelegate?
 
     private lazy var vkLogo: UIImageView = {
@@ -104,13 +106,15 @@ class LogInViewController: UIViewController {
     }()
 
 
-// MARK: - LifeCycle
+    // MARK: - LifeCycle
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.isHidden = true
-        loginButton.addTarget(self, action: #selector(logInButtonPressed(_:)), for: .touchUpInside)
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -121,112 +125,107 @@ class LogInViewController: UIViewController {
         view.layoutIfNeeded()
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.isHidden = true
+        loginButton.addTarget(self, action: #selector(logInButtonPressed(_:)), for: .touchUpInside)
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         removeKeyboardObservers()
     }
 
     @objc func logInButtonPressed(_ sender: UIButton) {
-        let profileView = ProfileViewController()
-        let headerView = profileView.returnHeaderView()
-        let password = passwordTextField.text
-        let login = emailTextField.text
-
+        
         if !passwordTextField.text!.isEmpty && !emailTextField.text!.isEmpty {
-            let loginChecker = loginDelegate?.check(login: login!, pass: password!)
-            if loginChecker == true {
-                let currentUser = CurrenUserService(user: User(login: "123456",
-                                                                   fullName: "MMKS ZH",
-                                                                  avatarImg: UIImage(named: "copybara")!,
-                                                                   status: "Finished Workd"))
-                headerView.getUser(user: currentUser.user!)
-                navigationController?.pushViewController(profileView, animated: true)
-            } else {
+            let password = passwordTextField.text
+            let login = emailTextField.text
+            loginDelegate?.check(login: login!, pass: password!)
+            switch self.viewModel.state {
+            case .green:
+                viewModel.onDetail?()
+            case .red:
                 let uiAlertController = UIAlertController(title: "Ошибка",
-                                                                     message: "Неверный логин или пароль",
-                                                                     preferredStyle: .alert)
-
-                           let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
-                           uiAlertController.addAction(alertAction)
-                           present(uiAlertController, animated: true)
+                                                          message: "Неверный логин или пароль",
+                                                          preferredStyle: .alert)
+                
+                let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
+                uiAlertController.addAction(alertAction)
+                present(uiAlertController, animated: true)
+            case .initial: break
+            default: break
             }
-        } else {
-            let uiAlertController = UIAlertController(title: "Ошибка",
-                                                                 message: "Пожалуйста, заполните формы",
-                                                                 preferredStyle: .alert)
-
-                       let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
-                       uiAlertController.addAction(alertAction)
-                       present(uiAlertController, animated: true)
         }
     }
 
     private func setupConstraints() {
-         let safeArea = view.safeAreaLayoutGuide
-         NSLayoutConstraint.activate([
-             vkLogo.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
-             vkLogo.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-             vkLogo.widthAnchor.constraint(equalToConstant: 100),
-             vkLogo.heightAnchor.constraint(equalToConstant: 100),
+        let safeArea = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            vkLogo.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
+            vkLogo.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            vkLogo.widthAnchor.constraint(equalToConstant: 100),
+            vkLogo.heightAnchor.constraint(equalToConstant: 100),
 
-             scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-             scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
-             scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
-             scrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+            scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
+            scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
+            scrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
 
-             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
 
-             textFieldView.topAnchor.constraint(equalTo: vkLogo.bottomAnchor, constant: 120),
-             textFieldView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-             textFieldView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-             textFieldView.heightAnchor.constraint(equalToConstant: 100),
+            textFieldView.topAnchor.constraint(equalTo: vkLogo.bottomAnchor, constant: 120),
+            textFieldView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            textFieldView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            textFieldView.heightAnchor.constraint(equalToConstant: 100),
 
-             emailTextField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor),
-             emailTextField.topAnchor.constraint(equalTo: textFieldView.topAnchor),
-             emailTextField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor),
-             emailTextField.heightAnchor.constraint(equalToConstant: 50),
+            emailTextField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor),
+            emailTextField.topAnchor.constraint(equalTo: textFieldView.topAnchor),
+            emailTextField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor),
+            emailTextField.heightAnchor.constraint(equalToConstant: 50),
 
-             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor),
-             passwordTextField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor),
-             passwordTextField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor),
-             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor),
+            passwordTextField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor),
+            passwordTextField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
 
-             underlineView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 0.5),
-             underlineView.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: -0.5),
-             underlineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-             underlineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-             underlineView.heightAnchor.constraint(equalToConstant: 0.5),
+            underlineView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 0.5),
+            underlineView.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: -0.5),
+            underlineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            underlineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            underlineView.heightAnchor.constraint(equalToConstant: 0.5),
 
-             loginButton.topAnchor.constraint(equalTo: textFieldView.bottomAnchor, constant: 16),
-             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-             loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-             loginButton.heightAnchor.constraint(equalToConstant: 50)
-         ])
-     }
+            loginButton.topAnchor.constraint(equalTo: textFieldView.bottomAnchor, constant: 16),
+            loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            loginButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
 
-     private func addSubviews() {
-         view.addSubview(scrollView)
-         scrollView.addSubview(contentView)
-         contentView.addSubview(vkLogo)
-         contentView.addSubview(loginButton)
-         contentView.addSubview(textFieldView)
-         textFieldView.addSubview(emailTextField)
-         textFieldView.addSubview(passwordTextField)
-         textFieldView.addSubview(underlineView)
-     }
+    private func addSubviews() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(vkLogo)
+        contentView.addSubview(loginButton)
+        contentView.addSubview(textFieldView)
+        textFieldView.addSubview(emailTextField)
+        textFieldView.addSubview(passwordTextField)
+        textFieldView.addSubview(underlineView)
+    }
 }
 
 extension LogInViewController: UITextFieldDelegate {
 
-   private func setupKeyboardObservers() {
-       let notificationCenter = NotificationCenter.default
-       notificationCenter.addObserver(self, selector: #selector(willShowKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-       notificationCenter.addObserver(self, selector: #selector(willHideKeyboard(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    private func setupKeyboardObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(willShowKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(willHideKeyboard(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     @objc func willShowKeyboard(_ notificator: NSNotification) {
@@ -249,9 +248,11 @@ extension LogInViewController: UITextFieldDelegate {
     }
 
     @objc func textChangedIn(_ textField: UITextField) {
-            if let text = textField.text {
-                passwordTextField.text = text
-            }
+        if let text = textField.text {
+            passwordTextField.text = text
         }
+    }
 
 }
+
+

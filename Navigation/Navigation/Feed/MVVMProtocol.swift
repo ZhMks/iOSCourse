@@ -8,11 +8,12 @@
 import Foundation
 
 
-protocol UsersVMOutput {
+protocol FeedViewModel {
     var state: State { get set }
     var secretWord: String { get set }
     var currentState: ((State) -> Void)? { get set }
-    func check(word: String) -> State
+    var onDetail: Action? {get set}
+    func check(word: String)
 }
 
 enum State {
