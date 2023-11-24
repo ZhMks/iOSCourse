@@ -19,7 +19,6 @@ class LoginCoordinator: LoginBaseCoordinator {
         }
         let module = LogInViewController(viewModel: viewModel)
         rootViewController = UINavigationController(rootViewController: module)
-        module.loginDelegate = viewModel
         return rootViewController
     }
     
@@ -30,9 +29,18 @@ class LoginCoordinator: LoginBaseCoordinator {
                                                                 fullName: "Maksim Zhuin",
                                                                 avatarImg: UIImage(named: "copybara")!,
                                                                 status: "Show status done"))
+        profileVC.onDetail = { [weak self] in
+            self?.showPhotoScreen()
+        }
         let header = ProfileTableHeaderView(viewModel: profileViewModel)
         let module = ProfileViewController(viewModel: profileVC, header: header)
         self.navigationRootViewController?.pushViewController(module, animated: true)
+    }
+
+    func showPhotoScreen() {
+        let photoVM = PhotosVMImp(state: .loadingImages)
+        let photoVC = PhotosViewController(viewModel: photoVM)
+        self.navigationRootViewController?.pushViewController(photoVC, animated: true)
     }
 
 }

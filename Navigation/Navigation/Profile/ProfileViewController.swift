@@ -127,14 +127,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            let viewModel = PhotosVMImp()
-            let photosViewController = PhotosViewController(viewModel: viewModel)
-            imagePublisher.subscribe(photosViewController)
-            photosArray.forEach({ image in
-                imgArray.append(image.photoView)
-            })
-            imagePublisher.addImagesWithTimer(time: 0.5, repeat: 15, userImages: imgArray)
-            
             profileViewModel.onDetail?()
         }
     }
@@ -162,7 +154,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.3, animations: {
                 self.animatedButton.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
             })
-
         })
     }
 

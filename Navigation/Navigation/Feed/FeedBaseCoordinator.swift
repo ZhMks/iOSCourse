@@ -25,6 +25,9 @@ class FeedCoordinator: FeedBaseCoordinator {
 
     func showDetailScreen() {
         let viewModel = PostVMImp()
+        viewModel.showInfoVC = {[weak self] in
+            self?.showInfoScreen()
+        }
         let module = PostViewController(viewModel: viewModel)
         self.navigationRootViewController?.pushViewController(module, animated: true)
     }
@@ -32,7 +35,6 @@ class FeedCoordinator: FeedBaseCoordinator {
     func showInfoScreen() {
         let viewModel = InfoVMImp()
         let module = InfoViewController(infoVM: viewModel)
-        self.rootViewController = module
         self.navigationRootViewController?.pushViewController(module, animated: true)
     }
 }

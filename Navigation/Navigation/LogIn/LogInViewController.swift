@@ -11,9 +11,7 @@ class LogInViewController: UIViewController {
 
     // MARK: - Properties
 
-    let viewModel: LoginViewModel
-
-    var loginDelegate: LoginViewControllerDelegate?
+    var viewModel: LoginViewModel
 
     private lazy var vkLogo: UIImageView = {
         let vkLogo = UIImageView()
@@ -130,6 +128,7 @@ class LogInViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = true
         loginButton.addTarget(self, action: #selector(logInButtonPressed(_:)), for: .touchUpInside)
+        bindModel()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -138,24 +137,29 @@ class LogInViewController: UIViewController {
     }
 
     @objc func logInButtonPressed(_ sender: UIButton) {
-        
+
         if !passwordTextField.text!.isEmpty && !emailTextField.text!.isEmpty {
             let password = passwordTextField.text
             let login = emailTextField.text
-            loginDelegate?.check(login: login!, pass: password!)
-            switch self.viewModel.state {
+            viewModel.check(login: login!, pass: password!)
+        }
+    }
+
+    private func bindModel() {
+        viewModel.currentState = { [weak self] state in
+            guard let self else {return}
+            switch state {
             case .green:
                 viewModel.onDetail?()
             case .red:
                 let uiAlertController = UIAlertController(title: "Ошибка",
                                                           message: "Неверный логин или пароль",
                                                           preferredStyle: .alert)
-                
+
                 let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
                 uiAlertController.addAction(alertAction)
                 present(uiAlertController, animated: true)
             case .initial: break
-            default: break
             }
         }
     }
