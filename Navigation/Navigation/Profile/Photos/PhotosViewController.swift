@@ -26,6 +26,14 @@ class PhotosViewController: UIViewController {
         return uiCollectionView
     }()
 
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .black
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+
     // MARK: - LifeCycle
 
     init(viewModel: PhotosViewModel) {
@@ -48,8 +56,7 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        bindModel()
-        viewModel.updateArray()
+        performAlert()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,16 +65,31 @@ class PhotosViewController: UIViewController {
     }
 
     func bindModel() {
+        viewModel.updateArray()
         viewModel.currentState = { [weak self]  state in
-            guard let self else {return }
+            guard let self else { return }
             switch state {
             case .imagesLoaded:
-                viewModel.imageSubscriber?.removeSubscription(for: viewModel as! ImageLibrarySubscriber)
+                self.imgArray = viewModel.imgArray
+                DispatchQueue.main.async { [weak self] in
+                    self?.activityIndicator.stopAnimating()
+                    self?.uiCollectionView.reloadData()
+                }
             case .loadingImages:
                 self.imgArray = viewModel.imgArray
-                uiCollectionView.reloadData()
             }
         }
+    }
+
+    func performAlert() {
+        let uiAlertController = UIAlertController(title: "Обновить", message: "Для обновления требуется перезапуск", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Обновить", style: .cancel) { _ in
+            self.activityIndicator.isHidden = false
+            self.activityIndicator.startAnimating()
+            self.bindModel()
+        }
+        uiAlertController.addAction(alertAction)
+        self.navigationController?.present(uiAlertController, animated: true)
     }
 }
 
@@ -87,7 +109,6 @@ extension PhotosViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosTableViewCell.id, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
         let settings = imgArray![indexPath.row]
         cell.update(photo: settings)
-        collectionView.reloadData()
         return cell
     }
 
@@ -95,12 +116,16 @@ extension PhotosViewController: UICollectionViewDataSource {
         uiCollectionView.delegate = self
         uiCollectionView.dataSource = self
         view.addSubview(uiCollectionView)
+        view.addSubview(activityIndicator)
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             uiCollectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             uiCollectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
             uiCollectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            uiCollectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
+            uiCollectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+
+            activityIndicator.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor)
         ])
     }
 }

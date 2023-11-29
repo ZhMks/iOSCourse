@@ -11,6 +11,8 @@ class LogInViewController: UIViewController {
 
     // MARK: - Properties
 
+    private var userPassword: User = User(login: "X!8SSaEAn", fullName: "Maksim", avatarImg: UIImage(named: "copybara")!, status: "Self")
+
     var viewModel: LoginViewModel
 
     private lazy var vkLogo: UIImageView = {
@@ -103,6 +105,25 @@ class LogInViewController: UIViewController {
         return scrollView
     }()
 
+    private lazy var testUIButton: UIButton = {
+        let testUIButton = UIButton(type: .system)
+        testUIButton.translatesAutoresizingMaskIntoConstraints = false
+        testUIButton.setTitle("Тест UI", for: .normal)
+        testUIButton.backgroundColor = .systemBlue
+        testUIButton.setTitleColor(.white, for: .normal)
+        testUIButton.addTarget(self, action: #selector(animateTestButton(_:)), for: .touchUpInside)
+        return testUIButton
+    }()
+
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .red
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        return activityIndicator
+    }()
+
 
     // MARK: - LifeCycle
 
@@ -138,11 +159,9 @@ class LogInViewController: UIViewController {
 
     @objc func logInButtonPressed(_ sender: UIButton) {
 
-        if !passwordTextField.text!.isEmpty && !emailTextField.text!.isEmpty {
-            let password = passwordTextField.text
-            let login = emailTextField.text
-            viewModel.check(login: login!, pass: password!)
-        }
+        viewModel.onDetail?()
+//            activityIndicator.startAnimating()
+//            viewModel.check(pass: userPassword.login)
     }
 
     private func bindModel() {
@@ -150,7 +169,13 @@ class LogInViewController: UIViewController {
             guard let self else {return}
             switch state {
             case .green:
-                viewModel.onDetail?()
+                passwordTextField.isSecureTextEntry = false
+                passwordTextField.text = userPassword.login
+                DispatchQueue.main.asyncAfter(deadline: .init(uptimeNanoseconds: UInt64(1.0)),
+                                              execute: .init(block: { [weak self] in
+                    self?.activityIndicator.stopAnimating()
+                    self?.viewModel.onDetail?()
+                }))
             case .red:
                 let uiAlertController = UIAlertController(title: "Ошибка",
                                                           message: "Неверный логин или пароль",
@@ -208,7 +233,14 @@ class LogInViewController: UIViewController {
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
+            loginButton.heightAnchor.constraint(equalToConstant: 50),
+
+            testUIButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 30),
+            testUIButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            testUIButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+
+            activityIndicator.topAnchor.constraint(equalTo: loginButton.centerYAnchor, constant: -10),
+            activityIndicator.leadingAnchor.constraint(equalTo: loginButton.centerXAnchor)
         ])
     }
 
@@ -218,9 +250,24 @@ class LogInViewController: UIViewController {
         contentView.addSubview(vkLogo)
         contentView.addSubview(loginButton)
         contentView.addSubview(textFieldView)
+        contentView.addSubview(testUIButton)
+        contentView.addSubview(activityIndicator)
         textFieldView.addSubview(emailTextField)
         textFieldView.addSubview(passwordTextField)
         textFieldView.addSubview(underlineView)
+    }
+
+    @objc private func animateTestButton(_ sender: UIButton) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1.5) { [weak self] in
+                self?.testUIButton.backgroundColor = .red
+                self?.testUIButton.backgroundColor = .yellow
+                self?.testUIButton.backgroundColor = .black
+                self?.testUIButton.backgroundColor = .blue
+                self?.testUIButton.transform = CGAffineTransform(translationX: -50.0, y: -100.0)
+                self?.testUIButton.transform = CGAffineTransform.identity
+            }
+        }
     }
 }
 

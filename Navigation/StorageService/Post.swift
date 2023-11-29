@@ -76,24 +76,7 @@ public struct Photos {
             Photos(photoView: .init(named: "batman")!),
             Photos(photoView: .init(named: "foundation")!),
             Photos(photoView: .init(named: "nile")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
-            Photos(photoView: .init(named: "Netology1")!),
             Photos(photoView: .init(named: "Netology1")!)
-
         ]
     }
 }

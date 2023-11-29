@@ -25,8 +25,7 @@ protocol PhotosViewModel {
     var imgArray: [UIImage] {get set}
 
     var photoArray: [Photos] {get set}
-
-
+    
     func updateArray()
 }
 
@@ -51,30 +50,22 @@ class PhotosVMImp: PhotosViewModel {
 
     init(state: PhotosViewModelState) {
         self.state = state
-        self.imageSubscriber?.subscribe(self)
     }
 
     func updateArray() {
-        
-        if i == photoArray.count {
-            state = .imagesLoaded
-        } else {
-            imageSubscriber!.subscribe(self)
-            photoArray.forEach({ image in
-                imgArray.append(image.photoView)
-            })
-            imageSubscriber!.addImagesWithTimer(time: 0.5, repeat: imgArray.count, userImages: imgArray)
+        let imgProc = ImageProcessor()
+        photoArray.forEach({ [weak self] image in
+            self?.imgArray.append(image.photoView)
+        })
+        imgProc.processImagesOnThread(sourceImages: imgArray,
+                                      filter: .tonal,
+                                      qos: .background) { [weak self] cgImages in
+            self?.imgArray = cgImages.map({ UIImage(cgImage: $0!) })
+            self?.state = .imagesLoaded
         }
+        state = .loadingImages
     }
 }
 
 
-extension PhotosVMImp: ImageLibrarySubscriber {
 
-    func receive(images: [UIImage]) {
-            self.imgArray = images
-            state = .loadingImages
-            i += 1
-    }
-
-}

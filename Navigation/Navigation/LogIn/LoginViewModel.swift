@@ -7,15 +7,18 @@
 
 import Foundation
 
-protocol LoginViewModel: LoginViewControllerDelegate {
+protocol LoginViewModel {
     var onDetail: Action? {get set}
     var state: State? {get set}
     var currentState: ((State) -> Void)? {get set}
+    func bruteForce(passwordToUnlock: String)
+    func check(pass: String)
+
 }
 
 
 class LoginVMImp: LoginViewModel {
-    
+
     var onDetail: Action?
     var currentState: ((State) -> Void)?
 
@@ -29,14 +32,31 @@ class LoginVMImp: LoginViewModel {
         self.state = state
     }
 
-    func check(login: String, pass: String) -> Bool {
-        if Checker.shared.check(login: login, pass: pass) {
+    func check(pass: String) {
+        let opeationQueue = OperationQueue()
+        let operation = BlockOperation { [weak self] in
+            self?.bruteForce(passwordToUnlock: pass)
+        }
+        opeationQueue.addOperation(operation)
+        operation.completionBlock = {
             self.state = .green
-            return true
-        } else {
-            self.state = .red
-            return false
         }
     }
+
+
+    func bruteForce(passwordToUnlock: String)  {
+
+        self.state = .red
+
+        let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
+
+        var password: String = ""
+
+        while password != passwordToUnlock {
+            password = Checker.shared.generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
+        }
+        print(password)
+    }
 }
+
 
