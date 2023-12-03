@@ -251,7 +251,6 @@ class LogInViewController: UIViewController {
     }
 
     @objc private func animateTestButton(_ sender: UIButton) {
-        DispatchQueue.main.async {
             print("test")
             UIView.animate(withDuration: 1.5) {
                 self.testUIButton.backgroundColor = .red
@@ -260,7 +259,6 @@ class LogInViewController: UIViewController {
                 self.testUIButton.backgroundColor = .blue
                 self.testUIButton.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
                 self.testUIButton.transform = CGAffineTransform.identity
-    }
         }
     }
 }
