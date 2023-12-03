@@ -33,13 +33,9 @@ class LoginVMImp: LoginViewModel {
     }
 
     func check(pass: String) {
-        let opeationQueue = OperationQueue()
-        let operation = BlockOperation { [weak self] in
+        DispatchQueue.global().async { [weak self] in
             self?.bruteForce(passwordToUnlock: pass)
-        }
-        opeationQueue.addOperation(operation)
-        operation.completionBlock = {
-            self.state = .green
+            self?.state = .green
         }
     }
 

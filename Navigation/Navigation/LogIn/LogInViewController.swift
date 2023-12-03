@@ -11,7 +11,7 @@ class LogInViewController: UIViewController {
 
     // MARK: - Properties
 
-    private var userPassword: User = User(login: "X!8SSaEAn", fullName: "Maksim", avatarImg: UIImage(named: "copybara")!, status: "Self")
+    private var userPassword: User = User(login: "X!a", fullName: "Maksim", avatarImg: UIImage(named: "copybara")!, status: "Self")
 
     var viewModel: LoginViewModel
 
@@ -141,7 +141,6 @@ class LogInViewController: UIViewController {
         addSubviews()
         setupConstraints()
         setupKeyboardObservers()
-        view.layoutIfNeeded()
     }
 
     override func viewDidLoad() {
@@ -158,10 +157,10 @@ class LogInViewController: UIViewController {
     }
 
     @objc func logInButtonPressed(_ sender: UIButton) {
-
-        viewModel.onDetail?()
-//            activityIndicator.startAnimating()
-//            viewModel.check(pass: userPassword.login)
+        DispatchQueue.main.async { [weak self] in
+            self?.activityIndicator.startAnimating()
+            self?.viewModel.check(pass: self?.userPassword.login as! String)
+        }
     }
 
     private func bindModel() {
@@ -169,21 +168,15 @@ class LogInViewController: UIViewController {
             guard let self else {return}
             switch state {
             case .green:
-                passwordTextField.isSecureTextEntry = false
-                passwordTextField.text = userPassword.login
                 DispatchQueue.main.asyncAfter(deadline: .init(uptimeNanoseconds: UInt64(1.0)),
                                               execute: .init(block: { [weak self] in
                     self?.activityIndicator.stopAnimating()
+                    self?.passwordTextField.isSecureTextEntry = false
+                    self?.passwordTextField.text = self?.userPassword.login
                     self?.viewModel.onDetail?()
                 }))
             case .red:
-                let uiAlertController = UIAlertController(title: "Ошибка",
-                                                          message: "Неверный логин или пароль",
-                                                          preferredStyle: .alert)
-
-                let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
-                uiAlertController.addAction(alertAction)
-                present(uiAlertController, animated: true)
+                print("red")
             case .initial: break
             }
         }
@@ -239,8 +232,8 @@ class LogInViewController: UIViewController {
             testUIButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             testUIButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 
-            activityIndicator.topAnchor.constraint(equalTo: loginButton.centerYAnchor, constant: -10),
-            activityIndicator.leadingAnchor.constraint(equalTo: loginButton.centerXAnchor)
+            activityIndicator.topAnchor.constraint(equalTo: loginButton.centerYAnchor, constant: -15),
+            activityIndicator.leadingAnchor.constraint(equalTo: loginButton.centerXAnchor, constant: -10)
         ])
     }
 
@@ -250,23 +243,24 @@ class LogInViewController: UIViewController {
         contentView.addSubview(vkLogo)
         contentView.addSubview(loginButton)
         contentView.addSubview(textFieldView)
-        contentView.addSubview(testUIButton)
         contentView.addSubview(activityIndicator)
         textFieldView.addSubview(emailTextField)
         textFieldView.addSubview(passwordTextField)
         textFieldView.addSubview(underlineView)
+        view.addSubview(testUIButton)
     }
 
     @objc private func animateTestButton(_ sender: UIButton) {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 1.5) { [weak self] in
-                self?.testUIButton.backgroundColor = .red
-                self?.testUIButton.backgroundColor = .yellow
-                self?.testUIButton.backgroundColor = .black
-                self?.testUIButton.backgroundColor = .blue
-                self?.testUIButton.transform = CGAffineTransform(translationX: -50.0, y: -100.0)
-                self?.testUIButton.transform = CGAffineTransform.identity
-            }
+            print("test")
+            UIView.animate(withDuration: 1.5) {
+                self.testUIButton.backgroundColor = .red
+                self.testUIButton.backgroundColor = .yellow
+                self.testUIButton.backgroundColor = .black
+                self.testUIButton.backgroundColor = .blue
+                self.testUIButton.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
+                self.testUIButton.transform = CGAffineTransform.identity
+    }
         }
     }
 }

@@ -10,9 +10,6 @@ import UIKit
 
 class Checker {
 
-    private let login = "Zhmks"
-    private let password = "K!887SxA"
-
     static let shared = Checker()
 
     private init() {}
