@@ -57,11 +57,15 @@ class PhotosVMImp: PhotosViewModel {
         photoArray.forEach({ [weak self] image in
             self?.imgArray.append(image.photoView)
         })
-        imgProc.processImagesOnThread(sourceImages: imgArray,
-                                      filter: .tonal,
-                                      qos: .background) { [weak self] cgImages in
-            self?.imgArray = cgImages.map({ UIImage(cgImage: $0!) })
-            self?.state = .imagesLoaded
+        DispatchQueue.global().async { [weak self] in
+            if let imgArray = self?.imgArray {
+                    imgProc.processImagesOnThread(sourceImages: imgArray,
+                                                  filter: .tonal,
+                                                  qos: .background) { [weak self] cgImages in
+                        self?.imgArray = cgImages.map({ UIImage(cgImage: $0!) })
+                        self?.state = .imagesLoaded
+                    }
+                }
         }
         state = .loadingImages
     }

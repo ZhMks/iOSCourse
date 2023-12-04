@@ -5,13 +5,12 @@
 //  Created by Максим Жуин on 20.11.2023.
 //
 
-import Foundation
+import UIKit
 
 protocol LoginViewModel {
     var onDetail: Action? {get set}
     var state: State? {get set}
     var currentState: ((State) -> Void)? {get set}
-    func bruteForce(passwordToUnlock: String)
     func check(pass: String)
 
 }
@@ -33,25 +32,16 @@ class LoginVMImp: LoginViewModel {
     }
 
     func check(pass: String) {
-        DispatchQueue.global().async { [weak self] in
-            self?.bruteForce(passwordToUnlock: pass)
-            self?.state = .green
+        let user = User(login: "123456",
+                        fullName: "Maksim Zhuin",
+                        avatarImg: UIImage(named: "copybara")!,
+                        status: "Show some status")
+        Checker.shared.user = user
+        if  Checker.shared.check(password: pass) {
+            self.state = .green
+        } else {
+            self.state = .red
         }
-    }
-
-
-    func bruteForce(passwordToUnlock: String)  {
-
-        self.state = .red
-
-        let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
-
-        var password: String = ""
-
-        while password != passwordToUnlock {
-            password = Checker.shared.generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
-        }
-        print(password)
     }
 }
 

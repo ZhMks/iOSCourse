@@ -11,8 +11,6 @@ class LogInViewController: UIViewController {
 
     // MARK: - Properties
 
-    private var userPassword: User = User(login: "X!a", fullName: "Maksim", avatarImg: UIImage(named: "copybara")!, status: "Self")
-
     var viewModel: LoginViewModel
 
     private lazy var vkLogo: UIImageView = {
@@ -105,25 +103,6 @@ class LogInViewController: UIViewController {
         return scrollView
     }()
 
-    private lazy var testUIButton: UIButton = {
-        let testUIButton = UIButton(type: .system)
-        testUIButton.translatesAutoresizingMaskIntoConstraints = false
-        testUIButton.setTitle("Тест UI", for: .normal)
-        testUIButton.backgroundColor = .systemBlue
-        testUIButton.setTitleColor(.white, for: .normal)
-        testUIButton.addTarget(self, action: #selector(animateTestButton(_:)), for: .touchUpInside)
-        return testUIButton
-    }()
-
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.color = .red
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.style = .large
-        return activityIndicator
-    }()
-
 
     // MARK: - LifeCycle
 
@@ -157,9 +136,8 @@ class LogInViewController: UIViewController {
     }
 
     @objc func logInButtonPressed(_ sender: UIButton) {
-        DispatchQueue.main.async { [weak self] in
-            self?.activityIndicator.startAnimating()
-            self?.viewModel.check(pass: self?.userPassword.login as! String)
+        if let text = passwordTextField.text {
+            viewModel.check(pass: text)
         }
     }
 
@@ -168,13 +146,7 @@ class LogInViewController: UIViewController {
             guard let self else {return}
             switch state {
             case .green:
-                DispatchQueue.main.asyncAfter(deadline: .init(uptimeNanoseconds: UInt64(1.0)),
-                                              execute: .init(block: { [weak self] in
-                    self?.activityIndicator.stopAnimating()
-                    self?.passwordTextField.isSecureTextEntry = false
-                    self?.passwordTextField.text = self?.userPassword.login
-                    self?.viewModel.onDetail?()
-                }))
+                viewModel.onDetail?()
             case .red:
                 print("red")
             case .initial: break
@@ -227,13 +199,6 @@ class LogInViewController: UIViewController {
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
-
-            testUIButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 30),
-            testUIButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            testUIButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-
-            activityIndicator.topAnchor.constraint(equalTo: loginButton.centerYAnchor, constant: -15),
-            activityIndicator.leadingAnchor.constraint(equalTo: loginButton.centerXAnchor, constant: -10)
         ])
     }
 
@@ -243,23 +208,9 @@ class LogInViewController: UIViewController {
         contentView.addSubview(vkLogo)
         contentView.addSubview(loginButton)
         contentView.addSubview(textFieldView)
-        contentView.addSubview(activityIndicator)
         textFieldView.addSubview(emailTextField)
         textFieldView.addSubview(passwordTextField)
         textFieldView.addSubview(underlineView)
-        view.addSubview(testUIButton)
-    }
-
-    @objc private func animateTestButton(_ sender: UIButton) {
-            print("test")
-            UIView.animate(withDuration: 1.5) {
-                self.testUIButton.backgroundColor = .red
-                self.testUIButton.backgroundColor = .yellow
-                self.testUIButton.backgroundColor = .black
-                self.testUIButton.backgroundColor = .blue
-                self.testUIButton.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
-                self.testUIButton.transform = CGAffineTransform.identity
-        }
     }
 }
 

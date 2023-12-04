@@ -71,15 +71,30 @@ class PhotosViewController: UIViewController {
             switch state {
             case .imagesLoaded:
                 self.imgArray = viewModel.imgArray
+
+                // Если бы остался код из прошлой лекции, то можно было бы исопльзовать таймер, чтобы оценить время на брутфорс пароля,
+                // но тк его надо удалить, то единственное, что я тут придумал - это имитировать задержку при обновлении экрана.
+                
                 DispatchQueue.main.async { [weak self] in
-                    self?.activityIndicator.stopAnimating()
-                    self?.uiCollectionView.reloadData()
+                    var counter = 5
+                    let timer = Timer(timeInterval: 1.0, repeats: true) { timer in
+                        counter -= 1
+                        print(counter)
+                        if counter <= 0 {
+                            timer.invalidate()
+                            self?.activityIndicator.stopAnimating()
+                            self?.uiCollectionView.reloadData()
+                        }
+                    }
+                RunLoop.current.add(timer, forMode: .common)
+                RunLoop.current.run()
                 }
             case .loadingImages:
                 self.imgArray = viewModel.imgArray
             }
         }
     }
+
 
     func performAlert() {
         let uiAlertController = UIAlertController(title: "Обновить", message: "Для обновления требуется перезапуск", preferredStyle: .alert)
