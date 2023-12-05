@@ -27,10 +27,11 @@ final class FeedModel: FeedViewModel  {
     }
 
     func check(word: String){
-        if word == secretWord {
-            self.state = .green
-        } else {
+        guard word == secretWord else {
             self.state = .red
+            preconditionFailure("Test Failure")
+        }
+            self.state = .green
         }
     }
-}
+

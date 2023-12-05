@@ -11,8 +11,20 @@ protocol LoginViewModel {
     var onDetail: Action? {get set}
     var state: State? {get set}
     var currentState: ((State) -> Void)? {get set}
-    func check(pass: String)
+    func check(pass: String?) throws
 
+}
+
+enum PossibleErrors: Error, CustomStringConvertible {
+    case invalidLogin
+    case emptyLoging
+
+    var description: String {
+        switch self {
+        case .emptyLoging: "Please fill in fields"
+        case .invalidLogin: "Invalid password"
+        }
+    }
 }
 
 
@@ -31,16 +43,19 @@ class LoginVMImp: LoginViewModel {
         self.state = state
     }
 
-    func check(pass: String) {
+    func check(pass: String?) throws {
         let user = User(login: "123456",
                         fullName: "Maksim Zhuin",
                         avatarImg: UIImage(named: "copybara")!,
                         status: "Show some status")
         Checker.shared.user = user
-        if  Checker.shared.check(password: pass) {
+
+        if Checker.shared.check(password: pass) {
             self.state = .green
+        } else if pass == nil {
+            throw PossibleErrors.emptyLoging
         } else {
-            self.state = .red
+            throw PossibleErrors.invalidLogin
         }
     }
 }

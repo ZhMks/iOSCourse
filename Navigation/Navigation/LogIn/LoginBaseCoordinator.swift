@@ -38,7 +38,7 @@ class LoginCoordinator: LoginBaseCoordinator {
     }
 
     func showPhotoScreen() {
-        let photoVM = PhotosVMImp(state: .loadingImages)
+        let photoVM = PhotosVMImp()
         let photoVC = PhotosViewController(viewModel: photoVM)
         self.navigationRootViewController?.pushViewController(photoVC, animated: true)
     }

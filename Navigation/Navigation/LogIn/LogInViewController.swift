@@ -62,7 +62,7 @@ class LogInViewController: UIViewController {
         passwordTextField.leftViewMode = .always
         passwordTextField.keyboardType = UIKeyboardType.default
         passwordTextField.clearButtonMode = UITextField.ViewMode.whileEditing
-        passwordTextField.addTarget(self, action: #selector(textChangedIn(_:)), for: .allEditingEvents)
+        passwordTextField.addTarget(self, action: #selector(textChangedIn(_:)), for: .touchUpInside)
 
         return passwordTextField
     }()
@@ -127,7 +127,6 @@ class LogInViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = true
         loginButton.addTarget(self, action: #selector(logInButtonPressed(_:)), for: .touchUpInside)
-        bindModel()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -136,21 +135,33 @@ class LogInViewController: UIViewController {
     }
 
     @objc func logInButtonPressed(_ sender: UIButton) {
-        if let text = passwordTextField.text {
-            viewModel.check(pass: text)
+        do {
+            try viewModel.check(pass: passwordTextField.text)
+            viewModel.onDetail?()
         }
-    }
-
-    private func bindModel() {
-        viewModel.currentState = { [weak self] state in
-            guard let self else {return}
-            switch state {
-            case .green:
-                viewModel.onDetail?()
-            case .red:
-                print("red")
-            case .initial: break
-            }
+        catch PossibleErrors.invalidLogin {
+            let uiAlertController = UIAlertController(title: "Ошибка",
+                                                      message: "\(PossibleErrors.invalidLogin.description)",
+                                                      preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Отмена", style: .destructive)
+            uiAlertController.addAction(alertAction)
+            self.navigationController?.present(uiAlertController, animated: true)
+        }
+        catch PossibleErrors.emptyLoging {
+            let uiAlertController = UIAlertController(title: "Ошибка",
+                                                      message: "\(PossibleErrors.emptyLoging.description)",
+                                                      preferredStyle: .alert)
+            let uiAlertAction = UIAlertAction(title: "Отмена", style: .destructive)
+            uiAlertController.addAction(uiAlertAction)
+            self.navigationController?.present(uiAlertController, animated: true)
+        }
+        catch {
+            let uiAlertController = UIAlertController(title: "Ошибка",
+                                                      message: "Неизвестная ошибка",
+                                                      preferredStyle: .alert)
+            let uiAlertAction = UIAlertAction(title: "Отмена", style: .destructive)
+            uiAlertController.addAction(uiAlertAction)
+            self.navigationController?.present(uiAlertController, animated: true)
         }
     }
 

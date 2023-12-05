@@ -9,17 +9,14 @@ import UIKit
 
 
 class Checker {
-
+    
     var user: User?
-
+    
     static let shared = Checker()
-
+    
     private init() {}
-
-    func check(password: String) -> Bool {
+    
+    func check(password: String?) -> Bool {
         password == user?.login ? true : false
     }
 }
-
-
-
