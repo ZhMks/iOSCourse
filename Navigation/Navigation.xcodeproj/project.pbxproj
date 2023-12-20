@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B22BBB3E2B305C2400B92D58 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22BBB3D2B305C2400B92D58 /* NetworkService.swift */; };
 		B234B6582AA35A2F00F3904F /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B234B6572AA35A2F00F3904F /* ProfileTableHeaderView.swift */; };
 		B25B87792ABC75E500282787 /* PhotosCollectionVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25B87782ABC75E500282787 /* PhotosCollectionVIewCell.swift */; };
 		B26630072ABC66E60018A785 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26630062ABC66E60018A785 /* PhotosViewController.swift */; };
@@ -86,6 +87,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B22BBB3D2B305C2400B92D58 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B234B6572AA35A2F00F3904F /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		B25B87782ABC75E500282787 /* PhotosCollectionVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionVIewCell.swift; sourceTree = "<group>"; };
 		B26630062ABC66E60018A785 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +156,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B22BBB3C2B305C0D00B92D58 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				B22BBB3D2B305C2400B92D58 /* NetworkService.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
 		B234B6552AA3590D00F3904F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +209,7 @@
 		B274C2C92A99FD9200D872F4 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				B22BBB3C2B305C0D00B92D58 /* NetworkService */,
 				B2909C2F2AA5E08300985A6B /* Main Scene */,
 				B234B6562AA3592700F3904F /* Feed */,
 				B29D66442B0B5B46007AE9AD /* PostFlow */,
@@ -469,6 +480,7 @@
 				B29D66472B0B5B9C007AE9AD /* PostViewModel.swift in Sources */,
 				B234B6582AA35A2F00F3904F /* ProfileTableHeaderView.swift in Sources */,
 				B29D664F2B0B65C8007AE9AD /* MainCoordinator.swift in Sources */,
+				B22BBB3E2B305C2400B92D58 /* NetworkService.swift in Sources */,
 				B25B87792ABC75E500282787 /* PhotosCollectionVIewCell.swift in Sources */,
 				B2909C332AAB393B00985A6B /* LogInViewController.swift in Sources */,
 			);

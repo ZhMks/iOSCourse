@@ -8,6 +8,7 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
     var window: UIWindow?
 
     var mainCoordinator = MainCoordinator().start()
@@ -18,6 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         window.rootViewController = mainCoordinator
         window.makeKeyAndVisible()
+        let appConfiguration = AppConfiguration.URLFromURL(URL.init(string: "https://swapi.dev/api/starships/")!)
+        let appConfiguration2 = AppConfiguration.urlFromString("https://swapi.dev/api/people/?page=2")
+        NetworkService.request(for: appConfiguration)
         self.window = window
     }
 
