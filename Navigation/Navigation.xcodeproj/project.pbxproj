@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B22BBB3E2B305C2400B92D58 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22BBB3D2B305C2400B92D58 /* NetworkService.swift */; };
 		B234B6582AA35A2F00F3904F /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B234B6572AA35A2F00F3904F /* ProfileTableHeaderView.swift */; };
+		B242694A2B39527C00655C9D /* NetworkServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24269492B39527C00655C9D /* NetworkServiceModel.swift */; };
+		B242694C2B46ABCE00655C9D /* PlanetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B242694B2B46ABCD00655C9D /* PlanetTableViewCell.swift */; };
 		B25B87792ABC75E500282787 /* PhotosCollectionVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25B87782ABC75E500282787 /* PhotosCollectionVIewCell.swift */; };
 		B26630072ABC66E60018A785 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26630062ABC66E60018A785 /* PhotosViewController.swift */; };
 		B274C2CB2A99FD9200D872F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2CA2A99FD9200D872F4 /* AppDelegate.swift */; };
@@ -19,7 +21,6 @@
 		B274C2E12A9A27C300D872F4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E02A9A27C300D872F4 /* ProfileViewController.swift */; };
 		B274C2E32A9B553B00D872F4 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E22A9B553B00D872F4 /* PostViewController.swift */; };
 		B274C2E52A9C862200D872F4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E42A9C862200D872F4 /* InfoViewController.swift */; };
-		B274C2E72A9CBADC00D872F4 /* UiAllertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E62A9CBADC00D872F4 /* UiAllertViewController.swift */; };
 		B2909C332AAB393B00985A6B /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C322AAB393B00985A6B /* LogInViewController.swift */; };
 		B2909C3E2AAF446100985A6B /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C3D2AAF446100985A6B /* PostTableViewCell.swift */; };
 		B2909C492AB188A500985A6B /* ExtensionProfileHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C482AB188A500985A6B /* ExtensionProfileHeaderController.swift */; };
@@ -89,6 +90,8 @@
 /* Begin PBXFileReference section */
 		B22BBB3D2B305C2400B92D58 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B234B6572AA35A2F00F3904F /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
+		B24269492B39527C00655C9D /* NetworkServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceModel.swift; sourceTree = "<group>"; };
+		B242694B2B46ABCD00655C9D /* PlanetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetTableViewCell.swift; sourceTree = "<group>"; };
 		B25B87782ABC75E500282787 /* PhotosCollectionVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionVIewCell.swift; sourceTree = "<group>"; };
 		B26630062ABC66E60018A785 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		B274C2C72A99FD9200D872F4 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +104,6 @@
 		B274C2E02A9A27C300D872F4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B274C2E22A9B553B00D872F4 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		B274C2E42A9C862200D872F4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
-		B274C2E62A9CBADC00D872F4 /* UiAllertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiAllertViewController.swift; sourceTree = "<group>"; };
 		B2909C322AAB393B00985A6B /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B2909C3D2AAF446100985A6B /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		B2909C412AB0399C00985A6B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				B22BBB3D2B305C2400B92D58 /* NetworkService.swift */,
+				B24269492B39527C00655C9D /* NetworkServiceModel.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -273,7 +276,7 @@
 			children = (
 				B274C2E42A9C862200D872F4 /* InfoViewController.swift */,
 				B29D664A2B0B5F11007AE9AD /* InfoViewModel.swift */,
-				B274C2E62A9CBADC00D872F4 /* UiAllertViewController.swift */,
+				B242694B2B46ABCD00655C9D /* PlanetTableViewCell.swift */,
 			);
 			path = InfoFlow;
 			sourceTree = "<group>";
@@ -463,7 +466,7 @@
 				B292C9FD2B00CEEC002D22D8 /* FeedModel.swift in Sources */,
 				B29D66532B0B6691007AE9AD /* ProfileViewModel.swift in Sources */,
 				B29D664D2B0B6151007AE9AD /* FeedBaseCoordinator.swift in Sources */,
-				B274C2E72A9CBADC00D872F4 /* UiAllertViewController.swift in Sources */,
+				B242694C2B46ABCE00655C9D /* PlanetTableViewCell.swift in Sources */,
 				B2DB0FC02AEA44DE002176A8 /* User.swift in Sources */,
 				B2909C492AB188A500985A6B /* ExtensionProfileHeaderController.swift in Sources */,
 				B29D66492B0B5BC3007AE9AD /* MainBaseCoordinator.swift in Sources */,
@@ -472,6 +475,7 @@
 				B274C2CD2A99FD9200D872F4 /* SceneDelegate.swift in Sources */,
 				B29D665A2B0B88EA007AE9AD /* LoginViewModel.swift in Sources */,
 				B29D664B2B0B5F11007AE9AD /* InfoViewModel.swift in Sources */,
+				B242694A2B39527C00655C9D /* NetworkServiceModel.swift in Sources */,
 				B2A4505B2ABC1C3B00B5ACCA /* PhotosTableViewCell.swift in Sources */,
 				B26630072ABC66E60018A785 /* PhotosViewController.swift in Sources */,
 				B274C2E52A9C862200D872F4 /* InfoViewController.swift in Sources */,

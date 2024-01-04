@@ -60,6 +60,14 @@ class FeedViewController: UIViewController {
         return imageView
     }()
 
+    private lazy var goToInfoScreen: UIButton = {
+        let goToInfoScreen = UIButton(type: .system)
+        goToInfoScreen.translatesAutoresizingMaskIntoConstraints = false
+        goToInfoScreen.setTitle("Go to INFO", for: .normal)
+        goToInfoScreen.addTarget(self, action: #selector(tapOnGoToInfoButton(_:)), for: .touchUpInside)
+        return goToInfoScreen
+    }()
+
     // MARK: - Lifecycle
 
     init(viewModel: FeedViewModel) {
@@ -88,6 +96,7 @@ class FeedViewController: UIViewController {
         view.addSubview(textField)
         view.addSubview(topButton)
         view.addSubview(checkGuessButton)
+        view.addSubview(goToInfoScreen)
         NSLayoutConstraint.activate([
             hamsterImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80),
             hamsterImage.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 80),
@@ -102,7 +111,12 @@ class FeedViewController: UIViewController {
             topButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
 
             checkGuessButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-            checkGuessButton.topAnchor.constraint(equalTo: topButton.bottomAnchor, constant: 20)
+            checkGuessButton.topAnchor.constraint(equalTo: topButton.bottomAnchor, constant: 20),
+
+            goToInfoScreen.topAnchor.constraint(equalTo: checkGuessButton.bottomAnchor, constant: 25),
+            goToInfoScreen.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 80),
+            goToInfoScreen.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -80),
+            goToInfoScreen.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -40)
         ])
     }
 
@@ -135,5 +149,9 @@ class FeedViewController: UIViewController {
         if let text = self.textField.text {
             feedModel.check(word: text)
         }
+    }
+
+    @objc func tapOnGoToInfoButton(_ sender: UIButton) {
+        feedModel.onInfoScreen?()
     }
 }

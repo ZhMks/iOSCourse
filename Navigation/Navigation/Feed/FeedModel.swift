@@ -9,8 +9,9 @@ import Foundation
 
 
 final class FeedModel: FeedViewModel  {
+
     var onDetail: Action?
-    
+    var onInfoScreen: Action?
     
     var currentState: ((State) -> Void)?
 
@@ -29,7 +30,7 @@ final class FeedModel: FeedViewModel  {
     func check(word: String){
         guard word == secretWord else {
             self.state = .red
-            preconditionFailure("Test Failure")
+            return
         }
             self.state = .green
         }

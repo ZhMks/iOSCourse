@@ -14,6 +14,7 @@ protocol FeedViewModel {
     var currentState: ((State) -> Void)? { get set }
     var onDetail: Action? {get set}
     func check(word: String)
+    var onInfoScreen: Action? { get set }
 }
 
 enum State {
