@@ -65,22 +65,6 @@ class PhotosViewController: UIViewController {
     }
 
     func bindModel() {
-        self.viewModel.processImages( completion: { result in
-                DispatchQueue.main.async { [weak self] in
-                    switch result {
-                    case .success(let images):
-                        self?.activityIndicator.stopAnimating()
-                        self?.imgArray = images
-                        self?.uiCollectionView.reloadData()
-                    case .failure(_):
-                        self?.activityIndicator.stopAnimating()
-                        let uiAlertController = UIAlertController(title: "Ошибка", message: "Невозможно обновить", preferredStyle: .alert)
-                        let alertAction = UIAlertAction(title: "Отмена", style: .cancel)
-                        uiAlertController.addAction(alertAction)
-                        self?.navigationController?.present(uiAlertController, animated: true)
-                    }
-                }
-            })
     }
 
     func performAlert() {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class User {
+final class UserClass {
 
     var login: String
     var fullName: String

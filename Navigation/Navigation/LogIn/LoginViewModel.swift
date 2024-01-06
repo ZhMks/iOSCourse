@@ -9,55 +9,42 @@ import UIKit
 
 protocol LoginViewModel {
     var onDetail: Action? {get set}
-    var state: State? {get set}
-    var currentState: ((State) -> Void)? {get set}
-    func check(pass: String?) throws
-
+    var onSignUP: Action? {get set}
+    func checkUser(email: String, password: String, completion: @escaping(Result<FireBaseUser, Error>) -> Void)
+    func signUpUser(email: String, password: String, completion: @escaping(Result<FireBaseUser, Error>) -> Void)
 }
-
-enum PossibleErrors: Error, CustomStringConvertible {
-    case invalidLogin
-    case emptyLoging
-
-    var description: String {
-        switch self {
-        case .emptyLoging: "Please fill in fields"
-        case .invalidLogin: "Invalid password"
-        }
-    }
-}
-
 
 class LoginVMImp: LoginViewModel {
 
+    var authService: Checker
+
     var onDetail: Action?
-    var currentState: ((State) -> Void)?
+var onSignUP: Action?
+    init(authService: Checker) {
+        self.authService = authService
+    }
 
-    var state: State? {
-        didSet {
-            currentState?(state!)
+    func checkUser(email: String, password: String, completion: @escaping (Result<FireBaseUser, Error>) -> Void) {
+        Checker.shared.checkCredentials(email: email, password: password) { [weak self] result in
+            switch result {
+            case .success(let user):
+                completion(.success(user))
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
         }
     }
 
-    init(state: State) {
-        self.state = state
-    }
-
-    func check(pass: String?) throws {
-        let user = User(login: "123456",
-                        fullName: "Maksim Zhuin",
-                        avatarImg: UIImage(named: "copybara")!,
-                        status: "Show some status")
-        Checker.shared.user = user
-
-        if Checker.shared.check(password: pass) {
-            self.state = .green
-        } else if pass == nil {
-            throw PossibleErrors.emptyLoging
-        } else {
-            throw PossibleErrors.invalidLogin
+    func signUpUser(email: String, password: String, completion: @escaping (Result<FireBaseUser, Error>) -> Void) {
+        Checker.shared.signUpUser(email: email, password: password) { [weak self] result in
+            switch result {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
         }
     }
+
 }
-
 

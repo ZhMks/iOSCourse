@@ -115,13 +115,20 @@ extension ProfileTableHeaderView {
             self.setStatusButton.backgroundColor = UIColor(red: 70/255, green: 130/255, blue: 180/255, alpha: 1)
             self.setStatusButton.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.setStatusButton.backgroundColor = UIColor(red: 0/255, green: 132/255, blue: 247/255, alpha: 1)
-
-            if let text = self.statusText {
+        }
+            if let text = statusText {
+                let store = FiresService().dataBase.collection(.collectionName)
+                let newEvent = Event(name: self.viewModel.user.fullName, status: statusTextField.text!)
+                do {
+                    try store.addDocument(from: newEvent)
+                } catch {
+                    print(error.localizedDescription)
+                }
                 self.statusLabelText.text = text
             } else {
                 print("There is no text")
             }
-        }
+
     }
 
     func setUpConstraints() {

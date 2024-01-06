@@ -89,6 +89,17 @@ class LogInViewController: UIViewController {
         return loginButton
     }()
 
+    private lazy var signUpButton: UIButton = {
+        let loginButton = UIButton(type: .system)
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        loginButton.setTitleColor(.white, for: .normal)
+        loginButton.layer.cornerRadius = 10
+        loginButton.setTitle("Sign UP", for: .normal)
+        loginButton.clipsToBounds = true
+        return loginButton
+    }()
+
     private lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -126,7 +137,10 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = true
-        loginButton.addTarget(self, action: #selector(logInButtonPressed(_:)), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        signUpButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissTextfield))
+        view.addGestureRecognizer(tapGesture)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -134,34 +148,37 @@ class LogInViewController: UIViewController {
         removeKeyboardObservers()
     }
 
-    @objc func logInButtonPressed(_ sender: UIButton) {
-        do {
-            try viewModel.check(pass: passwordTextField.text)
-            viewModel.onDetail?()
-        }
-        catch PossibleErrors.invalidLogin {
-            let uiAlertController = UIAlertController(title: "Ошибка",
-                                                      message: "\(PossibleErrors.invalidLogin.description)",
-                                                      preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "Отмена", style: .destructive)
-            uiAlertController.addAction(alertAction)
-            self.navigationController?.present(uiAlertController, animated: true)
-        }
-        catch PossibleErrors.emptyLoging {
-            let uiAlertController = UIAlertController(title: "Ошибка",
-                                                      message: "\(PossibleErrors.emptyLoging.description)",
-                                                      preferredStyle: .alert)
-            let uiAlertAction = UIAlertAction(title: "Отмена", style: .destructive)
-            uiAlertController.addAction(uiAlertAction)
-            self.navigationController?.present(uiAlertController, animated: true)
-        }
-        catch {
-            let uiAlertController = UIAlertController(title: "Ошибка",
-                                                      message: "Неизвестная ошибка",
-                                                      preferredStyle: .alert)
-            let uiAlertAction = UIAlertAction(title: "Отмена", style: .destructive)
-            uiAlertController.addAction(uiAlertAction)
-            self.navigationController?.present(uiAlertController, animated: true)
+    @objc func buttonPressed(button: UIButton) {
+        switch button {
+        case loginButton:
+            if validation(email: emailTextField.text!, password: passwordTextField.text!) {
+                viewModel.checkUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] result in
+                    switch result {
+                    case .success(let success):
+                       self?.viewModel.onDetail?()
+                    case .failure(_):
+                        let alert = UIAlertController(title: "Ошибка", message: "Невозможно авторизоваться, проверьте e-mail и пароль", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "Отмена", style: .destructive)
+                        alert.addAction(action)
+                        self?.present(alert, animated: true)
+                    }
+                }
+            }
+        case signUpButton:
+            if validation(email: emailTextField.text!, password: passwordTextField.text!) {
+                viewModel.signUpUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] result in
+                    switch result {
+                    case .success(_):
+                        self?.viewModel.onSignUP?()
+                    case .failure(_):
+                        let alert = UIAlertController(title: "Ошибка", message: "Невозможно создать пользователя", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "Отмена", style: .destructive)
+                        alert.addAction(action)
+                        self?.present(alert, animated: true)
+                    }
+                }
+            }
+        default: break
         }
     }
 
@@ -208,8 +225,13 @@ class LogInViewController: UIViewController {
             loginButton.topAnchor.constraint(equalTo: textFieldView.bottomAnchor, constant: 16),
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
+
+            signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            signUpButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            signUpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            signUpButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            signUpButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 
@@ -218,10 +240,51 @@ class LogInViewController: UIViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(vkLogo)
         contentView.addSubview(loginButton)
+        contentView.addSubview(signUpButton)
         contentView.addSubview(textFieldView)
         textFieldView.addSubview(emailTextField)
         textFieldView.addSubview(passwordTextField)
         textFieldView.addSubview(underlineView)
+    }
+
+    private func validation(email: String, password: String) -> Bool {
+        let minimumNumberOfElements = 6
+        let character: Character = "@"
+        let dotCharacter: Character = "."
+
+        if email.isEmpty && password.isEmpty  {
+            showAlert(title: "Ошибка", message: "Заполните поля")
+            return false
+        }  else if email.isEmpty && !password.isEmpty {
+            showAlert(title: "Ошибка", message: "Заполните e-mail")
+            return false
+        } else if !email.isEmpty && password.isEmpty {
+            showAlert(title: "Ошибка", message: "Заполните Password")
+            return false
+        } else if email.count < minimumNumberOfElements  {
+            showAlert(title: "Ошибка", message: "Неверный e-mail")
+            return false
+        } else if  password.count < minimumNumberOfElements {
+            showAlert(title: "Неверный пароль", message: "Минимальное кол-во символов - \(minimumNumberOfElements)")
+            return false
+        } else if !email.contains(character) && !email.contains(dotCharacter) {
+            showAlert(title: "Ошибка", message: "E-mail должен содержать символ @, .")
+            return false
+        } else {
+            return true
+        }
+    }
+
+    private func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Отмена", style: .destructive)
+        alertController.addAction(action)
+        self.present(alertController, animated: true)
+    }
+
+    @objc func dismissTextfield() {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
     }
 }
 

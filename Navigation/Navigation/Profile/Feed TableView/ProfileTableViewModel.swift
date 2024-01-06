@@ -9,9 +9,9 @@ import UIKit
 
 class ProfileTableViewModel {
 
-    var user: User 
+    var user: UserClass
 
-    init(user: User) {
+    init(user: UserClass) {
         self.user = user
     }
 

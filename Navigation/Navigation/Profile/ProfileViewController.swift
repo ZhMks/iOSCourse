@@ -7,7 +7,7 @@
 
 import UIKit
 import StorageService
-import iOSIntPackage
+
 
 class ProfileViewController: UIViewController {
 
@@ -19,7 +19,6 @@ class ProfileViewController: UIViewController {
     // MARK: - Properties
     private var dataSource = Post(author: "", imgae: "", description: "", likes: 0, views: 0).makeArray()
     private var photosArray = Photos(photoView: .init()).makeArray()
-    private var imagePublisher = ImagePublisherFacade()
 
     private lazy var postTableView: UITableView = {
         let postTableView = UITableView(frame: .zero, style: .grouped)
