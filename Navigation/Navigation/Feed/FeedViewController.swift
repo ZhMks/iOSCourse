@@ -9,8 +9,6 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
-    weak var coordinator: FeedBaseCoordinator?
-
     private var feedModel: FeedViewModel
 
     struct Post {

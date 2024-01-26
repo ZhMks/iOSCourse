@@ -7,12 +7,18 @@
 
 import UIKit
 import StorageService
+import CoreData
 
 
 class ProfileViewController: UIViewController {
 
     let profileViewModel: ProfileViewModel
     var header: ProfileTableHeaderView
+
+    let gestureRecognizer: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: PostTableViewCell.self, action: #selector(doubleTapGesture))
+        return gesture
+    }()
 
     private lazy var imgArray: [UIImage] = []
 
@@ -23,7 +29,6 @@ class ProfileViewController: UIViewController {
     private lazy var postTableView: UITableView = {
         let postTableView = UITableView(frame: .zero, style: .grouped)
         postTableView.translatesAutoresizingMaskIntoConstraints = false
-
         return postTableView
     }()
 
@@ -63,11 +68,27 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .yellow
         #endif
     }
+
+    @objc func doubleTapGesture(at index: Int) {
+            let favouritePost = FavouritePosts()
+            let array = dataSource[index]
+            favouritePost.authorName = array.author
+            favouritePost.numberOfLikes = Int64(array.likes)
+            favouritePost.numberOfViews = Int64(array.views)
+            favouritePost.image = array.imgae
+            CoreDataService.shared.saveContext()
+            print("Success")
+    }
 }
 
 // MARK: - Functions
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        doubleTapGesture(at: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
     func tuneTableView() {
         postTableView.rowHeight = UITableView.automaticDimension

@@ -19,7 +19,7 @@ class LoginVMImp: LoginViewModel {
     var authService: Checker
 
     var onDetail: Action?
-var onSignUP: Action?
+    var onSignUP: Action?
     init(authService: Checker) {
         self.authService = authService
     }

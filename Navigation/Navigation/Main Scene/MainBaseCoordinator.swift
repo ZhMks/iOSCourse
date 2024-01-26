@@ -36,7 +36,12 @@ protocol LoginBaseCoordinator: Coordinator {
     func showDetailScreen()
 }
 
+protocol FavouritesBaseCoordinator: Coordinator {
+    func showDetailScreen()
+}
+
 protocol MainBaseCoordinator: Coordinator {
     var feedCoordinator: FeedBaseCoordinator { get }
     var loginCoordinator: LoginBaseCoordinator { get }
+    var favouritesCoordinator: FavouritesBaseCoordinator { get }
 }

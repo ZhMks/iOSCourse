@@ -50,6 +50,12 @@
 		B2A10F202AE6839F004BBF96 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2A10F0A2AE6839E004BBF96 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B2A10F282AE68918004BBF96 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C412AB0399C00985A6B /* Post.swift */; };
 		B2A4505B2ABC1C3B00B5ACCA /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4505A2ABC1C3B00B5ACCA /* PhotosTableViewCell.swift */; };
+		B2AF38642B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B2AF38622B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodeld */; };
+		B2AF38672B6273BA00D1ECD5 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AF38662B6273BA00D1ECD5 /* CoreDataService.swift */; };
+		B2AF38692B638AB700D1ECD5 /* FavouritesModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AF38682B638AB700D1ECD5 /* FavouritesModelService.swift */; };
+		B2AF386C2B63947C00D1ECD5 /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AF386B2B63947C00D1ECD5 /* FavouritesViewController.swift */; };
+		B2AF386E2B63949800D1ECD5 /* FavouritesBaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AF386D2B63949800D1ECD5 /* FavouritesBaseCoordinator.swift */; };
+		B2AF38702B6394A600D1ECD5 /* FavouritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AF386F2B6394A600D1ECD5 /* FavouritesViewModel.swift */; };
 		B2DB0FC02AEA44DE002176A8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DB0FBE2AEA4382002176A8 /* User.swift */; };
 		B2DB0FC62AEB8CFA002176A8 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DB0FC52AEB8CFA002176A8 /* Checker.swift */; };
 /* End PBXBuildFile section */
@@ -134,6 +140,12 @@
 		B2A10F132AE6839F004BBF96 /* StorageServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorageServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2A10F1A2AE6839F004BBF96 /* StorageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
 		B2A4505A2ABC1C3B00B5ACCA /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		B2AF38632B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavouritePostsModel.xcdatamodel; sourceTree = "<group>"; };
+		B2AF38662B6273BA00D1ECD5 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		B2AF38682B638AB700D1ECD5 /* FavouritesModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesModelService.swift; sourceTree = "<group>"; };
+		B2AF386B2B63947C00D1ECD5 /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
+		B2AF386D2B63949800D1ECD5 /* FavouritesBaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesBaseCoordinator.swift; sourceTree = "<group>"; };
+		B2AF386F2B6394A600D1ECD5 /* FavouritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewModel.swift; sourceTree = "<group>"; };
 		B2DB0FBE2AEA4382002176A8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B2DB0FC52AEB8CFA002176A8 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -209,6 +221,7 @@
 		B274C2BE2A99FD9200D872F4 = {
 			isa = PBXGroup;
 			children = (
+				B2AF38622B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodeld */,
 				B274C2C92A99FD9200D872F4 /* Navigation */,
 				B2A10F0B2AE6839E004BBF96 /* StorageService */,
 				B2A10F192AE6839F004BBF96 /* StorageServiceTests */,
@@ -230,6 +243,9 @@
 		B274C2C92A99FD9200D872F4 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				B2AF386A2B63946E00D1ECD5 /* Favourites */,
+				B2AF38682B638AB700D1ECD5 /* FavouritesModelService.swift */,
+				B2AF38652B6273A500D1ECD5 /* CoreDataService */,
 				B22BBB3C2B305C0D00B92D58 /* NetworkService */,
 				B2909C2F2AA5E08300985A6B /* Main Scene */,
 				B234B6562AA3592700F3904F /* Feed */,
@@ -327,6 +343,24 @@
 				B2A10F1A2AE6839F004BBF96 /* StorageServiceTests.swift */,
 			);
 			path = StorageServiceTests;
+			sourceTree = "<group>";
+		};
+		B2AF38652B6273A500D1ECD5 /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+				B2AF38662B6273BA00D1ECD5 /* CoreDataService.swift */,
+			);
+			path = CoreDataService;
+			sourceTree = "<group>";
+		};
+		B2AF386A2B63946E00D1ECD5 /* Favourites */ = {
+			isa = PBXGroup;
+			children = (
+				B2AF386D2B63949800D1ECD5 /* FavouritesBaseCoordinator.swift */,
+				B2AF386B2B63947C00D1ECD5 /* FavouritesViewController.swift */,
+				B2AF386F2B6394A600D1ECD5 /* FavouritesViewModel.swift */,
+			);
+			path = Favourites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -481,6 +515,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2AF386C2B63947C00D1ECD5 /* FavouritesViewController.swift in Sources */,
+				B2AF38692B638AB700D1ECD5 /* FavouritesModelService.swift in Sources */,
+				B2AF38672B6273BA00D1ECD5 /* CoreDataService.swift in Sources */,
 				B274C2CB2A99FD9200D872F4 /* AppDelegate.swift in Sources */,
 				B2DB0FC62AEB8CFA002176A8 /* Checker.swift in Sources */,
 				B274C2E12A9A27C300D872F4 /* ProfileViewController.swift in Sources */,
@@ -496,11 +533,13 @@
 				B2909C492AB188A500985A6B /* ExtensionProfileHeaderController.swift in Sources */,
 				B29D66492B0B5BC3007AE9AD /* MainBaseCoordinator.swift in Sources */,
 				B29D665D2B0B88FF007AE9AD /* LoginBaseCoordinator.swift in Sources */,
+				B2AF38642B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodeld in Sources */,
 				B274C2DF2A9A27BB00D872F4 /* FeedViewController.swift in Sources */,
 				B274C2CD2A99FD9200D872F4 /* SceneDelegate.swift in Sources */,
 				B29D665A2B0B88EA007AE9AD /* LoginViewModel.swift in Sources */,
 				B29D664B2B0B5F11007AE9AD /* InfoViewModel.swift in Sources */,
 				B242694A2B39527C00655C9D /* NetworkServiceModel.swift in Sources */,
+				B2AF386E2B63949800D1ECD5 /* FavouritesBaseCoordinator.swift in Sources */,
 				B2A4505B2ABC1C3B00B5ACCA /* PhotosTableViewCell.swift in Sources */,
 				B26630072ABC66E60018A785 /* PhotosViewController.swift in Sources */,
 				B274C2E52A9C862200D872F4 /* InfoViewController.swift in Sources */,
@@ -508,6 +547,7 @@
 				B274C2E32A9B553B00D872F4 /* PostViewController.swift in Sources */,
 				B29D66472B0B5B9C007AE9AD /* PostViewModel.swift in Sources */,
 				B242698B2B494B4D00655C9D /* FireBaseUser.swift in Sources */,
+				B2AF38702B6394A600D1ECD5 /* FavouritesViewModel.swift in Sources */,
 				B234B6582AA35A2F00F3904F /* ProfileTableHeaderView.swift in Sources */,
 				B29D664F2B0B65C8007AE9AD /* MainCoordinator.swift in Sources */,
 				B22BBB3E2B305C2400B92D58 /* NetworkService.swift in Sources */,
@@ -944,6 +984,19 @@
 			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		B2AF38622B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B2AF38632B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodel */,
+			);
+			currentVersion = B2AF38632B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodel */;
+			path = FavouritePostsModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B274C2BF2A99FD9200D872F4 /* Project object */;
 }

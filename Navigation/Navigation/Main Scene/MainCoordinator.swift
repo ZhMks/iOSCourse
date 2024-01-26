@@ -10,6 +10,8 @@ import UIKit
 
 class MainCoordinator: MainBaseCoordinator {
 
+    lazy var favouritesCoordinator: FavouritesBaseCoordinator = FavouritesCoordinator()
+
     var parentCoordinator: MainBaseCoordinator?
     lazy  var feedCoordinator: FeedBaseCoordinator = FeedCoordinator()
     lazy  var loginCoordinator: LoginBaseCoordinator = LoginCoordinator()
@@ -24,7 +26,11 @@ class MainCoordinator: MainBaseCoordinator {
         loginCoordinator.parentCoordinator = self
         loginViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
 
-        (rootViewController as? UITabBarController)?.viewControllers = [feedViewController, loginViewController]
+        let favouritesController = favouritesCoordinator.start()
+        favouritesCoordinator.parentCoordinator = self
+        favouritesController.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage(systemName: "star"), tag: 2)
+
+        (rootViewController as? UITabBarController)?.viewControllers = [feedViewController, loginViewController, favouritesController]
         return rootViewController
     }
 
