@@ -24,7 +24,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
-        Checker.shared.logOutUser()
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {

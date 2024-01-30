@@ -25,7 +25,7 @@ public struct Post {
         self.views = views
     }
 
-    public func makeArray() -> [Post] {
+   public static func makeArray() -> [Post] {
         [
         Post(author: "Wedmak.Official",
              imgae: "Film1",
@@ -56,13 +56,13 @@ public struct Post {
 
 public struct Photos {
 
-   public var photoView: UIImage
+ public var photoView: UIImage
 
-    public init(photoView: UIImage) {
+ public init(photoView: UIImage) {
         self.photoView = photoView
     }
 
-   public func makeArray() -> [Photos] {
+  public static func makeArray() -> [Photos] {
         [
             Photos(photoView: .init(named: "gldot")!),
             Photos(photoView: .init(named: "Film1")!),

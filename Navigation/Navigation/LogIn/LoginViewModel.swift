@@ -29,6 +29,7 @@ class LoginVMImp: LoginViewModel {
             switch result {
             case .success(let user):
                 completion(.success(user))
+                UserDefaults.standard.set("success", forKey: "User")
             case .failure(let failure):
                 completion(.failure(failure))
             }

@@ -8,17 +8,16 @@
 import Foundation
 import CoreData
 import UIKit
+import StorageService
 
 
 final class FavouritesModelService {
-    
+
     private(set) var favouritePosts = [FavouritePosts]()
     private let coreDataService = CoreDataService.shared
+    private let request = FavouritePosts.fetchRequest()
 
-
-    private func fetchPosts() {
-
-        let request = FavouritePosts.fetchRequest()
+   func fetchPosts() {
         do {
             favouritePosts = try coreDataService.context.fetch(request)
         } catch {
@@ -27,16 +26,26 @@ final class FavouritesModelService {
         }
     }
 
-    func createModelWith(name: String, text: String, image: UIImage, numberOfLikes: Int, numberOfViews: Int) {
-        let newFavouritePost = FavouritePosts(context: coreDataService.context)
-        newFavouritePost.authorName = name
-        newFavouritePost.postText = text
-        newFavouritePost.numberOfLikes = Int64(numberOfLikes)
-        newFavouritePost.numberOfViews = Int64(numberOfViews)
-        let imageData = image.assetName
-        newFavouritePost.image = imageData
-        coreDataService.saveContext()
-        fetchPosts()
+    func createModelWith(name: String, text: String, image: String, numberOfLikes: Int, numberOfViews: Int) {
+        let predicate = NSPredicate.init(format: "authorName = %@", name)
+        request.predicate = predicate
+        do {
+            let arrData = try coreDataService.context.fetch(request)
+            if arrData.count > 0 {
+                return
+            }
+            let newFavouritePost = FavouritePosts(context: coreDataService.context)
+            newFavouritePost.authorName = name
+            newFavouritePost.postText = text
+            newFavouritePost.numberOfLikes = Int64(numberOfLikes)
+            newFavouritePost.numberOfViews = Int64(numberOfViews)
+            newFavouritePost.image = image
+            print(newFavouritePost)
+            coreDataService.saveContext()
+            fetchPosts()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     func deletePostAt(index: Int) {
@@ -46,14 +55,3 @@ final class FavouritesModelService {
     }
 }
 
-private extension UIImage {
-
-    var containingBundle: Bundle? {
-        imageAsset?.value(forKey: "containingBundle") as? Bundle
-    }
-
-    var assetName: String? {
-        imageAsset?.value(forKey: "assetName") as? String
-    }
-
-}

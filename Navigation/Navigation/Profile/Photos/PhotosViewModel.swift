@@ -32,7 +32,7 @@ class PhotosVMImp: PhotosViewModel {
 
     var imgArray: [UIImage]? = []
 
-    var photoArray: [StorageService.Photos] = Photos(photoView: .init()).makeArray()
+    var photoArray: [StorageService.Photos] = Photos.makeArray()
 }
 
 

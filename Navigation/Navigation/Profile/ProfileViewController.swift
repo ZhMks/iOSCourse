@@ -14,17 +14,9 @@ class ProfileViewController: UIViewController {
 
     let profileViewModel: ProfileViewModel
     var header: ProfileTableHeaderView
-
-    let gestureRecognizer: UITapGestureRecognizer = {
-        let gesture = UITapGestureRecognizer(target: PostTableViewCell.self, action: #selector(doubleTapGesture))
-        return gesture
-    }()
-
-    private lazy var imgArray: [UIImage] = []
+    let favouriteModelService: FavouritesModelService = FavouritesModelService()
 
     // MARK: - Properties
-    private var dataSource = Post(author: "", imgae: "", description: "", likes: 0, views: 0).makeArray()
-    private var photosArray = Photos(photoView: .init()).makeArray()
 
     private lazy var postTableView: UITableView = {
         let postTableView = UITableView(frame: .zero, style: .grouped)
@@ -61,23 +53,20 @@ class ProfileViewController: UIViewController {
         setupConstraints()
         tuneTableView()
         postTableView.reloadData()
-
-        #if DEBUG
-        view.backgroundColor = .systemBackground
-        #else
-        view.backgroundColor = .yellow
-        #endif
     }
 
-    @objc func doubleTapGesture(at index: Int) {
-            let favouritePost = FavouritePosts()
-            let array = dataSource[index]
-            favouritePost.authorName = array.author
-            favouritePost.numberOfLikes = Int64(array.likes)
-            favouritePost.numberOfViews = Int64(array.views)
-            favouritePost.image = array.imgae
-            CoreDataService.shared.saveContext()
-            print("Success")
+    @objc func doubleTapGestureFunc(recognizer: UITapGestureRecognizer) {
+        if recognizer.numberOfTapsRequired == 2{
+            let point = recognizer.location(in: self.postTableView)
+            let indexPath = self.postTableView.indexPathForRow(at: point)
+            let array = profileViewModel.dataSource![indexPath!.row]
+            favouriteModelService.createModelWith(name: array.author,
+                                                  text: array.description,
+                                                  image: array.imgae,
+                                                  numberOfLikes: array.likes,
+                                                  numberOfViews: array.views)
+            print("success tapp")
+        }
     }
 }
 
@@ -86,7 +75,7 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        doubleTapGesture(at: indexPath.row)
+        print(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -108,7 +97,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
            if section == 0 {
                return 1
            } else {
-               return dataSource.count
+               return profileViewModel.dataSource!.count
            }
        }
 
@@ -119,11 +108,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.id, for: indexPath) as? PhotosTableViewCell else { return UITableViewCell() }
-            cell.configure(with: photosArray)
+            cell.configure(with: profileViewModel.imgArray!)
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
-            let setting = dataSource[indexPath.row]
+            let setting = profileViewModel.dataSource![indexPath.row]
+            let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapGestureFunc(recognizer:)))
+            doubleTap.numberOfTapsRequired = 2
+            cell.addGestureRecognizer(doubleTap)
             cell.configure(
                 author: setting.author,
                 title: setting.description,

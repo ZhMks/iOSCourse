@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import CoreData
+import Firebase
 
 final class FavouritesCoordinator: FavouritesBaseCoordinator {
 
@@ -21,13 +22,19 @@ final class FavouritesCoordinator: FavouritesBaseCoordinator {
 
     
     func start() -> UIViewController {
-        let favouriteModelService = FavouritesModelService()
-        let model = FavouritesModel(favouritePosts: favouriteModelService.favouritePosts,
-                                    state: .initial,
-                                    favouriteModelService: favouriteModelService)
+        let service = FavouritesModelService()
+        let model = FavouritesModel(service: service, state: .initial)
+//        if Auth.auth().currentUser != nil {
+//            service.fetchPosts()
+//            model.favouritePosts = service.favouritePosts
+//            model.state = .green
+//        } else {
+//            model.favouritePosts = []
+//            model.state = .red
+//        }
         let controller = FavouritesViewController(favouriteViewModel: model)
-        let navigationController = UINavigationController(rootViewController: controller)
-        return navigationController
+        rootViewController = UINavigationController(rootViewController: controller)
+        return rootViewController
     }
 
     

@@ -18,9 +18,7 @@ final class CoreDataService: ICoreDataService {
 
     static let shared: ICoreDataService = CoreDataService()
 
-    private init() {
-
-    }
+    private init() { }
 
     private let persistentContatiner = {
         let container = NSPersistentContainer(name: "FavouritePostsModel")

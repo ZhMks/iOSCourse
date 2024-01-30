@@ -6,21 +6,26 @@
 //
 
 import Foundation
+import Firebase
 
 
 protocol FavouritesViewModel {
-    var favouriteModelService: FavouritesModelService { get }
-    var favouritePosts: [FavouritePosts] { get set }
+    var favouritePosts: [FavouritePosts]? { get set }
     var state: State { get set }
     var currentState: ((State) -> Void)? { get set }
+    var favouriteService: FavouritesModelService { get }
+    func checkAuthorisation()
+    func fetchData()
 }
 
 
 final class FavouritesModel: FavouritesViewModel {
 
+    var favouriteService: FavouritesModelService
+
     var currentState: ((State) -> Void)?
 
-    var favouriteModelService: FavouritesModelService
+    var favouritePosts: [FavouritePosts]?
 
     var state: State {
         didSet {
@@ -28,13 +33,27 @@ final class FavouritesModel: FavouritesViewModel {
         }
     }
 
-    var favouritePosts: [FavouritePosts]
-
-    init(favouritePosts: [FavouritePosts], state: State, favouriteModelService: FavouritesModelService) {
-        self.favouritePosts = favouritePosts
+    init(service: FavouritesModelService, state: State) {
+        self.favouriteService = service
         self.state = state
-        self.favouriteModelService = favouriteModelService
     }
 
-    
+    func checkAuthorisation() {
+        guard let value = UserDefaults.standard.value(forKey: "User") as? String else { return }
+        print(value)
+        if value == "success" {
+            favouriteService.fetchPosts()
+            favouritePosts = favouriteService.favouritePosts
+            state = .green
+        } else {
+            favouritePosts = favouriteService.favouritePosts
+            state = .red
+        }
+    }
+
+    func fetchData() {
+        favouriteService.fetchPosts()
+        self.favouritePosts = favouriteService.favouritePosts
+    }
+
 }
