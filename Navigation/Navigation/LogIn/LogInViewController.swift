@@ -154,7 +154,7 @@ class LogInViewController: UIViewController {
             if validation(email: emailTextField.text!, password: passwordTextField.text!) {
                 viewModel.checkUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] result in
                     switch result {
-                    case .success(let success):
+                    case .success(_):
                        self?.viewModel.onDetail?()
                     case .failure(_):
                         let alert = UIAlertController(title: "Ошибка", message: "Невозможно авторизоваться, проверьте e-mail и пароль", preferredStyle: .alert)

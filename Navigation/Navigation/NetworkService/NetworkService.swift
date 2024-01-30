@@ -45,7 +45,7 @@ class NetworkServiceClass: NetworkServiceProtocol {
         guard let url = URL else { return }
         let request = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
+            if error != nil {
                 completion(.failure(NetworkServiceErrors.unknownError))
             }
             if let response = response as? HTTPURLResponse {

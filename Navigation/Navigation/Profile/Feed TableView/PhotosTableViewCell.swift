@@ -20,8 +20,9 @@ static let id = "PhotosTableViewCell"
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumInteritemSpacing = 8.0
-        let uiCollectionView = UICollectionView(frame: contentView.bounds, collectionViewLayout: flowLayout)
+        let uiCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         uiCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        uiCollectionView.isScrollEnabled = true
         return uiCollectionView
     }()
 
@@ -45,11 +46,10 @@ static let id = "PhotosTableViewCell"
     // MARK: - LifeCycle
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         uiCollectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.id)
         setupUI()
         uiCollectionView.backgroundColor = .clear
-        uiCollectionView.reloadData()
     }
     
     required init?(coder: NSCoder) {
@@ -84,7 +84,7 @@ static let id = "PhotosTableViewCell"
 extension PhotosTableViewCell {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        4
+        photosArray.count
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

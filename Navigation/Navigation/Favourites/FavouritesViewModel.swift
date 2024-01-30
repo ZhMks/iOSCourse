@@ -16,6 +16,7 @@ protocol FavouritesViewModel {
     var favouriteService: FavouritesModelService { get }
     func checkAuthorisation()
     func fetchData()
+    func searchData(with author: String) -> [FavouritePosts]
 }
 
 
@@ -54,6 +55,11 @@ final class FavouritesModel: FavouritesViewModel {
     func fetchData() {
         favouriteService.fetchPosts()
         self.favouritePosts = favouriteService.favouritePosts
+    }
+
+    func searchData(with author: String) -> [FavouritePosts]  {
+        let arrData = favouriteService.searchData(with: author)
+        return arrData
     }
 
 }

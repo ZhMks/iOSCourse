@@ -26,6 +26,7 @@ class LoginVMImp: LoginViewModel {
 
     func checkUser(email: String, password: String, completion: @escaping (Result<FireBaseUser, Error>) -> Void) {
         Checker.shared.checkCredentials(email: email, password: password) { [weak self] result in
+            guard self != nil else { return }
             switch result {
             case .success(let user):
                 completion(.success(user))
@@ -38,6 +39,7 @@ class LoginVMImp: LoginViewModel {
 
     func signUpUser(email: String, password: String, completion: @escaping (Result<FireBaseUser, Error>) -> Void) {
         Checker.shared.signUpUser(email: email, password: password) { [weak self] result in
+            guard self != nil else { return }
             switch result {
             case .success(let success):
                 completion(.success(success))

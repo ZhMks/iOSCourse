@@ -11,6 +11,19 @@ class FavouritesViewController: UIViewController {
 
     private var favouriteViewModel: FavouritesViewModel
 
+    private lazy var searchTextField: UITextField = {
+        let searchText = UITextField(frame: CGRect(x: 180, y: 100, width: 200, height: 30))
+        searchText.borderStyle = .roundedRect
+        searchText.font = UIFont.systemFont(ofSize: 16)
+        searchText.placeholder = "Search"
+        searchText.backgroundColor = UIColor.white
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: searchText.frame.height))
+        searchText.leftView = paddingView
+        searchText.leftViewMode = .always
+        searchText.delegate = self
+        return searchText
+    }()
+
     private lazy var favouriteTableView: UITableView = {
         let favouritePostsTableView = UITableView()
         favouritePostsTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,21 +59,26 @@ class FavouritesViewController: UIViewController {
             switch state {
             case .green:
                 favouriteTableView.isHidden = false
+                navigationController?.navigationBar.isHidden = false
                 favouriteTableView.reloadData()
             case .red:
                 favouriteTableView.isHidden = true
+                navigationController!.navigationBar.isHidden = true
             case .initial:
                 favouriteTableView.isHidden = true
+                navigationController!.navigationBar.isHidden = true
             }
         }
     }
 
     func layout() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tapGesture)
         view.addSubview(favouriteTableView)
         favouriteTableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
         let rightNavButton1 = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(serchBarButtonTapped))
         let rightNavButton2 = UIBarButtonItem(image: UIImage(systemName: "eraser"), style: .plain, target: self, action: #selector(eraseBarButtonTapped))
-        navigationController?.navigationItem.rightBarButtonItems = [rightNavButton1, rightNavButton2]
+        navigationItem.rightBarButtonItems = [rightNavButton1, rightNavButton2]
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             favouriteTableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
@@ -71,12 +89,24 @@ class FavouritesViewController: UIViewController {
     }
 
     @objc func serchBarButtonTapped() {
-
+        if searchTextField.superview == nil {
+               view.addSubview(searchTextField)
+           } else {
+               searchTextField.text = ""
+               searchTextField.removeFromSuperview()
+           }
     }
 
     @objc func eraseBarButtonTapped() {
-
+        searchTextField.text = ""
+        searchTextField.becomeFirstResponder()
+        favouriteViewModel.fetchData()
+        favouriteTableView.reloadData()
     }
+
+    @objc func handleTap() {
+            searchTextField.resignFirstResponder()
+        }
 }
 
 extension FavouritesViewController: UITableViewDelegate {
@@ -109,4 +139,16 @@ extension FavouritesViewController: UITableViewDataSource {
                        views: Int(infoForCell!.numberOfViews))
         return cell
     }
+}
+
+extension FavouritesViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        favouriteViewModel.favouritePosts = favouriteViewModel.searchData(with: textField.text!)
+        favouriteTableView.reloadData()
+        textField.resignFirstResponder()
+        searchTextField.removeFromSuperview()
+        return true
+    }
+
 }

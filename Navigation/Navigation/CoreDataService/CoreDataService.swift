@@ -9,14 +9,9 @@ import Foundation
 import CoreData
 
 
-protocol ICoreDataService {
-    var context: NSManagedObjectContext { get }
-    func saveContext()
-}
+final class CoreDataService {
 
-final class CoreDataService: ICoreDataService {
-
-    static let shared: ICoreDataService = CoreDataService()
+    static let shared = CoreDataService()
 
     private init() { }
 
@@ -32,7 +27,9 @@ final class CoreDataService: ICoreDataService {
     }()
 
     lazy var context: NSManagedObjectContext = {
-        return persistentContatiner.viewContext
+        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.persistentStoreCoordinator = persistentContatiner.persistentStoreCoordinator
+        return context
     }()
 
     func saveContext() {

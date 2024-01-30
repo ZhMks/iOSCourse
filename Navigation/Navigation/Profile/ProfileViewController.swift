@@ -52,6 +52,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(postTableView)
         setupConstraints()
         tuneTableView()
+        view.backgroundColor = .systemBackground
         postTableView.reloadData()
     }
 

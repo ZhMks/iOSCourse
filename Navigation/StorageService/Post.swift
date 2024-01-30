@@ -49,7 +49,12 @@ public struct Post {
              imgae: "Film3",
              description: "SIMPLETEXT SIMPLETEXT SIMPLETEXT SIMPLETEXT SIMPLETEXT",
              likes: 2222,
-             views: 2234)
+             views: 2234),
+        Post(author: "TestProject",
+             imgae: "Film2",
+             description: "TestProjectForCoreDataBackground",
+             likes: 124,
+             views: 122)
         ]
     }
 }

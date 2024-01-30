@@ -27,7 +27,8 @@ final class FiresService {
 
     func addEvent(event: Event) {
         do {
-            let documentReference = try dataBase.collection(.collectionName).addDocument(from: event) { [weak self] error in
+            _ = try dataBase.collection(.collectionName).addDocument(from: event) { [weak self] error in
+                guard let self else { return }
                 if let error = error {
                     print(error.localizedDescription)
                 }
@@ -40,6 +41,7 @@ final class FiresService {
     func deleteEvent(event: Event, completion: @escaping (Event) -> Void ) {
         guard let documentID = event.documentID else { return }
         dataBase.collection(.collectionName).document(documentID).delete { [weak self] error in
+            guard let self else { return }
             if let error = error {
                 print(error.localizedDescription)
             }
