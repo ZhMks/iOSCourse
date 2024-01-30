@@ -58,6 +58,9 @@ class FavouritesViewController: UIViewController {
     func layout() {
         view.addSubview(favouriteTableView)
         favouriteTableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
+        let rightNavButton1 = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(serchBarButtonTapped))
+        let rightNavButton2 = UIBarButtonItem(image: UIImage(systemName: "eraser"), style: .plain, target: self, action: #selector(eraseBarButtonTapped))
+        navigationController?.navigationItem.rightBarButtonItems = [rightNavButton1, rightNavButton2]
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             favouriteTableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
@@ -65,6 +68,14 @@ class FavouritesViewController: UIViewController {
             favouriteTableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             favouriteTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
+    }
+
+    @objc func serchBarButtonTapped() {
+
+    }
+
+    @objc func eraseBarButtonTapped() {
+
     }
 }
 
