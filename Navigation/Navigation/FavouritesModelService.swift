@@ -58,10 +58,11 @@ final class FavouritesModelService {
     }
 
     func searchData(with author: String) -> [FavouritePosts] {
+        let secondReques = FavouritePosts.fetchRequest()
         let predicate = NSPredicate.init(format: "authorName = %@", author)
-        request.predicate = predicate
+        secondReques.predicate = predicate
         do {
-            let arrData = try coreDataService.context.fetch(request)
+            let arrData = try coreDataService.context.fetch(secondReques)
             if arrData.count > 0 {
                return arrData
             }
