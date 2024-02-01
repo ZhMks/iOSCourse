@@ -27,7 +27,7 @@ final class FavouritesModelService {
     }
 
     func createModelWith(name: String, text: String, image: String, numberOfLikes: Int, numberOfViews: Int) {
-        let predicate = NSPredicate.init(format: "authorName = %@", name)
+        let predicate = NSPredicate.init(format: "authorName = %@ AND postText = %@", name, text)
         request.predicate = predicate
         coreDataService.context.perform { [weak self] in
             guard let self else { return }

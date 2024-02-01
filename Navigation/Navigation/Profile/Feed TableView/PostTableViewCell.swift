@@ -32,6 +32,15 @@ class PostTableViewCell: UITableViewCell {
         return feedImageView
     }()
 
+    lazy var starImage: UIImageView = {
+        let starImage = UIImageView(image: UIImage(systemName: "star.fill"))
+        starImage.translatesAutoresizingMaskIntoConstraints = false
+        let color = UIColor(red: 135/255, green: 206/255, blue: 250/255, alpha: 1)
+        starImage.tintColor = color
+        starImage.isHidden = true
+        return starImage
+    }()
+
     private lazy var feedImageViewLabel: UILabel = {
         let feedImageViewLabel = UILabel()
         feedImageViewLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +90,8 @@ class PostTableViewCell: UITableViewCell {
             contentView.addSubview(bottomLikesLabel)
             contentView.addSubview(bottomViewsLabel)
             contentView.addSubview(authorName)
-            
+            feedImageView.addSubview(starImage)
+
             NSLayoutConstraint.activate([
                 authorName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
                 authorName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -104,7 +114,12 @@ class PostTableViewCell: UITableViewCell {
 
                 bottomViewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
                 bottomViewsLabel.topAnchor.constraint(equalTo: feedImageViewLabel.bottomAnchor, constant: 16),
-                bottomViewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+                bottomViewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+
+                starImage.centerXAnchor.constraint(equalTo: feedImageView.centerXAnchor),
+                starImage.centerYAnchor.constraint(equalTo: feedImageView.centerYAnchor),
+                starImage.heightAnchor.constraint(equalToConstant: 50),
+                starImage.widthAnchor.constraint(equalToConstant: 50)
             ])
         }
 

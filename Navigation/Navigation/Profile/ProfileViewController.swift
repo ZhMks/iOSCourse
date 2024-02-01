@@ -57,9 +57,11 @@ class ProfileViewController: UIViewController {
     }
 
     @objc func doubleTapGestureFunc(recognizer: UITapGestureRecognizer) {
-        if recognizer.numberOfTapsRequired == 2{
-            let point = recognizer.location(in: self.postTableView)
+        let point = recognizer.location(in: self.postTableView)
+        if recognizer.numberOfTapsRequired == 2 {
             let indexPath = self.postTableView.indexPathForRow(at: point)
+            guard let cell = postTableView.cellForRow(at: indexPath!) as? PostTableViewCell else { return }
+            starAnimation(for: cell)
             let array = profileViewModel.dataSource![indexPath!.row]
             favouriteModelService.createModelWith(name: array.author,
                                                   text: array.description,
@@ -67,6 +69,18 @@ class ProfileViewController: UIViewController {
                                                   numberOfLikes: array.likes,
                                                   numberOfViews: array.views)
             print("success tapp")
+        }
+    }
+
+    private func starAnimation(for cell: PostTableViewCell) {
+        UIView.animateKeyframes(withDuration: 0.2, delay: 0.0) {
+            cell.starImage.isHidden = false
+            cell.starImage.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        }
+        UIView.animateKeyframes(withDuration: 0.2, delay: 0.2) {
+            cell.starImage.transform = CGAffineTransform(scaleX: 1, y: 1)
+        } completion: { _ in
+            cell.starImage.isHidden = true
         }
     }
 }

@@ -63,15 +63,11 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
 
-    func bindModel() {
-    }
-
     func performAlert() {
         let uiAlertController = UIAlertController(title: "Обновить", message: "Для обновления требуется перезапуск", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Обновить", style: .cancel) { _ in
             self.activityIndicator.isHidden = false
             self.activityIndicator.startAnimating()
-            self.bindModel()
         }
         uiAlertController.addAction(alertAction)
         self.navigationController?.present(uiAlertController, animated: true)

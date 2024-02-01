@@ -54,7 +54,12 @@ public struct Post {
              imgae: "Film2",
              description: "TestProjectForCoreDataBackground",
              likes: 124,
-             views: 122)
+             views: 122),
+        Post(author: "TestProject",
+             imgae: "Film3",
+             description: "This is test description for testing predicate",
+             likes: 12,
+             views: 0)
         ]
     }
 }
