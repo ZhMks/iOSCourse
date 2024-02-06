@@ -6,8 +6,19 @@
 //
 
 import UIKit
+import CoreData
 
 class FavouritesViewController: UIViewController {
+
+    private lazy var fetchController: NSFetchedResultsController<FavouritePosts> = {
+        let request = favouriteViewModel.favouriteService.request
+        let context = favouriteViewModel.favouriteService.coreDataService.context
+        let sortDescriptor = [NSSortDescriptor(key: "authorName", ascending: true)]
+        request.sortDescriptors = sortDescriptor
+        let fetchController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context , sectionNameKeyPath: nil, cacheName: nil)
+        fetchController.delegate = self
+        return fetchController
+    }()
 
     private var favouriteViewModel: FavouritesViewModel
 
@@ -44,13 +55,13 @@ class FavouritesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         favouriteViewModel.checkAuthorisation()
+        bindModel()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         layout()
-        bindModel()
     }
 
     func bindModel() {
@@ -60,13 +71,22 @@ class FavouritesViewController: UIViewController {
             case .green:
                 favouriteTableView.isHidden = false
                 navigationController?.navigationBar.isHidden = false
-                favouriteTableView.reloadData()
+                do {
+                    try fetchController.performFetch()
+                    favouriteTableView.reloadData()
+                } catch {
+                    print("Error performing fetch: \(error)")
+                }
             case .red:
                 favouriteTableView.isHidden = true
-                navigationController!.navigationBar.isHidden = true
+                for button in navigationItem.rightBarButtonItems! {
+                    button.isEnabled = false
+                }
             case .initial:
                 favouriteTableView.isHidden = true
-                navigationController!.navigationBar.isHidden = true
+                for button in navigationItem.rightBarButtonItems! {
+                    button.isEnabled = false
+                }
             }
         }
     }
@@ -90,53 +110,56 @@ class FavouritesViewController: UIViewController {
 
     @objc func serchBarButtonTapped() {
         if searchTextField.superview == nil {
-               view.addSubview(searchTextField)
-           } else {
-               searchTextField.text = ""
-               searchTextField.removeFromSuperview()
-           }
+            view.addSubview(searchTextField)
+        } else {
+            searchTextField.text = ""
+            searchTextField.removeFromSuperview()
+        }
     }
 
     @objc func eraseBarButtonTapped() {
+        fetchController.fetchRequest.predicate = nil
+        do {
+            try fetchController.performFetch()
+            favouriteTableView.reloadData()
+        } catch {
+            print(error.localizedDescription)
+        }
         searchTextField.text = ""
         searchTextField.becomeFirstResponder()
-        favouriteViewModel.fetchData()
         favouriteTableView.reloadData()
     }
 
     @objc func handleTap() {
-            searchTextField.resignFirstResponder()
-        }
+        searchTextField.resignFirstResponder()
+    }
 }
 
 extension FavouritesViewController: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            favouriteViewModel.favouriteService.deletePostAt(index: indexPath.row)
-            favouriteViewModel.fetchData()
-            tableView.reloadData()
+            let favouritePost = fetchController.object(at: indexPath)
+            favouriteViewModel.favouriteService.delete(post: favouritePost)
         }
     }
+
 }
 
 extension FavouritesViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if favouriteViewModel.favouritePosts == nil {
-            return 0
-        } else {
-            return favouriteViewModel.favouritePosts!.count
-        }
+        return fetchController.sections?[section].numberOfObjects ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
-        let infoForCell = favouriteViewModel.favouritePosts?[indexPath.row]
-        cell.configure(author: infoForCell!.authorName!,
-                       title: infoForCell!.postText!,
-                       imageName: infoForCell!.image!,
-                       likes: Int(infoForCell!.numberOfLikes),
-                       views: Int(infoForCell!.numberOfViews))
+        let infoForCell = fetchController.object(at: indexPath)
+        cell.configure(author: infoForCell.authorName!,
+                       title: infoForCell.postText!,
+                       imageName: infoForCell.image!,
+                       likes: Int(infoForCell.numberOfLikes),
+                       views: Int(infoForCell.numberOfViews))
         return cell
     }
 }
@@ -144,11 +167,47 @@ extension FavouritesViewController: UITableViewDataSource {
 extension FavouritesViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        favouriteViewModel.favouritePosts = favouriteViewModel.searchData(with: textField.text!)
-        favouriteTableView.reloadData()
+        fetchController.fetchRequest.predicate = NSPredicate.init(format: "authorName CONTAINS %@", textField.text!)
+        do {
+            try fetchController.performFetch()
+            favouriteTableView.reloadData()
+        } catch {
+            print(error.localizedDescription)
+        }
         textField.resignFirstResponder()
         searchTextField.removeFromSuperview()
         return true
     }
 
 }
+
+extension FavouritesViewController: NSFetchedResultsControllerDelegate {
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath else { return }
+            DispatchQueue.main.async {
+                self.favouriteTableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .delete:
+            guard let indexPath else { return }
+            DispatchQueue.main.async {
+                self.favouriteTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        case .move:
+            guard let newIndexPath, let indexPath else { return }
+            DispatchQueue.main.async {
+                self.favouriteTableView.moveRow(at: indexPath, to: newIndexPath)
+            }
+        case .update:
+            guard let indexPath else { return }
+            DispatchQueue.main.async {
+                self.favouriteTableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+        @unknown default:
+            assertionFailure("ERROR")
+        }
+    }
+}
+

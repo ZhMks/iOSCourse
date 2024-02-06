@@ -37,12 +37,16 @@ class LoginCoordinator: LoginBaseCoordinator {
                 user = UserClass(login: "", fullName: success.name, avatarImg: UIImage(named: "copybara")!, status: success.status)
                 let profileViewModel = ProfileTableViewModel(user: user)
                 let header = ProfileTableHeaderView(viewModel: profileViewModel)
-                let module = ProfileViewController(viewModel: profileVC, header: header)
+                let coreData = CoreDataService()
+                let favouriteService = FavouritesModelService(coreDataService: coreData)
+                let module = ProfileViewController(viewModel: profileVC, header: header, favouriteService: favouriteService)
                 self?.navigationRootViewController?.pushViewController(module, animated: true)
             case .failure(let failure):
                 let profileViewModel = ProfileTableViewModel(user: user)
                 let header = ProfileTableHeaderView(viewModel: profileViewModel)
-                let module = ProfileViewController(viewModel: profileVC, header: header)
+                let coreData = CoreDataService()
+                let favouriteService = FavouritesModelService(coreDataService: coreData)
+                let module = ProfileViewController(viewModel: profileVC, header: header, favouriteService: favouriteService)
                 self?.navigationRootViewController?.pushViewController(module, animated: true)
             }
         }

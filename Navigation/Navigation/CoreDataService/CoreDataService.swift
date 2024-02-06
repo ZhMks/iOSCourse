@@ -11,10 +11,6 @@ import CoreData
 
 final class CoreDataService {
 
-    static let shared = CoreDataService()
-
-    private init() { }
-
     private let persistentContatiner = {
         let container = NSPersistentContainer(name: "FavouritePostsModel")
         container.loadPersistentStores { storeDescription, error in
@@ -23,6 +19,7 @@ final class CoreDataService {
                 assertionFailure()
             }
         }
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
 

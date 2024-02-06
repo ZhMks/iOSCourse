@@ -59,7 +59,8 @@ public struct Post {
              imgae: "Film3",
              description: "This is test description for testing predicate",
              likes: 12,
-             views: 0)
+             views: 0),
+        Post(author: "SimpleTextAuthor", imgae: "Film1", description: "Testint NSFetchResultController", likes: 9, views: 9)
         ]
     }
 }

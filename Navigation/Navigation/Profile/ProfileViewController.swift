@@ -12,9 +12,10 @@ import CoreData
 
 class ProfileViewController: UIViewController {
 
-    let profileViewModel: ProfileViewModel
-    var header: ProfileTableHeaderView
-    let favouriteModelService: FavouritesModelService = FavouritesModelService()
+  private  let profileViewModel: ProfileViewModel
+  var header: ProfileTableHeaderView
+  private let favouriteService: FavouritesModelService
+
 
     // MARK: - Properties
 
@@ -37,9 +38,10 @@ class ProfileViewController: UIViewController {
 
     // MARK: - LifeCycle
 
-    init(viewModel: ProfileViewModel, header: ProfileTableHeaderView) {
+    init(viewModel: ProfileViewModel, header: ProfileTableHeaderView, favouriteService: FavouritesModelService) {
         self.profileViewModel = viewModel
         self.header = header
+        self.favouriteService = favouriteService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -63,7 +65,7 @@ class ProfileViewController: UIViewController {
             guard let cell = postTableView.cellForRow(at: indexPath!) as? PostTableViewCell else { return }
             starAnimation(for: cell)
             let array = profileViewModel.dataSource![indexPath!.row]
-            favouriteModelService.createModelWith(name: array.author,
+            favouriteService.createModelWith(name: array.author,
                                                   text: array.description,
                                                   image: array.imgae,
                                                   numberOfLikes: array.likes,
@@ -185,3 +187,4 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
 }
+

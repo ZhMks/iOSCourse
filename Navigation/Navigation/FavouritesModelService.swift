@@ -13,17 +13,10 @@ import StorageService
 
 final class FavouritesModelService {
 
-    private(set) var favouritePosts = [FavouritePosts]()
-    private let coreDataService = CoreDataService.shared
-    private let request = FavouritePosts.fetchRequest()
-
-   func fetchPosts() {
-        do {
-            favouritePosts = try coreDataService.context.fetch(request)
-        } catch {
-            print(error.localizedDescription)
-            favouritePosts = []
-        }
+    let coreDataService: CoreDataService
+    let request = FavouritePosts.fetchRequest()
+    init(coreDataService: CoreDataService) {
+        self.coreDataService = coreDataService
     }
 
     func createModelWith(name: String, text: String, image: String, numberOfLikes: Int, numberOfViews: Int) {
@@ -42,34 +35,19 @@ final class FavouritesModelService {
                 newFavouritePost.numberOfLikes = Int64(numberOfLikes)
                 newFavouritePost.numberOfViews = Int64(numberOfViews)
                 newFavouritePost.image = image
-                print(newFavouritePost)
                 coreDataService.saveContext()
-                fetchPosts()
             } catch {
                 print(error.localizedDescription)
             }
         }
     }
 
-    func deletePostAt(index: Int) {
-        coreDataService.context.delete(favouritePosts[index])
-        coreDataService.saveContext()
-        fetchPosts()
-    }
-
-    func searchData(with author: String) -> [FavouritePosts] {
-        let secondReques = FavouritePosts.fetchRequest()
-        let predicate = NSPredicate.init(format: "authorName = %@", author)
-        secondReques.predicate = predicate
-        do {
-            let arrData = try coreDataService.context.fetch(secondReques)
-            if arrData.count > 0 {
-               return arrData
-            }
-        } catch {
-            print(error.localizedDescription)
+    func delete(post: FavouritePosts) {
+        coreDataService.context.perform { [weak self] in
+            guard let self else { return }
+            coreDataService.context.delete(post)
+            coreDataService.saveContext()
         }
-        return self.favouritePosts
     }
 }
 

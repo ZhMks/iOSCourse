@@ -21,13 +21,12 @@ final class FavouritesCoordinator: FavouritesBaseCoordinator {
     }
 
     func start() -> UIViewController {
-        let service = FavouritesModelService()
+        let coreDataService = CoreDataService()
+        let service = FavouritesModelService(coreDataService: coreDataService)
         let model = FavouritesModel(service: service, state: .initial)
         let controller = FavouritesViewController(favouriteViewModel: model)
         rootViewController = UINavigationController(rootViewController: controller)
         return rootViewController
     }
-
-    
     
 }
