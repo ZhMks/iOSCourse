@@ -55,13 +55,13 @@ class FavouritesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         favouriteViewModel.checkAuthorisation()
-        bindModel()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         layout()
+        bindModel()
     }
 
     func bindModel() {
