@@ -15,7 +15,7 @@ final class SignUpController: UIViewController {
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.borderStyle = .roundedRect
         nameTextField.backgroundColor = .systemGray2
-        nameTextField.placeholder = "Введите имя"
+        nameTextField.placeholder = NSLocalizedString("Enter name", tableName: "Localizable", comment: "")
         return nameTextField
     }()
 
@@ -24,14 +24,14 @@ final class SignUpController: UIViewController {
         statusTextField.translatesAutoresizingMaskIntoConstraints = false
         statusTextField.borderStyle = .roundedRect
         statusTextField.backgroundColor = .systemGray2
-        statusTextField.placeholder = "Введите статус"
+        statusTextField.placeholder = NSLocalizedString("Enter Status", tableName: "Localizable", comment: "")
         return statusTextField
     }()
 
     private lazy var signUpButton: UIButton = {
         let signUpButton = UIButton(type: .system)
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        signUpButton.setTitle("Sign Up", for: .normal)
+        signUpButton.setTitle(NSLocalizedString("Sign Up", tableName: "Localizable", comment: ""), for: .normal)
         signUpButton.backgroundColor = .systemBlue
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped(_:)), for: .touchUpInside)
         return signUpButton

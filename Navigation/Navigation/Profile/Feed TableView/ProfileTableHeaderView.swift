@@ -62,7 +62,7 @@ class ProfileTableHeaderView: UIView {
         textField.layer.borderColor = UIColor(named: "black")?.cgColor
         textField.keyboardType = .default
         textField.returnKeyType = .done
-        textField.placeholder = " Input your status"
+        textField.placeholder = NSLocalizedString("Input Status", comment: "")
 
         return textField
     }()
@@ -71,7 +71,7 @@ class ProfileTableHeaderView: UIView {
         let setStatusButton = UIButton()
         setStatusButton.translatesAutoresizingMaskIntoConstraints = false
         setStatusButton.backgroundColor = UIColor(red: 0/255, green: 132/255, blue: 247/255, alpha: 1)
-        setStatusButton.setTitle("Set status", for: .normal)
+        setStatusButton.setTitle(NSLocalizedString("Set Status", comment: ""), for: .normal)
         setStatusButton.titleLabel?.textColor = .white
         setStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
         setStatusButton.layer.shadowRadius = 4

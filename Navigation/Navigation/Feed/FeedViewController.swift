@@ -25,7 +25,7 @@ class FeedViewController: UIViewController {
         textField.layer.borderColor = UIColor(named: "black")?.cgColor
         textField.keyboardType = .default
         textField.returnKeyType = .done
-        textField.placeholder = "Please enter text"
+        textField.placeholder = NSLocalizedString("Please enter text", tableName: "Localizable", comment: "")
         return textField
     }()
 
@@ -33,7 +33,7 @@ class FeedViewController: UIViewController {
         let topButton = UIButton(type: .system)
         topButton.translatesAutoresizingMaskIntoConstraints = false
         topButton.backgroundColor = .blue
-        topButton.setTitle("Go to Post", for: .normal)
+        topButton.setTitle(NSLocalizedString("Go to Post", tableName: "Localizable", comment: ""), for: .normal)
         topButton.setTitleColor(.white, for: .normal)
         topButton.addTarget(self, action: #selector(tapOnTopButton(_:)), for: .touchUpInside)
         return topButton
@@ -42,7 +42,7 @@ class FeedViewController: UIViewController {
     private lazy var checkGuessButton: UIButton = {
         let checkGuessButton = UIButton(type: .system)
         checkGuessButton.translatesAutoresizingMaskIntoConstraints = false
-        checkGuessButton.setTitle("Check pass", for: .normal)
+        checkGuessButton.setTitle(NSLocalizedString("Check Pass", tableName: "Localizable", comment: ""), for: .normal)
         checkGuessButton.setTitleColor(.white, for: .normal)
         checkGuessButton.backgroundColor = .blue
         checkGuessButton.addTarget(self, action: #selector(tapOnCheckGuessButton(_:)), for: .touchUpInside)
@@ -61,7 +61,7 @@ class FeedViewController: UIViewController {
     private lazy var goToInfoScreen: UIButton = {
         let goToInfoScreen = UIButton(type: .system)
         goToInfoScreen.translatesAutoresizingMaskIntoConstraints = false
-        goToInfoScreen.setTitle("Go to INFO", for: .normal)
+        goToInfoScreen.setTitle(NSLocalizedString("Go to Info", tableName: "Localizable", comment: ""), for: .normal)
         goToInfoScreen.addTarget(self, action: #selector(tapOnGoToInfoButton(_:)), for: .touchUpInside)
         return goToInfoScreen
     }()
@@ -134,8 +134,13 @@ class FeedViewController: UIViewController {
         case .green: 
             feedModel.onDetail?()
         case .red:
-            let uiAlert = UIAlertController(title: "error", message: "enter correct password", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "Back", style: .cancel)
+            let uiAlert = UIAlertController(title: NSLocalizedString("Error", tableName: "Localizable", comment: ""),
+                                            message: NSLocalizedString("Enter Correct Password", tableName: "Localizable", comment: ""),
+                                            preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: NSLocalizedString("Back",
+                                                                     tableName: "Localizable",
+                                                                     comment: ""),
+                                            style: .cancel)
             uiAlert.addAction(alertAction)
             self.navigationController?.present(uiAlert, animated: true)
         default: return

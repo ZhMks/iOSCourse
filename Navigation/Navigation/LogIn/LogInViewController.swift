@@ -28,7 +28,7 @@ class LogInViewController: UIViewController {
         emailTextField.font = UIFont.systemFont(ofSize: 16)
         emailTextField.tintColor = UIColor(named: "accentColor")
         emailTextField.autocapitalizationType = .none
-        emailTextField.placeholder = "E-mail or phone"
+        emailTextField.placeholder = NSLocalizedString("E-mail or Phone", tableName: "Localizable", comment: "")
         emailTextField.delegate = self
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 0))
         emailTextField.leftView = paddingView
@@ -55,7 +55,7 @@ class LogInViewController: UIViewController {
         passwordTextField.font = UIFont.systemFont(ofSize: 16)
         passwordTextField.tintColor = UIColor(named: "accentColor")
         passwordTextField.isSecureTextEntry = true
-        passwordTextField.placeholder = "Password"
+        passwordTextField.placeholder = NSLocalizedString("Password", tableName: "Localizable", comment: "")
         passwordTextField.delegate = self
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 0))
         passwordTextField.leftView = paddingView
@@ -84,7 +84,7 @@ class LogInViewController: UIViewController {
         loginButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.layer.cornerRadius = 10
-        loginButton.setTitle("Log In", for: .normal)
+        loginButton.setTitle(NSLocalizedString("Log In", tableName: "Localizable", comment: ""), for: .normal)
         loginButton.clipsToBounds = true
         return loginButton
     }()
@@ -95,7 +95,7 @@ class LogInViewController: UIViewController {
         loginButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.layer.cornerRadius = 10
-        loginButton.setTitle("Sign UP", for: .normal)
+        loginButton.setTitle(NSLocalizedString("Sign Up", tableName: "Localizable", comment: ""), for: .normal)
         loginButton.clipsToBounds = true
         return loginButton
     }()
@@ -157,8 +157,8 @@ class LogInViewController: UIViewController {
                     case .success(_):
                        self?.viewModel.onDetail?()
                     case .failure(_):
-                        let alert = UIAlertController(title: "Ошибка", message: "Невозможно авторизоваться, проверьте e-mail и пароль", preferredStyle: .alert)
-                        let action = UIAlertAction(title: "Отмена", style: .destructive)
+                        let alert = UIAlertController(title: NSLocalizedString("Error", tableName: "Localizable", comment: ""), message: NSLocalizedString("Wrong e-mail or password", tableName: "Localizable", comment: ""), preferredStyle: .alert)
+                        let action = UIAlertAction(title: NSLocalizedString("Back", tableName: "Localizable", comment: ""), style: .destructive)
                         alert.addAction(action)
                         self?.present(alert, animated: true)
                     }
@@ -171,8 +171,8 @@ class LogInViewController: UIViewController {
                     case .success(_):
                         self?.viewModel.onSignUP?()
                     case .failure(_):
-                        let alert = UIAlertController(title: "Ошибка", message: "Невозможно создать пользователя", preferredStyle: .alert)
-                        let action = UIAlertAction(title: "Отмена", style: .destructive)
+                        let alert = UIAlertController(title: NSLocalizedString("Error", tableName: "Localizable", comment: ""), message: NSLocalizedString("Can't create user", tableName: "Localizable", comment: ""), preferredStyle: .alert)
+                        let action = UIAlertAction(title: NSLocalizedString("Back", tableName: "Localizable", comment: ""), style: .destructive)
                         alert.addAction(action)
                         self?.present(alert, animated: true)
                     }
@@ -253,22 +253,22 @@ class LogInViewController: UIViewController {
         let dotCharacter: Character = "."
 
         if email.isEmpty && password.isEmpty  {
-            showAlert(title: "Ошибка", message: "Заполните поля")
+            showAlert(title: NSLocalizedString("Error", tableName: "Localizable", comment: ""), message: NSLocalizedString("Fill the fields", tableName: "Localizable", comment: ""))
             return false
         }  else if email.isEmpty && !password.isEmpty {
-            showAlert(title: "Ошибка", message: "Заполните e-mail")
+            showAlert(title: NSLocalizedString("Error", tableName: "Localizable", comment: ""), message: NSLocalizedString("Fill E-mail", tableName: "Localizable", comment: ""))
             return false
         } else if !email.isEmpty && password.isEmpty {
-            showAlert(title: "Ошибка", message: "Заполните Password")
+            showAlert(title: NSLocalizedString("Error", tableName: "Localizable", comment: ""), message: NSLocalizedString("Fill Password", tableName: "Localizable", comment: ""))
             return false
         } else if email.count < minimumNumberOfElements  {
-            showAlert(title: "Ошибка", message: "Неверный e-mail")
+            showAlert(title: NSLocalizedString("Error", tableName: "Localizable", comment: ""), message: NSLocalizedString("Wrong E-mail", tableName: "Localizable", comment: ""))
             return false
         } else if  password.count < minimumNumberOfElements {
-            showAlert(title: "Неверный пароль", message: "Минимальное кол-во символов - \(minimumNumberOfElements)")
+            showAlert(title: NSLocalizedString("Wrong Password", tableName: "Localizable", comment: ""), message: NSLocalizedString("Minimum number of elements " + "- \(minimumNumberOfElements)", tableName: "Localizable", comment: ""))
             return false
         } else if !email.contains(character) && !email.contains(dotCharacter) {
-            showAlert(title: "Ошибка", message: "E-mail должен содержать символ @, .")
+            showAlert(title: NSLocalizedString("Error", tableName: "Localizable", comment: ""), message: NSLocalizedString("E-mail must containts @,.", tableName: "Localizable", comment: ""))
             return false
         } else {
             return true
@@ -277,7 +277,7 @@ class LogInViewController: UIViewController {
 
     private func showAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Отмена", style: .destructive)
+        let action = UIAlertAction(title: NSLocalizedString("Back", tableName: "Localizable", comment: ""), style: .destructive)
         alertController.addAction(action)
         self.present(alertController, animated: true)
     }

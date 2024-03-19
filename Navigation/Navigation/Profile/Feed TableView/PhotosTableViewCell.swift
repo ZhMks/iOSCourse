@@ -29,7 +29,7 @@ static let id = "PhotosTableViewCell"
     private lazy var label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Photos"
+        label.text = NSLocalizedString("Photos", comment: "")
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textColor = .black
         return label

@@ -24,7 +24,9 @@ class PostViewController: UIViewController {
         super.viewDidLoad()
         let backgroundColor = UIColor(red: 255/255, green: 204/255, blue: 255/255, alpha: 1)
         view.backgroundColor = backgroundColor
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info",
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Info",
+                                                                                     tableName: "Localizable",
+                                                                                     comment: ""),
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(barButtonPressed(_:)))

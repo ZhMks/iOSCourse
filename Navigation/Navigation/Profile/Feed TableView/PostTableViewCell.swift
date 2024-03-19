@@ -80,54 +80,59 @@ class PostTableViewCell: UITableViewCell {
 
 
 
-    extension PostTableViewCell{
+extension PostTableViewCell{
 
-        // MARK: - Functions
+    // MARK: - Functions
 
-        private func setupUI(){
-            contentView.addSubview(feedImageView)
-            contentView.addSubview(feedImageViewLabel)
-            contentView.addSubview(bottomLikesLabel)
-            contentView.addSubview(bottomViewsLabel)
-            contentView.addSubview(authorName)
-            feedImageView.addSubview(starImage)
+    private func setupUI(){
+        contentView.addSubview(feedImageView)
+        contentView.addSubview(feedImageViewLabel)
+        contentView.addSubview(bottomLikesLabel)
+        contentView.addSubview(bottomViewsLabel)
+        contentView.addSubview(authorName)
+        feedImageView.addSubview(starImage)
 
-            NSLayoutConstraint.activate([
-                authorName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-                authorName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                authorName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-                authorName.heightAnchor.constraint(equalToConstant: 50),
+        NSLayoutConstraint.activate([
+            authorName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            authorName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            authorName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            authorName.heightAnchor.constraint(equalToConstant: 50),
 
-                feedImageView.topAnchor.constraint(equalTo: authorName.bottomAnchor, constant: 12),
-                feedImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                feedImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                feedImageView.heightAnchor.constraint(equalToConstant: 200),
+            feedImageView.topAnchor.constraint(equalTo: authorName.bottomAnchor, constant: 12),
+            feedImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            feedImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            feedImageView.heightAnchor.constraint(equalToConstant: 200),
 
-                feedImageViewLabel.topAnchor.constraint(equalTo: feedImageView.bottomAnchor, constant: 16),
-                feedImageViewLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-                feedImageViewLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                feedImageViewLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
+            feedImageViewLabel.topAnchor.constraint(equalTo: feedImageView.bottomAnchor, constant: 16),
+            feedImageViewLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            feedImageViewLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            feedImageViewLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
 
-                bottomLikesLabel.topAnchor.constraint(equalTo: feedImageViewLabel.bottomAnchor, constant: 16),
-                bottomLikesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-                bottomLikesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            bottomLikesLabel.topAnchor.constraint(equalTo: feedImageViewLabel.bottomAnchor, constant: 16),
+            bottomLikesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            bottomLikesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
 
-                bottomViewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                bottomViewsLabel.topAnchor.constraint(equalTo: feedImageViewLabel.bottomAnchor, constant: 16),
-                bottomViewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            bottomViewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            bottomViewsLabel.topAnchor.constraint(equalTo: feedImageViewLabel.bottomAnchor, constant: 16),
+            bottomViewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
 
-                starImage.centerXAnchor.constraint(equalTo: feedImageView.centerXAnchor),
-                starImage.centerYAnchor.constraint(equalTo: feedImageView.centerYAnchor),
-                starImage.heightAnchor.constraint(equalToConstant: 50),
-                starImage.widthAnchor.constraint(equalToConstant: 50)
-            ])
-        }
+            starImage.centerXAnchor.constraint(equalTo: feedImageView.centerXAnchor),
+            starImage.centerYAnchor.constraint(equalTo: feedImageView.centerYAnchor),
+            starImage.heightAnchor.constraint(equalToConstant: 50),
+            starImage.widthAnchor.constraint(equalToConstant: 50)
+        ])
+    }
 
-        func configure(author: String, title: String, imageName: String, likes: Int, views: Int) {
-            authorName.text = author
-            feedImageViewLabel.text = title
-            feedImageView.image = UIImage(named: imageName)
-            bottomLikesLabel.text = "Likes: \(likes)"
-            bottomViewsLabel.text = "Views: \(views)"
-        }
+    func configure(author: String, title: String, imageName: String, likes: Int, views: Int) {
+        authorName.text = author
+        feedImageViewLabel.text = title
+        feedImageView.image = UIImage(named: imageName)
+        bottomLikesLabel.text = localizePlurals(key: "LikesNumber", number: likes)
+        bottomViewsLabel.text = localizePlurals(key: "ViewsNumber", number: views)
+    }
+
+    func localizePlurals(key: String, number: Int) -> String {
+        let localizedString = NSLocalizedString(key, tableName: "PostCellRU", comment: "")
+        return String(format: localizedString, number)
+    }
 }
