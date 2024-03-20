@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "1648333946_14-kartinkof-club-p-mem-foto-khomyaka-14.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
