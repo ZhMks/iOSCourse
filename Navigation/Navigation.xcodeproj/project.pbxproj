@@ -27,9 +27,10 @@
 		B274C2E12A9A27C300D872F4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E02A9A27C300D872F4 /* ProfileViewController.swift */; };
 		B274C2E32A9B553B00D872F4 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E22A9B553B00D872F4 /* PostViewController.swift */; };
 		B274C2E52A9C862200D872F4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E42A9C862200D872F4 /* InfoViewController.swift */; };
-		B27F7AF12BA9918800A570C6 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27F7AF02BA9918800A570C6 /* Extension+String.swift */; };
 		B27F7AF32BA992AC00A570C6 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B27F7AF22BA992AC00A570C6 /* Localizable.xcstrings */; };
 		B27F7AF92BAAB29700A570C6 /* PostCellRU.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B27F7AF72BAAB29700A570C6 /* PostCellRU.stringsdict */; };
+		B27F7AFB2BAAC90400A570C6 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27F7AFA2BAAC90400A570C6 /* Extension+Color.swift */; };
+		B27F7AFE2BAAD02600A570C6 /* ColorCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27F7AFD2BAAD02600A570C6 /* ColorCreator.swift */; };
 		B2909C332AAB393B00985A6B /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C322AAB393B00985A6B /* LogInViewController.swift */; };
 		B2909C3E2AAF446100985A6B /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C3D2AAF446100985A6B /* PostTableViewCell.swift */; };
 		B2909C492AB188A500985A6B /* ExtensionProfileHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C482AB188A500985A6B /* ExtensionProfileHeaderController.swift */; };
@@ -122,9 +123,10 @@
 		B274C2E22A9B553B00D872F4 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		B274C2E42A9C862200D872F4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		B27F7AEC2BA97C1300A570C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		B27F7AF02BA9918800A570C6 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		B27F7AF22BA992AC00A570C6 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		B27F7AF82BAAB29700A570C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/PostCellRU.stringsdict; sourceTree = "<group>"; };
+		B27F7AFA2BAAC90400A570C6 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
+		B27F7AFD2BAAD02600A570C6 /* ColorCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCreator.swift; sourceTree = "<group>"; };
 		B2909C322AAB393B00985A6B /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B2909C3D2AAF446100985A6B /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		B2909C412AB0399C00985A6B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -252,9 +254,10 @@
 		B274C2C92A99FD9200D872F4 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				B27F7AEF2BA9917400A570C6 /* Extension+String */,
+				B27F7AFC2BAACFD300A570C6 /* Colors */,
 				B2AF386A2B63946E00D1ECD5 /* Favourites */,
 				B2AF38682B638AB700D1ECD5 /* FavouritesModelService.swift */,
+				B2AF386D2B63949800D1ECD5 /* FavouritesBaseCoordinator.swift */,
 				B2AF38652B6273A500D1ECD5 /* CoreDataService */,
 				B22BBB3C2B305C0D00B92D58 /* NetworkService */,
 				B2909C2F2AA5E08300985A6B /* Main Scene */,
@@ -270,12 +273,13 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
-		B27F7AEF2BA9917400A570C6 /* Extension+String */ = {
+		B27F7AFC2BAACFD300A570C6 /* Colors */ = {
 			isa = PBXGroup;
 			children = (
-				B27F7AF02BA9918800A570C6 /* Extension+String.swift */,
+				B27F7AFA2BAAC90400A570C6 /* Extension+Color.swift */,
+				B27F7AFD2BAAD02600A570C6 /* ColorCreator.swift */,
 			);
-			path = "Extension+String";
+			path = Colors;
 			sourceTree = "<group>";
 		};
 		B2909C2F2AA5E08300985A6B /* Main Scene */ = {
@@ -374,7 +378,6 @@
 		B2AF386A2B63946E00D1ECD5 /* Favourites */ = {
 			isa = PBXGroup;
 			children = (
-				B2AF386D2B63949800D1ECD5 /* FavouritesBaseCoordinator.swift */,
 				B2AF386B2B63947C00D1ECD5 /* FavouritesViewController.swift */,
 				B2AF386F2B6394A600D1ECD5 /* FavouritesViewModel.swift */,
 			);
@@ -540,6 +543,7 @@
 				B2AF38692B638AB700D1ECD5 /* FavouritesModelService.swift in Sources */,
 				B2AF38672B6273BA00D1ECD5 /* CoreDataService.swift in Sources */,
 				B274C2CB2A99FD9200D872F4 /* AppDelegate.swift in Sources */,
+				B27F7AFE2BAAD02600A570C6 /* ColorCreator.swift in Sources */,
 				B2DB0FC62AEB8CFA002176A8 /* Checker.swift in Sources */,
 				B274C2E12A9A27C300D872F4 /* ProfileViewController.swift in Sources */,
 				B29D66632B0DF00F007AE9AD /* ProfileTableViewModel.swift in Sources */,
@@ -562,7 +566,6 @@
 				B242694A2B39527C00655C9D /* NetworkServiceModel.swift in Sources */,
 				B2AF386E2B63949800D1ECD5 /* FavouritesBaseCoordinator.swift in Sources */,
 				B2A4505B2ABC1C3B00B5ACCA /* PhotosTableViewCell.swift in Sources */,
-				B27F7AF12BA9918800A570C6 /* Extension+String.swift in Sources */,
 				B26630072ABC66E60018A785 /* PhotosViewController.swift in Sources */,
 				B274C2E52A9C862200D872F4 /* InfoViewController.swift in Sources */,
 				B29D66562B0B876E007AE9AD /* PhotosViewModel.swift in Sources */,
@@ -574,6 +577,7 @@
 				B29D664F2B0B65C8007AE9AD /* MainCoordinator.swift in Sources */,
 				B22BBB3E2B305C2400B92D58 /* NetworkService.swift in Sources */,
 				B25B87792ABC75E500282787 /* PhotosCollectionVIewCell.swift in Sources */,
+				B27F7AFB2BAAC90400A570C6 /* Extension+Color.swift in Sources */,
 				B2909C332AAB393B00985A6B /* LogInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,7 +31,7 @@ static let id = "PhotosTableViewCell"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = NSLocalizedString("Photos", comment: "")
         label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.textColor = .black
+        label.textColor = ColorCreator.textColor
         return label
     }()
 

@@ -14,14 +14,14 @@ class PlanetTableViewCell: UITableViewCell {
     private var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.textColor = .black
+        nameLabel.textColor = ColorCreator.textColor
         return nameLabel
     }()
 
     private var age: UILabel = {
         let age = UILabel()
         age.translatesAutoresizingMaskIntoConstraints = false
-        age.textColor = .black
+        age.textColor = ColorCreator.textColor
         return age
     }()
 

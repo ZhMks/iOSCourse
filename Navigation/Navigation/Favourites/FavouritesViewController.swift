@@ -27,7 +27,8 @@ class FavouritesViewController: UIViewController {
         searchText.borderStyle = .roundedRect
         searchText.font = UIFont.systemFont(ofSize: 16)
         searchText.placeholder = "Search"
-        searchText.backgroundColor = UIColor.white
+        searchText.textColor = ColorCreator.textColor
+        searchText.backgroundColor = UIColor.systemBackground
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: searchText.frame.height))
         searchText.leftView = paddingView
         searchText.leftViewMode = .always
@@ -59,7 +60,7 @@ class FavouritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorCreator.themeColor
         layout()
         bindModel()
     }

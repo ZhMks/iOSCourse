@@ -15,6 +15,7 @@ final class SignUpController: UIViewController {
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.borderStyle = .roundedRect
         nameTextField.backgroundColor = .systemGray2
+        nameTextField.textColor = ColorCreator.textColor
         nameTextField.placeholder = NSLocalizedString("Enter name", tableName: "Localizable", comment: "")
         return nameTextField
     }()
@@ -23,6 +24,7 @@ final class SignUpController: UIViewController {
         let statusTextField = UITextField()
         statusTextField.translatesAutoresizingMaskIntoConstraints = false
         statusTextField.borderStyle = .roundedRect
+        statusTextField.textColor = ColorCreator.textColor
         statusTextField.backgroundColor = .systemGray2
         statusTextField.placeholder = NSLocalizedString("Enter Status", tableName: "Localizable", comment: "")
         return statusTextField
@@ -40,7 +42,7 @@ final class SignUpController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
-        view.backgroundColor = .white
+        view.backgroundColor = ColorCreator.themeColor
     }
 
     private func layout() {

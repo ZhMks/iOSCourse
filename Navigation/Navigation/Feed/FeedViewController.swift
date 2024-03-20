@@ -19,7 +19,7 @@ class FeedViewController: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont.systemFont(ofSize: 15)
-        textField.textColor = .black
+        textField.textColor = ColorCreator.textColor
         textField.backgroundColor = .systemGray3
         textField.layer.borderWidth = 1.0
         textField.layer.borderColor = UIColor(named: "black")?.cgColor
@@ -32,7 +32,7 @@ class FeedViewController: UIViewController {
     private lazy var topButton: UIButton = {
         let topButton = UIButton(type: .system)
         topButton.translatesAutoresizingMaskIntoConstraints = false
-        topButton.backgroundColor = .blue
+        topButton.backgroundColor = .systemBlue
         topButton.setTitle(NSLocalizedString("Go to Post", tableName: "Localizable", comment: ""), for: .normal)
         topButton.setTitleColor(.white, for: .normal)
         topButton.addTarget(self, action: #selector(tapOnTopButton(_:)), for: .touchUpInside)
@@ -44,7 +44,7 @@ class FeedViewController: UIViewController {
         checkGuessButton.translatesAutoresizingMaskIntoConstraints = false
         checkGuessButton.setTitle(NSLocalizedString("Check Pass", tableName: "Localizable", comment: ""), for: .normal)
         checkGuessButton.setTitleColor(.white, for: .normal)
-        checkGuessButton.backgroundColor = .blue
+        checkGuessButton.backgroundColor = .systemBlue
         checkGuessButton.addTarget(self, action: #selector(tapOnCheckGuessButton(_:)), for: .touchUpInside)
         return checkGuessButton
     }()
@@ -80,7 +80,7 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.systemBackground
+        view.backgroundColor = ColorCreator.themeColor
         setupImageView()
         bindModel()
     }
@@ -122,8 +122,8 @@ class FeedViewController: UIViewController {
         feedModel.currentState = { [weak self] state in
             guard let self else { return }
             switch state {
-            case .green: topButton.backgroundColor = .green
-            case .red: topButton.backgroundColor = .red
+            case .green: topButton.backgroundColor = .systemGreen
+            case .red: topButton.backgroundColor = .systemRed
             default: return
             }
         }

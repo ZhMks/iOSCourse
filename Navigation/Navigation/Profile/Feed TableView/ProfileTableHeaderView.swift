@@ -24,7 +24,7 @@ class ProfileTableHeaderView: UIView {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false 
         name.font = UIFont.boldSystemFont(ofSize: 16)
-        name.textColor = .black
+        name.textColor = ColorCreator.textColor
 
         return name
     }()
@@ -45,7 +45,7 @@ class ProfileTableHeaderView: UIView {
         let statusLabelText = UILabel()
         statusLabelText.translatesAutoresizingMaskIntoConstraints = false
         statusLabelText.text = ""
-        statusLabelText.textColor = .gray
+        statusLabelText.textColor = ColorCreator.textColor
         statusLabelText.font = UIFont.systemFont(ofSize: 14)
 
         return statusLabelText
@@ -55,11 +55,11 @@ class ProfileTableHeaderView: UIView {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont.systemFont(ofSize: 15)
-        textField.textColor = .black
-        textField.backgroundColor = .white
+        textField.textColor = ColorCreator.textColor
+        textField.backgroundColor = ColorCreator.themeColor
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1.0
-        textField.layer.borderColor = UIColor(named: "black")?.cgColor
+        textField.layer.borderColor = UIColor.black.cgColor
         textField.keyboardType = .default
         textField.returnKeyType = .done
         textField.placeholder = NSLocalizedString("Input Status", comment: "")
@@ -72,10 +72,10 @@ class ProfileTableHeaderView: UIView {
         setStatusButton.translatesAutoresizingMaskIntoConstraints = false
         setStatusButton.backgroundColor = UIColor(red: 0/255, green: 132/255, blue: 247/255, alpha: 1)
         setStatusButton.setTitle(NSLocalizedString("Set Status", comment: ""), for: .normal)
-        setStatusButton.titleLabel?.textColor = .white
+        setStatusButton.titleLabel?.textColor = ColorCreator.textColor
         setStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
         setStatusButton.layer.shadowRadius = 4
-        setStatusButton.layer.shadowColor = UIColor(named: "black")?.cgColor
+        setStatusButton.layer.shadowColor = UIColor.black.cgColor
         setStatusButton.layer.shadowOpacity = 0.7
         setStatusButton.layer.cornerRadius = 10
 
@@ -87,7 +87,7 @@ class ProfileTableHeaderView: UIView {
     init(viewModel: ProfileTableViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
-        backgroundColor = .secondarySystemBackground
+        backgroundColor = ColorCreator.themeColor
         addSubViews()
         setUpConstraints()
         statusTextField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)

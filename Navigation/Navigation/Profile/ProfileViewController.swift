@@ -54,7 +54,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(postTableView)
         setupConstraints()
         tuneTableView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorCreator.themeColor
         postTableView.reloadData()
     }
 
@@ -85,18 +85,8 @@ class ProfileViewController: UIViewController {
             cell.starImage.isHidden = true
         }
     }
-}
 
-// MARK: - Functions
-
-extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    func tuneTableView() {
+   private func tuneTableView() {
         postTableView.rowHeight = UITableView.automaticDimension
         postTableView.estimatedRowHeight = 44
         postTableView.setAndLayout(header: header)
@@ -106,8 +96,18 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         postTableView.dataSource = self
         postTableView.delegate = self
         postTableView.sectionFooterHeight = 2
+       postTableView.separatorColor = .systemBrown
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
         header.profileImage.addGestureRecognizer(tapGesture)
+    }
+}
+
+// MARK: - Functions
+
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

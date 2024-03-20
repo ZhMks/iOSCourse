@@ -18,7 +18,7 @@ class PostTableViewCell: UITableViewCell {
         let authorName = UILabel()
         authorName.translatesAutoresizingMaskIntoConstraints = false
         authorName.font = UIFont.boldSystemFont(ofSize: 20)
-        authorName.textColor = .black
+        authorName.textColor = ColorCreator.textColor
         authorName.numberOfLines = 2
         return authorName
     }()
@@ -27,7 +27,7 @@ class PostTableViewCell: UITableViewCell {
         let feedImageView = UIImageView()
         feedImageView.translatesAutoresizingMaskIntoConstraints = false
         feedImageView.contentMode = .scaleAspectFit
-        feedImageView.backgroundColor = .black
+        feedImageView.backgroundColor = ColorCreator.themeColor
 
         return feedImageView
     }()
@@ -45,7 +45,7 @@ class PostTableViewCell: UITableViewCell {
         let feedImageViewLabel = UILabel()
         feedImageViewLabel.translatesAutoresizingMaskIntoConstraints = false
         feedImageViewLabel.font = UIFont.systemFont(ofSize: 14)
-        feedImageViewLabel.textColor = .systemGray
+        feedImageViewLabel.textColor = ColorCreator.textColor
         feedImageViewLabel.numberOfLines = 0
         return feedImageViewLabel
     }()
@@ -53,7 +53,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var bottomLikesLabel: UILabel = {
         let bottomLikesLabel = UILabel()
         bottomLikesLabel.translatesAutoresizingMaskIntoConstraints = false
-        bottomLikesLabel.textColor = .black
+        bottomLikesLabel.textColor = ColorCreator.textColor
         bottomLikesLabel.font = UIFont.systemFont(ofSize: 16)
         return bottomLikesLabel
     }()
@@ -61,7 +61,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var bottomViewsLabel: UILabel = {
         let bottomViewsLabel = UILabel()
         bottomViewsLabel.translatesAutoresizingMaskIntoConstraints = false
-        bottomViewsLabel.textColor = .black
+        bottomViewsLabel.textColor = ColorCreator.textColor
         bottomViewsLabel.font = UIFont.systemFont(ofSize: 16)
         return bottomViewsLabel
     }()

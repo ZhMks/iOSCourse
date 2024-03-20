@@ -13,7 +13,7 @@ class InfoViewController: UIViewController {
 
     private lazy var alertButton: UIButton = {
         let alertButton = UIButton(type: .system)
-        alertButton.backgroundColor = .blue
+        alertButton.backgroundColor = .systemBlue
         alertButton.translatesAutoresizingMaskIntoConstraints = false
         alertButton.setTitle("Present Alert", for: .normal)
         alertButton.setTitleColor(.white, for: .normal)
@@ -57,7 +57,7 @@ class InfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorCreator.themeColor
         alertButton.addTarget(self, action: #selector(animationForButton(_:)), for: .touchUpInside)
         setupUI()
         updateView()

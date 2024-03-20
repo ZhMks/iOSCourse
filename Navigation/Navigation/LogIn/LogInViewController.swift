@@ -24,7 +24,7 @@ class LogInViewController: UIViewController {
     private lazy var emailTextField: UITextField = {
         let emailTextField = UITextField()
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.textColor = .black
+        emailTextField.textColor = ColorCreator.textColor
         emailTextField.font = UIFont.systemFont(ofSize: 16)
         emailTextField.tintColor = UIColor(named: "accentColor")
         emailTextField.autocapitalizationType = .none
@@ -51,7 +51,7 @@ class LogInViewController: UIViewController {
     private lazy var passwordTextField: UITextField = {
         let passwordTextField = UITextField()
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.textColor = .black
+        passwordTextField.textColor = ColorCreator.textColor
         passwordTextField.font = UIFont.systemFont(ofSize: 16)
         passwordTextField.tintColor = UIColor(named: "accentColor")
         passwordTextField.isSecureTextEntry = true
@@ -135,7 +135,7 @@ class LogInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorCreator.themeColor
         navigationController?.navigationBar.isHidden = true
         loginButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
