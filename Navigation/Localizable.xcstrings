@@ -98,6 +98,26 @@
         }
       }
     },
+    "Favourites" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Избранное"
+          }
+        }
+      }
+    },
+    "Feed" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лента"
+          }
+        }
+      }
+    },
     "Fill E-mail" : {
       "localizations" : {
         "ru" : {
@@ -214,6 +234,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Пожалуйста, введите текст"
+          }
+        }
+      }
+    },
+    "Profile" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профиль"
           }
         }
       }

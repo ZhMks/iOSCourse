@@ -29,7 +29,7 @@
 		B274C2E52A9C862200D872F4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B274C2E42A9C862200D872F4 /* InfoViewController.swift */; };
 		B27F7AF12BA9918800A570C6 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27F7AF02BA9918800A570C6 /* Extension+String.swift */; };
 		B27F7AF32BA992AC00A570C6 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B27F7AF22BA992AC00A570C6 /* Localizable.xcstrings */; };
-		B27F7AF62BA99AF300A570C6 /* PostCellRU.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B27F7AF42BA99AF300A570C6 /* PostCellRU.stringsdict */; };
+		B27F7AF92BAAB29700A570C6 /* PostCellRU.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B27F7AF72BAAB29700A570C6 /* PostCellRU.stringsdict */; };
 		B2909C332AAB393B00985A6B /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C322AAB393B00985A6B /* LogInViewController.swift */; };
 		B2909C3E2AAF446100985A6B /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C3D2AAF446100985A6B /* PostTableViewCell.swift */; };
 		B2909C492AB188A500985A6B /* ExtensionProfileHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2909C482AB188A500985A6B /* ExtensionProfileHeaderController.swift */; };
@@ -124,7 +124,7 @@
 		B27F7AEC2BA97C1300A570C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B27F7AF02BA9918800A570C6 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		B27F7AF22BA992AC00A570C6 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		B27F7AF52BA99AF300A570C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/PostCellRU.stringsdict; sourceTree = "<group>"; };
+		B27F7AF82BAAB29700A570C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/PostCellRU.stringsdict; sourceTree = "<group>"; };
 		B2909C322AAB393B00985A6B /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B2909C3D2AAF446100985A6B /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		B2909C412AB0399C00985A6B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 		B274C2BE2A99FD9200D872F4 = {
 			isa = PBXGroup;
 			children = (
-				B27F7AF42BA99AF300A570C6 /* PostCellRU.stringsdict */,
+				B27F7AF72BAAB29700A570C6 /* PostCellRU.stringsdict */,
 				B27F7AF22BA992AC00A570C6 /* Localizable.xcstrings */,
 				B2AF38622B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodeld */,
 				B274C2C92A99FD9200D872F4 /* Navigation */,
@@ -507,9 +507,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B27F7AF92BAAB29700A570C6 /* PostCellRU.stringsdict in Resources */,
 				B274C2D72A99FD9400D872F4 /* LaunchScreen.storyboard in Resources */,
 				B274C2D42A99FD9400D872F4 /* Assets.xcassets in Resources */,
-				B27F7AF62BA99AF300A570C6 /* PostCellRU.stringsdict in Resources */,
 				B27F7AF32BA992AC00A570C6 /* Localizable.xcstrings in Resources */,
 				B24269892B49472F00655C9D /* GoogleService-Info.plist in Resources */,
 			);
@@ -625,10 +625,10 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		B27F7AF42BA99AF300A570C6 /* PostCellRU.stringsdict */ = {
+		B27F7AF72BAAB29700A570C6 /* PostCellRU.stringsdict */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B27F7AF52BA99AF300A570C6 /* en */,
+				B27F7AF82BAAB29700A570C6 /* en */,
 			);
 			name = PostCellRU.stringsdict;
 			sourceTree = "<group>";

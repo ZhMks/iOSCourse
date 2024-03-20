@@ -30,8 +30,8 @@ public struct Post {
         Post(author: "Wedmak.Official",
              imgae: "Film1",
              description: "Новые кадры со съемок второго сезона сериала \"Ведьмак\" ",
-             likes: 121,
-             views: 121),
+             likes: 1,
+             views: 1),
         Post(author: "Netology",
              imgae: "Netology1",
              description: """

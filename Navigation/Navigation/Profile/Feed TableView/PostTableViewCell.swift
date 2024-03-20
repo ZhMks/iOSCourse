@@ -127,8 +127,8 @@ extension PostTableViewCell{
         authorName.text = author
         feedImageViewLabel.text = title
         feedImageView.image = UIImage(named: imageName)
-        bottomLikesLabel.text = localizePlurals(key: "LikesNumber", number: likes)
-        bottomViewsLabel.text = localizePlurals(key: "ViewsNumber", number: views)
+        bottomLikesLabel.text = localizePlurals(key: "Likes", number: likes)
+        bottomViewsLabel.text = localizePlurals(key: "Views", number: views)
     }
 
     func localizePlurals(key: String, number: Int) -> String {

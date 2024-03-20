@@ -20,15 +20,18 @@ class MainCoordinator: MainBaseCoordinator {
     func start() -> UIViewController {
         let feedViewController = feedCoordinator.start()
         feedCoordinator.parentCoordinator = self
-        feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "house.fill"), tag: 0)
+        feedViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Feed", comment: ""),
+                                                     image: UIImage(systemName: "house.fill"), tag: 0)
 
         let loginViewController = loginCoordinator.start()
         loginCoordinator.parentCoordinator = self
-        loginViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+        loginViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Profile", comment: ""),
+                                                      image: UIImage(systemName: "person.fill"), tag: 1)
 
         let favouritesController = favouritesCoordinator.start()
         favouritesCoordinator.parentCoordinator = self
-        favouritesController.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage(systemName: "star"), tag: 2)
+        favouritesController.tabBarItem = UITabBarItem(title: NSLocalizedString("Favourites", comment: ""),
+                                                       image: UIImage(systemName: "star"), tag: 2)
 
         (rootViewController as? UITabBarController)?.viewControllers = [feedViewController, loginViewController, favouritesController]
         return rootViewController
