@@ -16,11 +16,11 @@ protocol LoginViewModel {
 
 class LoginVMImp: LoginViewModel {
 
-    var authService: Checker
+    var authService: CheckerServiceProtocol
 
     var onDetail: Action?
     var onSignUP: Action?
-    init(authService: Checker) {
+    init(authService: CheckerServiceProtocol) {
         self.authService = authService
     }
 

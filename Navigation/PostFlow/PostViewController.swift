@@ -22,7 +22,6 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backgroundColor = UIColor(red: 255/255, green: 204/255, blue: 255/255, alpha: 1)
         view.backgroundColor = ColorCreator.themeColor
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Info",
                                                                                      tableName: "Localizable",

@@ -41,7 +41,7 @@ class LoginCoordinator: LoginBaseCoordinator {
                 let favouriteService = FavouritesModelService(coreDataService: coreData)
                 let module = ProfileViewController(viewModel: profileVC, header: header, favouriteService: favouriteService)
                 self?.navigationRootViewController?.pushViewController(module, animated: true)
-            case .failure(let failure):
+            case .failure(_):
                 let profileViewModel = ProfileTableViewModel(user: user)
                 let header = ProfileTableHeaderView(viewModel: profileViewModel)
                 let coreData = CoreDataService()
