@@ -63,6 +63,7 @@
 		B2FB32662BAC52D00066D157 /* FeedModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB32652BAC52D00066D157 /* FeedModelTest.swift */; };
 		B2FB32732BAC542D0066D157 /* LoginTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB32722BAC542D0066D157 /* LoginTest.swift */; };
 		B2FB327A2BAC54B50066D157 /* FakeChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB32792BAC54B50066D157 /* FakeChecker.swift */; };
+		B2FB327D2BAD75440066D157 /* LocalNotifiationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB327C2BAD75440066D157 /* LocalNotifiationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +162,7 @@
 		B2FB32702BAC542D0066D157 /* LoginTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2FB32722BAC542D0066D157 /* LoginTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTest.swift; sourceTree = "<group>"; };
 		B2FB32792BAC54B50066D157 /* FakeChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeChecker.swift; sourceTree = "<group>"; };
+		B2FB327C2BAD75440066D157 /* LocalNotifiationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotifiationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +268,7 @@
 		B274C2C92A99FD9200D872F4 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				B2FB327B2BAD752E0066D157 /* NotificationService */,
 				B27F7AFC2BAACFD300A570C6 /* Colors */,
 				B2AF386A2B63946E00D1ECD5 /* Favourites */,
 				B2AF38682B638AB700D1ECD5 /* FavouritesModelService.swift */,
@@ -403,6 +406,14 @@
 				B2FB32722BAC542D0066D157 /* LoginTest.swift */,
 			);
 			path = LoginTest;
+			sourceTree = "<group>";
+		};
+		B2FB327B2BAD752E0066D157 /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				B2FB327C2BAD75440066D157 /* LocalNotifiationService.swift */,
+			);
+			path = NotificationService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -609,6 +620,7 @@
 				B29D66492B0B5BC3007AE9AD /* MainBaseCoordinator.swift in Sources */,
 				B29D665D2B0B88FF007AE9AD /* LoginBaseCoordinator.swift in Sources */,
 				B2AF38642B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodeld in Sources */,
+				B2FB327D2BAD75440066D157 /* LocalNotifiationService.swift in Sources */,
 				B274C2DF2A9A27BB00D872F4 /* FeedViewController.swift in Sources */,
 				B2FB327A2BAC54B50066D157 /* FakeChecker.swift in Sources */,
 				B274C2CD2A99FD9200D872F4 /* SceneDelegate.swift in Sources */,

@@ -9,13 +9,10 @@ import UIKit
 import FirebaseAuth
 
 protocol CheckerServiceProtocol {
-    var user: FireBaseUser? { get set }
     func signUpUser(email: String, password: String, completion: @escaping(Result<FireBaseUser, Error>) -> Void)
 }
 
 class Checker: CheckerServiceProtocol {
-
-    var user: FireBaseUser?
 
     static let shared = Checker()
     

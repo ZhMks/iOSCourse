@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseCore
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        UNUserNotificationCenter.current().delegate = self
+        LocalNotifiationService.shared.registeForLatestUpdatesIfPossible()
+        LocalNotifiationService.shared.setNotification()
         return true
     }
 
@@ -40,3 +44,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+        return [.badge, .sound, .banner]
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .dark
+    }
+}

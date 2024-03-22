@@ -7,7 +7,7 @@
 
 import XCTest
 @testable import Navigation
-@testable import Firebase
+@testable import FirebaseAuth
 
 final class LoginTest: XCTestCase {
 
@@ -18,7 +18,6 @@ final class LoginTest: XCTestCase {
         checker = FakeChecker()
         loginVM = LoginVMImp(authService: checker!)
         let excpectation = XCTestExpectation(description: "Success check")
-        
     }
 
     override func tearDownWithError() throws {
