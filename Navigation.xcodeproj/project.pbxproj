@@ -64,6 +64,8 @@
 		B2FB32732BAC542D0066D157 /* LoginTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB32722BAC542D0066D157 /* LoginTest.swift */; };
 		B2FB327A2BAC54B50066D157 /* FakeChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB32792BAC54B50066D157 /* FakeChecker.swift */; };
 		B2FB327D2BAD75440066D157 /* LocalNotifiationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB327C2BAD75440066D157 /* LocalNotifiationService.swift */; };
+		B2FB327F2BADBCE00066D157 /* LocalAuthorisationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB327E2BADBCE00066D157 /* LocalAuthorisationService.swift */; };
+		B2FB32822BAEB8F20066D157 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B2FB32812BAEB8F20066D157 /* KeychainAccess */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +165,7 @@
 		B2FB32722BAC542D0066D157 /* LoginTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTest.swift; sourceTree = "<group>"; };
 		B2FB32792BAC54B50066D157 /* FakeChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeChecker.swift; sourceTree = "<group>"; };
 		B2FB327C2BAD75440066D157 /* LocalNotifiationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotifiationService.swift; sourceTree = "<group>"; };
+		B2FB327E2BADBCE00066D157 /* LocalAuthorisationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorisationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +177,7 @@
 				B2A10F1F2AE6839F004BBF96 /* StorageService.framework in Frameworks */,
 				B24269852B4943C000655C9D /* FirebaseFirestore in Frameworks */,
 				B24269832B4943C000655C9D /* FirebaseAuth in Frameworks */,
+				B2FB32822BAEB8F20066D157 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +324,7 @@
 				B2DB0FC52AEB8CFA002176A8 /* Checker.swift */,
 				B242698C2B498C7600655C9D /* SignUpController.swift */,
 				B2FB32792BAC54B50066D157 /* FakeChecker.swift */,
+				B2FB327E2BADBCE00066D157 /* LocalAuthorisationService.swift */,
 			);
 			path = LogIn;
 			sourceTree = "<group>";
@@ -449,6 +454,7 @@
 				B24269822B4943C000655C9D /* FirebaseAuth */,
 				B24269842B4943C000655C9D /* FirebaseFirestore */,
 				B24269862B4943C000655C9D /* FirebaseFirestoreSwift */,
+				B2FB32812BAEB8F20066D157 /* KeychainAccess */,
 			);
 			productName = Navigation;
 			productReference = B274C2C72A99FD9200D872F4 /* Navigation.app */;
@@ -546,6 +552,7 @@
 			mainGroup = B274C2BE2A99FD9200D872F4;
 			packageReferences = (
 				B24269812B4943C000655C9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				B2FB32802BAEB8F20066D157 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = B274C2C82A99FD9200D872F4 /* Products */;
 			projectDirPath = "";
@@ -620,6 +627,7 @@
 				B29D66492B0B5BC3007AE9AD /* MainBaseCoordinator.swift in Sources */,
 				B29D665D2B0B88FF007AE9AD /* LoginBaseCoordinator.swift in Sources */,
 				B2AF38642B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodeld in Sources */,
+				B2FB327F2BADBCE00066D157 /* LocalAuthorisationService.swift in Sources */,
 				B2FB327D2BAD75440066D157 /* LocalNotifiationService.swift in Sources */,
 				B274C2DF2A9A27BB00D872F4 /* FeedViewController.swift in Sources */,
 				B2FB327A2BAC54B50066D157 /* FakeChecker.swift in Sources */,
@@ -842,6 +850,7 @@
 				DEVELOPMENT_TEAM = Y6VX64W3KZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Test Description for FaceID";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -873,6 +882,7 @@
 				DEVELOPMENT_TEAM = Y6VX64W3KZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Test Description for FaceID";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1137,6 +1147,14 @@
 				minimumVersion = 10.19.1;
 			};
 		};
+		B2FB32802BAEB8F20066D157 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1154,6 +1172,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B24269812B4943C000655C9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		B2FB32812BAEB8F20066D157 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B2FB32802BAEB8F20066D157 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 

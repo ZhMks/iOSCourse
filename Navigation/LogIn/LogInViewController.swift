@@ -114,6 +114,22 @@ class LogInViewController: UIViewController {
         return scrollView
     }()
 
+    private lazy var localAuthorisationButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.layer.cornerRadius = 8.0
+        button.backgroundColor = .blue
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(localAuthorisationButtonTapped), for: .touchUpInside)
+//        if LocalAuthorisationService.shared.context.biometryType == .faceID {
+//            button.setBackgroundImage(UIImage(systemName: "faceid"), for: .normal)
+//            return button
+//        } else if LocalAuthorisationService.shared.context.biometryType == .touchID {
+//            button.setBackgroundImage(UIImage(systemName: "touchid"), for: .normal)
+//            return button
+//        }
+        return button
+    }()
+
 
     // MARK: - LifeCycle
 
@@ -126,13 +142,6 @@ class LogInViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        addSubviews()
-        setupConstraints()
-        setupKeyboardObservers()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = ColorCreator.themeColor
@@ -141,6 +150,9 @@ class LogInViewController: UIViewController {
         signUpButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissTextfield))
         view.addGestureRecognizer(tapGesture)
+        addSubviews()
+        setupConstraints()
+        setupKeyboardObservers()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -151,7 +163,7 @@ class LogInViewController: UIViewController {
     @objc func buttonPressed(button: UIButton) {
         switch button {
         case loginButton:
-            if validation(email: emailTextField.text!, password: passwordTextField.text!) {
+           if validation(email: emailTextField.text!, password: passwordTextField.text!) {
                 viewModel.checkUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] result in
                     switch result {
                     case .success(_):
@@ -184,6 +196,7 @@ class LogInViewController: UIViewController {
 
     private func setupConstraints() {
         let safeArea = view.safeAreaLayoutGuide
+        checkAuthoristaionType()
         NSLayoutConstraint.activate([
             vkLogo.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             vkLogo.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -224,14 +237,19 @@ class LogInViewController: UIViewController {
 
             loginButton.topAnchor.constraint(equalTo: textFieldView.bottomAnchor, constant: 16),
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
 
             signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
             signUpButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             signUpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             signUpButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            signUpButton.heightAnchor.constraint(equalToConstant: 50)
+            signUpButton.heightAnchor.constraint(equalToConstant: 50),
+
+            localAuthorisationButton.topAnchor.constraint(equalTo: textFieldView.bottomAnchor, constant: 16),
+            localAuthorisationButton.leadingAnchor.constraint(equalTo: loginButton.trailingAnchor, constant: 5),
+            localAuthorisationButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            localAuthorisationButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 
@@ -245,6 +263,7 @@ class LogInViewController: UIViewController {
         textFieldView.addSubview(emailTextField)
         textFieldView.addSubview(passwordTextField)
         textFieldView.addSubview(underlineView)
+        contentView.addSubview(localAuthorisationButton)
     }
 
     private func validation(email: String, password: String) -> Bool {
@@ -285,6 +304,42 @@ class LogInViewController: UIViewController {
     @objc func dismissTextfield() {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
+    }
+
+    @objc func localAuthorisationButtonTapped() {
+        LocalAuthorisationService.shared.authoriseWithBioMetrics { [weak self] isAuthorised in
+            guard let self else { return }
+            switch isAuthorised {
+            case .success(let success):
+                let pass = LocalAuthorisationService.shared.getDataFromKeyChain().0
+                let email = LocalAuthorisationService.shared.getDataFromKeyChain().1
+                viewModel.checkUser(email: email, password: pass) { [weak self] result in
+                    switch result {
+                    case .success(let success):
+                        self?.viewModel.onDetail?()
+                    case .failure(let failure):
+                        print(failure.localizedDescription)
+                    }
+                }
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+        }
+    }
+
+    private func checkAuthoristaionType() {
+      let type = LocalAuthorisationService.shared.biometricType()
+
+        switch type {
+        case .none:
+            break
+        case .touch:
+            localAuthorisationButton.setBackgroundImage(UIImage(systemName: "touchid"), for: .normal)
+            localAuthorisationButton.backgroundColor = .clear
+        case .face:
+            localAuthorisationButton.setBackgroundImage(UIImage(systemName: "faceid"), for: .normal)
+            localAuthorisationButton.backgroundColor = .clear
+        }
     }
 }
 
