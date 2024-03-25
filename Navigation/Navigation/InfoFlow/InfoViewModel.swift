@@ -13,7 +13,7 @@ protocol InfoViewModel {
     var onAction: Action? { get set }
     var planetInfo: PlanetInformation? { get set }
     var citizens: [Citizen] { get set }
-    var networkService: NetworkServiceClass { get }
+    var networkService: NetworkServiceProtocol { get }
     var currentState: ((State) -> Void)? { get set }
     var state: State { get set }
     func updateCitizens(for URL: [URL?]?)
@@ -31,11 +31,11 @@ class InfoVMImp: InfoViewModel {
         }
     }
     var onAction: Action?
-    var networkService: NetworkServiceClass
+    var networkService: NetworkServiceProtocol
     var planetInfo: PlanetInformation?
     var citizens: [Citizen] = []
 
-    init(networkService: NetworkServiceClass, state: State) {
+    init(networkService: NetworkServiceProtocol, state: State) {
         self.networkService = networkService
         self.state = state
         captureData = { data in
@@ -47,7 +47,7 @@ class InfoVMImp: InfoViewModel {
     func updateCitizens(for URL: [URL?]?) {
         if let urlArray = URL {
             for eachUrl in urlArray {
-                self.networkService.fetchInformation(with: eachUrl, completion: { (result: Result<Citizen, NetworkServiceErrors>) in
+                self.networkService.fetchCitizens(with: eachUrl, completion: { result in
                     switch result {
                     case .success(let success):
                         self.citizens.append(success)

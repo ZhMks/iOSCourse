@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct PlanetInformation: Codable {
+struct PlanetInformation: Codable, Equatable {
 
     let orbitPeriod: String
 

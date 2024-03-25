@@ -46,14 +46,6 @@ class FeedCoordinator: FeedBaseCoordinator {
         let networkService = NetworkServiceClass()
         let viewModel = InfoVMImp(networkService: networkService, state: .initial)
         let module = InfoViewController(infoVM: viewModel)
-                viewModel.networkService.fetchData(with: URL.init(string: "https://jsonplaceholder.typicode.com/todos/"), completion: { result in
-                    switch result {
-                    case .success(let success):
-                        viewModel.captureData?(success)
-                    case .failure(let failure):
-                        print(failure.localizedDescription)
-                    }
-                })
         viewModel.networkService.fetchInformation(with: URL(string: "https://swapi.dev/api/planets/1"), completion: { (result: Result<PlanetInformation, NetworkServiceErrors>) in
             switch result {
             case .success(let success):

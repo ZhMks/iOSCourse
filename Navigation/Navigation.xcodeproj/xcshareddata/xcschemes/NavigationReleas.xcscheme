@@ -40,6 +40,17 @@
                ReferencedContainer = "container:Navigation.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B239FE8B2BB1B94600F74C01"
+               BuildableName = "NetworkServiceTest.xctest"
+               BlueprintName = "NetworkServiceTest"
+               ReferencedContainer = "container:Navigation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
