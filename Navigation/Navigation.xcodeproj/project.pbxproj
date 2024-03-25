@@ -47,8 +47,6 @@
 		B29D665D2B0B88FF007AE9AD /* LoginBaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29D665C2B0B88FF007AE9AD /* LoginBaseCoordinator.swift */; };
 		B29D66632B0DF00F007AE9AD /* ProfileTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29D66622B0DF00F007AE9AD /* ProfileTableViewModel.swift */; };
 		B2A10F0E2AE6839E004BBF96 /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = B2A10F0D2AE6839E004BBF96 /* StorageService.docc */; };
-		B2A10F142AE6839F004BBF96 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A10F0A2AE6839E004BBF96 /* StorageService.framework */; };
-		B2A10F1B2AE6839F004BBF96 /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A10F1A2AE6839F004BBF96 /* StorageServiceTests.swift */; };
 		B2A10F1C2AE6839F004BBF96 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = B2A10F0C2AE6839E004BBF96 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2A10F1F2AE6839F004BBF96 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A10F0A2AE6839E004BBF96 /* StorageService.framework */; };
 		B2A10F202AE6839F004BBF96 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2A10F0A2AE6839E004BBF96 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -65,20 +63,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B2A10F152AE6839F004BBF96 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B274C2BF2A99FD9200D872F4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B2A10F092AE6839E004BBF96;
-			remoteInfo = StorageService;
-		};
-		B2A10F172AE6839F004BBF96 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B274C2BF2A99FD9200D872F4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B274C2C62A99FD9200D872F4;
-			remoteInfo = Navigation;
-		};
 		B2A10F1D2AE6839F004BBF96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B274C2BF2A99FD9200D872F4 /* Project object */;
@@ -105,6 +89,7 @@
 /* Begin PBXFileReference section */
 		B22BBB3D2B305C2400B92D58 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B234B6572AA35A2F00F3904F /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
+		B239FE7A2BB1B64500F74C01 /* Navigation.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Navigation.xctestplan; path = ../../../Documents/Navigation.xctestplan; sourceTree = "<group>"; };
 		B24269492B39527C00655C9D /* NetworkServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceModel.swift; sourceTree = "<group>"; };
 		B242694B2B46ABCD00655C9D /* PlanetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetTableViewCell.swift; sourceTree = "<group>"; };
 		B24269882B49472F00655C9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -146,7 +131,6 @@
 		B2A10F0A2AE6839E004BBF96 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2A10F0C2AE6839E004BBF96 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		B2A10F0D2AE6839E004BBF96 /* StorageService.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StorageService.docc; sourceTree = "<group>"; };
-		B2A10F132AE6839F004BBF96 /* StorageServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorageServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2A10F1A2AE6839F004BBF96 /* StorageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
 		B2A4505A2ABC1C3B00B5ACCA /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		B2AF38632B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavouritePostsModel.xcdatamodel; sourceTree = "<group>"; };
@@ -175,14 +159,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B2A10F102AE6839F004BBF96 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B2A10F142AE6839F004BBF96 /* StorageService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +206,7 @@
 		B274C2BE2A99FD9200D872F4 = {
 			isa = PBXGroup;
 			children = (
+				B239FE7A2BB1B64500F74C01 /* Navigation.xctestplan */,
 				B27F7AF72BAAB29700A570C6 /* PostCellRU.stringsdict */,
 				B27F7AF22BA992AC00A570C6 /* Localizable.xcstrings */,
 				B2AF38622B6259B500D1ECD5 /* FavouritePostsModel.xcdatamodeld */,
@@ -246,7 +223,6 @@
 			children = (
 				B274C2C72A99FD9200D872F4 /* Navigation.app */,
 				B2A10F0A2AE6839E004BBF96 /* StorageService.framework */,
-				B2A10F132AE6839F004BBF96 /* StorageServiceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -440,25 +416,6 @@
 			productReference = B2A10F0A2AE6839E004BBF96 /* StorageService.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		B2A10F122AE6839F004BBF96 /* StorageServiceTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B2A10F272AE6839F004BBF96 /* Build configuration list for PBXNativeTarget "StorageServiceTests" */;
-			buildPhases = (
-				B2A10F0F2AE6839F004BBF96 /* Sources */,
-				B2A10F102AE6839F004BBF96 /* Frameworks */,
-				B2A10F112AE6839F004BBF96 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B2A10F162AE6839F004BBF96 /* PBXTargetDependency */,
-				B2A10F182AE6839F004BBF96 /* PBXTargetDependency */,
-			);
-			name = StorageServiceTests;
-			productName = StorageServiceTests;
-			productReference = B2A10F132AE6839F004BBF96 /* StorageServiceTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -474,10 +431,6 @@
 					};
 					B2A10F092AE6839E004BBF96 = {
 						CreatedOnToolsVersion = 15.0.1;
-					};
-					B2A10F122AE6839F004BBF96 = {
-						CreatedOnToolsVersion = 15.0.1;
-						TestTargetID = B274C2C62A99FD9200D872F4;
 					};
 				};
 			};
@@ -500,7 +453,6 @@
 			targets = (
 				B274C2C62A99FD9200D872F4 /* Navigation */,
 				B2A10F092AE6839E004BBF96 /* StorageService */,
-				B2A10F122AE6839F004BBF96 /* StorageServiceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -519,13 +471,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B2A10F082AE6839E004BBF96 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B2A10F112AE6839F004BBF96 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -591,27 +536,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B2A10F0F2AE6839F004BBF96 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B2A10F1B2AE6839F004BBF96 /* StorageServiceTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B2A10F162AE6839F004BBF96 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B2A10F092AE6839E004BBF96 /* StorageService */;
-			targetProxy = B2A10F152AE6839F004BBF96 /* PBXContainerItemProxy */;
-		};
-		B2A10F182AE6839F004BBF96 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B274C2C62A99FD9200D872F4 /* Navigation */;
-			targetProxy = B2A10F172AE6839F004BBF96 /* PBXContainerItemProxy */;
-		};
 		B2A10F1E2AE6839F004BBF96 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B2A10F092AE6839E004BBF96 /* StorageService */;
@@ -905,57 +832,6 @@
 			};
 			name = Release;
 		};
-		B2A10F242AE6839F004BBF96 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y6VX64W3KZ;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = NetologyLessoins.StorageServiceTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navigation.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navigation";
-			};
-			name = Debug;
-		};
-		B2A10F252AE6839F004BBF96 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y6VX64W3KZ;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = NetologyLessoins.StorageServiceTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navigation.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navigation";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -982,15 +858,6 @@
 			buildConfigurations = (
 				B2A10F222AE6839F004BBF96 /* Debug */,
 				B2A10F232AE6839F004BBF96 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B2A10F272AE6839F004BBF96 /* Build configuration list for PBXNativeTarget "StorageServiceTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B2A10F242AE6839F004BBF96 /* Debug */,
-				B2A10F252AE6839F004BBF96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
