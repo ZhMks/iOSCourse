@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B22BBB3E2B305C2400B92D58 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22BBB3D2B305C2400B92D58 /* NetworkService.swift */; };
 		B234B6582AA35A2F00F3904F /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B234B6572AA35A2F00F3904F /* ProfileTableHeaderView.swift */; };
+		B239FE822BB1B6C900F74C01 /* FeedModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B239FE812BB1B6C900F74C01 /* FeedModelTest.swift */; };
 		B242694A2B39527C00655C9D /* NetworkServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24269492B39527C00655C9D /* NetworkServiceModel.swift */; };
 		B242694C2B46ABCE00655C9D /* PlanetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B242694B2B46ABCD00655C9D /* PlanetTableViewCell.swift */; };
 		B24269832B4943C000655C9D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B24269822B4943C000655C9D /* FirebaseAuth */; };
@@ -63,6 +64,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B239FE832BB1B6C900F74C01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B274C2BF2A99FD9200D872F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B274C2C62A99FD9200D872F4;
+			remoteInfo = Navigation;
+		};
 		B2A10F1D2AE6839F004BBF96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B274C2BF2A99FD9200D872F4 /* Project object */;
@@ -90,6 +98,8 @@
 		B22BBB3D2B305C2400B92D58 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B234B6572AA35A2F00F3904F /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		B239FE7A2BB1B64500F74C01 /* Navigation.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Navigation.xctestplan; path = ../../../Documents/Navigation.xctestplan; sourceTree = "<group>"; };
+		B239FE7F2BB1B6C900F74C01 /* InfoVMModelTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfoVMModelTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B239FE812BB1B6C900F74C01 /* FeedModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModelTest.swift; sourceTree = "<group>"; };
 		B24269492B39527C00655C9D /* NetworkServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceModel.swift; sourceTree = "<group>"; };
 		B242694B2B46ABCD00655C9D /* PlanetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetTableViewCell.swift; sourceTree = "<group>"; };
 		B24269882B49472F00655C9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -144,6 +154,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B239FE7C2BB1B6C900F74C01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B274C2C42A99FD9200D872F4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -196,6 +213,14 @@
 			path = Feed;
 			sourceTree = "<group>";
 		};
+		B239FE802BB1B6C900F74C01 /* InfoVMModelTest */ = {
+			isa = PBXGroup;
+			children = (
+				B239FE812BB1B6C900F74C01 /* FeedModelTest.swift */,
+			);
+			path = InfoVMModelTest;
+			sourceTree = "<group>";
+		};
 		B24269792B493FCC00655C9D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +238,7 @@
 				B274C2C92A99FD9200D872F4 /* Navigation */,
 				B2A10F0B2AE6839E004BBF96 /* StorageService */,
 				B2A10F192AE6839F004BBF96 /* StorageServiceTests */,
+				B239FE802BB1B6C900F74C01 /* InfoVMModelTest */,
 				B274C2C82A99FD9200D872F4 /* Products */,
 				B24269792B493FCC00655C9D /* Frameworks */,
 			);
@@ -223,6 +249,7 @@
 			children = (
 				B274C2C72A99FD9200D872F4 /* Navigation.app */,
 				B2A10F0A2AE6839E004BBF96 /* StorageService.framework */,
+				B239FE7F2BB1B6C900F74C01 /* InfoVMModelTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -374,6 +401,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		B239FE7E2BB1B6C900F74C01 /* InfoVMModelTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B239FE852BB1B6C900F74C01 /* Build configuration list for PBXNativeTarget "InfoVMModelTest" */;
+			buildPhases = (
+				B239FE7B2BB1B6C900F74C01 /* Sources */,
+				B239FE7C2BB1B6C900F74C01 /* Frameworks */,
+				B239FE7D2BB1B6C900F74C01 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B239FE842BB1B6C900F74C01 /* PBXTargetDependency */,
+			);
+			name = InfoVMModelTest;
+			productName = InfoVMModelTest;
+			productReference = B239FE7F2BB1B6C900F74C01 /* InfoVMModelTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B274C2C62A99FD9200D872F4 /* Navigation */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B274C2DB2A99FD9400D872F4 /* Build configuration list for PBXNativeTarget "Navigation" */;
@@ -423,9 +468,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					B239FE7E2BB1B6C900F74C01 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = B274C2C62A99FD9200D872F4;
+					};
 					B274C2C62A99FD9200D872F4 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -453,11 +502,19 @@
 			targets = (
 				B274C2C62A99FD9200D872F4 /* Navigation */,
 				B2A10F092AE6839E004BBF96 /* StorageService */,
+				B239FE7E2BB1B6C900F74C01 /* InfoVMModelTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B239FE7D2BB1B6C900F74C01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B274C2C52A99FD9200D872F4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -480,6 +537,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B239FE7B2BB1B6C900F74C01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B239FE822BB1B6C900F74C01 /* FeedModelTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B274C2C32A99FD9200D872F4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -539,6 +604,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B239FE842BB1B6C900F74C01 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B274C2C62A99FD9200D872F4 /* Navigation */;
+			targetProxy = B239FE832BB1B6C900F74C01 /* PBXContainerItemProxy */;
+		};
 		B2A10F1E2AE6839F004BBF96 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B2A10F092AE6839E004BBF96 /* StorageService */;
@@ -567,6 +637,55 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B239FE862BB1B6C900F74C01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y6VX64W3KZ;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = NetologyLessoins.InfoVMModelTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navigation.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navigation";
+			};
+			name = Debug;
+		};
+		B239FE872BB1B6C900F74C01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y6VX64W3KZ;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = NetologyLessoins.InfoVMModelTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navigation.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navigation";
+			};
+			name = Release;
+		};
 		B274C2D92A99FD9400D872F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -702,6 +821,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -733,6 +853,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -835,6 +956,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B239FE852BB1B6C900F74C01 /* Build configuration list for PBXNativeTarget "InfoVMModelTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B239FE862BB1B6C900F74C01 /* Debug */,
+				B239FE872BB1B6C900F74C01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B274C2C22A99FD9200D872F4 /* Build configuration list for PBXProject "Navigation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
